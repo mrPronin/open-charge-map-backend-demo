@@ -19,4 +19,4 @@
 ## ASSUMPTIONS
 - use monorepo for all components
 - (?) to demonstrate how the project works, it is enough to have docker images for all components and a docker-compose file, there is no need to create Kubernetes config
-- to synchronize with OCM, I use the undocumented modifiedsince parameter to fulfill the requirement to receive only the delta of updated data from OCM
+- to synchronize with OCM, I use the undocumented `modifiedsince` parameter to fulfill the requirement to receive only the delta of updated data from OCM
