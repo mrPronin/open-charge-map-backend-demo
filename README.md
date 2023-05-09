@@ -18,5 +18,29 @@
 
 ## ASSUMPTIONS
 - use monorepo for all components
-- (?) to demonstrate how the project works, it is enough to have docker images for all components and a docker-compose file, there is no need to create Kubernetes config
-- to synchronize with OCM, I use the undocumented `modifiedsince` parameter to fulfill the requirement to receive only the delta of updated data from OCM
+- to demonstrate how the project works, it is enough to have docker images for all components and a docker-compose file, there is no need to create Kubernetes config
+- to synchronize with OCM, I use the undocumented modifiedsince parameter to fulfill the requirement to receive only the delta of updated data from OCM
+- use Apollo Server to support subgraphs
+
+## TODO
+- [x] define user stories
+- [x] create list of questions to the requirements
+- [x] analyze the questions
+- [x] create list of assumptions
+- [x] create git repository and initial README.MD with user stories
+- [x] investigate Open Charge Map API: https://openchargemap.org/site/develop/api#/
+- [x] prepare a list of questions to the requirements
+- [x] R&D federated GraphQL gateway
+- [ ] import service
+    - [x] initial project setup for import service
+    - [ ] boilerplate import service with Apollo Server
+    - [ ] define import service GraphQL schema
+    - [ ] etc
+- [ ] db
+    - [ ] etc
+- [ ] client-api
+    - [ ] etc
+- [ ] graph-router
+    - [ ] create Dockerfile for graph-router
+    - [ ] etc
+
