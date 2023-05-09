@@ -31,9 +31,9 @@
 - [x] investigate Open Charge Map API: https://openchargemap.org/site/develop/api#/
 - [x] prepare a list of questions to the requirements
 - [x] R&D federated GraphQL gateway
-- [ ] import service
-    - [x] initial project setup for import service
-    - [ ] boilerplate import service with Apollo Server
+- [ ] import-service
+    - [x] initial project setup for import-service
+    - [x] boilerplate import-service with Apollo Server
     - [ ] define import service GraphQL schema
     - [ ] etc
 - [ ] db
