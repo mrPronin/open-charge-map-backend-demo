@@ -13,7 +13,7 @@
     "lib": ["es2022"],
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "types": ["node"],
