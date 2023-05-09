@@ -52,6 +52,13 @@ const mockedImportSessions = [
     startDate: "2023-05-08T10:00:00Z",
     endDate: "2023-05-08T10:01:00Z",
   },
+  {
+    id: "ABABE00E-17E0-4ABA-9BF6-2F52E0726C94",
+    poiAmount: 8,
+    modifiedsince: "2023-05-06T00:00:00Z",
+    startDate: "2023-05-09T10:00:00Z",
+    endDate: "2023-05-09T10:01:00Z",
+  },
 ];
 
 const mockedImportMutationResponse = {
