@@ -1,0 +1,31 @@
+"Generic response interface for any mutation"
+interface MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+}
+
+"Response type for import mutation"
+type ImportMutationResponse implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+  importSession: ImportSession
+}
+
+"Describes the result of the data import operation from the Open Charge Map service"
+type ImportSession {
+  id: ID!
+  poiAmount: Int!
+  modifiedsince: DateTime!
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+type Mutation {
+  "Starts the procedure of importing data from the Open Charge Map service. If this is the first import session, all data will be imported. If there are previous import sessions, the data from the modifiedsince date of the previous session will be imported."
+  import: ImportMutationResponse!
+}
+type Query {
+  importSessions: [ImportSession]
+}

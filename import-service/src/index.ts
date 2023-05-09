@@ -2,40 +2,17 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { DateTimeResolver, DateTimeTypeDefinition } from "graphql-scalars";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const typeDefs = `#graphql
-    "Generic response interface for any mutation"
-    interface MutationResponse {
-        code: String!
-        success: Boolean!
-        message: String!
-    }
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-    "Response type for import mutation"
-    type ImportMutationResponse implements MutationResponse {
-        code: String!
-        success: Boolean!
-        message: String!
-        importSession: ImportSession
-    }
-
-    "Describes the result of the data import operation from the Open Charge Map service"
-    type ImportSession {
-        id: ID!
-        poiAmount: Int!
-        modifiedsince: DateTime!
-        startDate: DateTime!
-        endDate: DateTime!
-    }
-
-    type Mutation {
-        "Starts the procedure of importing data from the Open Charge Map service. If this is the first import session, all data will be imported. If there are previous import sessions, the data from the modifiedsince date of the previous session will be imported."
-        import: ImportMutationResponse!
-    }
-  type Query {
-    importSessions: [ImportSession]
-  }
-`;
+const typeDefs = fs.readFileSync(
+  path.join(__dirname, 'schema.graphql'),
+  'utf8'
+);
 
 const mockedImportSessions = [
   {

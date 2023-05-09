@@ -21,6 +21,7 @@
 - to demonstrate how the project works, it is enough to have docker images for all components and a docker-compose file, there is no need to create Kubernetes config
 - to synchronize with OCM, I use the undocumented modifiedsince parameter to fulfill the requirement to receive only the delta of updated data from OCM
 - use Apollo Server to support subgraphs
+- authentication and user management out of the scope of implementation
 
 ## TODO
 - [x] define user stories
@@ -36,14 +37,17 @@
     - [x] boilerplate import-service with Apollo Server
     - [x] define import-service GraphQL schema and mock response
     - [x] implement 'dev' script, add ts-node-dev
+    - [x] setup linter and formatter
     - [ ] implement MongoDB integration
-    - [ ] defin port from env variable for import-service
+        - [x] define mongoose schema for ImportSession
+    - [ ] refactor project
+        - [x] refactor: import-service, extract type definition to separate schema.graphql file
+        - [ ] refactor: import-service, extract resolvers from index.ts
+        - [ ] refactor: import-service,  extract mocks
     - [ ] define cors configuration
-    - [ ] use expressIpRateLimiter
-    - [ ] (?) implement shieldPermissions
-    - [ ] setup linter and formatter
     - [ ] adjust import-service to work as a subgraph
     - [ ] create Dockerfile for import-service
+        - [ ] implement port-mapping
     - [ ] etc
 - [ ] db
     - [ ] etc
