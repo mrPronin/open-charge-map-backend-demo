@@ -34,7 +34,16 @@
 - [ ] import-service
     - [x] initial project setup for import-service
     - [x] boilerplate import-service with Apollo Server
-    - [ ] define import service GraphQL schema
+    - [x] define import-service GraphQL schema and mock response
+    - [x] implement 'dev' script, add ts-node-dev
+    - [ ] implement MongoDB integration
+    - [ ] defin port from env variable for import-service
+    - [ ] define cors configuration
+    - [ ] use expressIpRateLimiter
+    - [ ] (?) implement shieldPermissions
+    - [ ] setup linter and formatter
+    - [ ] adjust import-service to work as a subgraph
+    - [ ] create Dockerfile for import-service
     - [ ] etc
 - [ ] db
     - [ ] etc
