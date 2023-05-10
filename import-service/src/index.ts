@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { resolvers } from "./resolvers";
+import * as db from './db';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,15 +18,16 @@ const typeDefs = fs.readFileSync(
 
 const port = (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4000;
 
-const server = new ApolloServer({
-  schema: makeExecutableSchema({
-    typeDefs: [DateTimeTypeDefinition, typeDefs],
-    resolvers: resolvers,
-  }),
-});
+async function main() {
+    // await db.connect();
+    const server = new ApolloServer({
+        schema: makeExecutableSchema({
+            typeDefs: [DateTimeTypeDefinition, typeDefs],
+            resolvers: resolvers,
+        }),
+    });
+    const { url } = await startStandaloneServer(server, { listen: { port } });
+    console.log(`🚀  Server ready at: ${url}`);
+}
 
-const { url } = await startStandaloneServer(server, {
-  listen: { port },
-});
-
-console.log(`🚀  Server ready at: ${url}`);
+main().catch((error) => console.error('failed starting server', error));
