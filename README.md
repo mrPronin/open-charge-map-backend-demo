@@ -42,12 +42,12 @@
         - [x] define mongoose schema for ImportSession
     - [ ] refactor project
         - [x] refactor: import-service, extract type definition to separate schema.graphql file
-        - [ ] refactor: import-service, extract resolvers from index.ts
-        - [ ] refactor: import-service,  extract mocks
+        - [x] refactor: import-service, extract resolvers from index.ts
+    - [x] define port from PORT environment variable 
     - [ ] define cors configuration
-    - [ ] adjust import-service to work as a subgraph
     - [ ] create Dockerfile for import-service
         - [ ] implement port-mapping
+    - [ ] adjust import-service to work as a subgraph
     - [ ] etc
 - [ ] db
     - [ ] etc

@@ -15,6 +15,8 @@ const typeDefs = fs.readFileSync(
   'utf8'
 );
 
+const port = (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4000;
+
 const server = new ApolloServer({
   schema: makeExecutableSchema({
     typeDefs: [DateTimeTypeDefinition, typeDefs],
@@ -23,7 +25,7 @@ const server = new ApolloServer({
 });
 
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: { port },
 });
 
 console.log(`🚀  Server ready at: ${url}`);
