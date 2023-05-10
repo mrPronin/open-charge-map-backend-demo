@@ -1,0 +1,6 @@
+/coverage
+/dist
+jest.config.js
+webpack.*.js
+prisma/*/*
+*.js
