@@ -1,6 +1,4 @@
-import { DateTimeResolver } from 'graphql-scalars';
-
-const mockedImportSessions = [
+export const mockedImportSessions = [
   {
     id: '57BC7CE8-E2C7-46D3-B009-ECFE508DCDF2',
     poiAmount: 5,
@@ -23,20 +21,3 @@ const mockedImportSessions = [
     endDate: '2023-05-09T10:01:00Z',
   },
 ];
-
-const mockedImportMutationResponse = {
-  code: '200',
-  success: true,
-  message: 'Data has been successfully imported',
-  importSession: mockedImportSessions[0],
-};
-
-export const resolvers = {
-  DateTime: DateTimeResolver,
-  Mutation: {
-    import: () => mockedImportMutationResponse,
-  },
-  Query: {
-    importSessions: () => mockedImportSessions,
-  },
-};

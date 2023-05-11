@@ -5,9 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "compile": "tsc",
+    "build": "tsc && npm run pre-build",
+    "pre-build": "cp src/*.graphql dist",
     "dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/index.ts",
-    "start": "npm run compile && node ./dist/index.js"
+    "start": "npm run build && node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
