@@ -8,7 +8,7 @@
     "build": "tsc && npm run pre-build",
     "pre-build": "cp src/*.graphql dist",
     "dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/index.ts",
-    "start": "npm run build && node ./dist/index.js"
+    "start": "node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
