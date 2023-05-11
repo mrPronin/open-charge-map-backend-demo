@@ -2,24 +2,18 @@ import mongoose from 'mongoose';
 
 export const connect = async () => {
   const {
-    MONGO_USERNAME,
-    MONGO_PASSWORD,
-    MONGO_HOSTNAME,
-    MONGO_PORT,
+    MONGODB_URI,
     MONGO_DB,
   } = process.env;
 
   if (
-    !MONGO_USERNAME ||
-    !MONGO_PASSWORD ||
-    !MONGO_HOSTNAME ||
-    !MONGO_PORT ||
+    !MONGODB_URI ||
     !MONGO_DB
   ) {
     throw new Error('Required MongoDB environment variables are missing.');
   }
 
-  const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+  const url = `${MONGODB_URI}/${MONGO_DB}?authSource=admin`;
 
   try {
     // await mongoose.connect(url, { connectTimeoutMS: 10000 });
