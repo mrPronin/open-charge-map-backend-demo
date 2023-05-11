@@ -11,8 +11,8 @@ This project uses the following environment variables:
 ## Getting started
 ### Build and run service in docker container
 #### Develop
-`docker build -t import-service-image-dev --file Dockerfile.dev .` - build image
-`docker run -p 4000:4000 import-service-image-dev` - create and run container
+- `docker build -t import-service-image-dev --file Dockerfile.dev .` - build image
+- `docker run -p 4000:4000 import-service-image-dev` - create and run container
 #### Production
 ## Getting started
 TODO
