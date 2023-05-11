@@ -1,5 +1,5 @@
-# import-service
-Fetches data from Open Charge Map, checks for changes, and updates the MongoDB database when necessary
+# client-api
+Connects to the MongoDB database to read the charging station data and serves it to clients through a /graphql endpoint, supporting relay-style pagination
 ## Environment variables
 This project uses the following environment variables:
 | Name                          | Description                         | Default Value                                  |
@@ -11,11 +11,10 @@ This project uses the following environment variables:
 ## Getting started
 ### Build and run service in docker container
 #### Develop
+TODO
 - `docker build -t import-service-image-dev --file Dockerfile.dev .` - build image
 - `docker run -p 4000:4000 import-service-image-dev` - create and run container
 #### Production
-- `docker build -t import-service-image .` - build image
-- `docker run -p 4000:4000 import-service-image` - create and run container
 ## Getting started
 TODO
 ## Running the build
