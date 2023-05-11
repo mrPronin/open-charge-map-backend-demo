@@ -40,14 +40,18 @@
     - [x] setup linter and formatter
     - [ ] implement MongoDB integration
         - [x] define mongoose schema for ImportSession
-    - [ ] refactor project
+        - [x] implement db connector as db.ts
+    - [x] refactor project
         - [x] refactor: import-service, extract type definition to separate schema.graphql file
         - [x] refactor: import-service, extract resolvers from index.ts
     - [x] define port from PORT environment variable 
     - [ ] define cors configuration
     - [ ] create Dockerfile for import-service
-        - [ ] implement port-mapping
+        - [x] import-service - define initial Dockerfile
+        - [x] refacor: Dockerfile for production and Dockerfile.dev for development
+        - [x] feat: import-service, create production Dockerfile
     - [ ] adjust import-service to work as a subgraph
+    - [x] fix: issue with start script ERR_UNSUPPORTED_DIR_IMPORT
     - [ ] etc
 - [ ] db
     - [ ] etc
