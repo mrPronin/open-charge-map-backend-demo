@@ -1,18 +1,15 @@
 FROM node:18-alpine
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /app
 
-WORKDIR /home/node/app
+COPY ./import-service/package*.json ./
 
-COPY package*.json ./
+RUN npm install 
 
-RUN npm install && chown -R node:node .
+COPY ./import-service/ ./
 
-USER node
-
-COPY --chown=node:node . .
+COPY ./wait-for.sh /wait-for.sh
 
 EXPOSE 4000
 
 CMD ["npm", "run", "dev"]
-

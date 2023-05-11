@@ -20,7 +20,7 @@ const typeDefs = fs.readFileSync(
 const port = (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4000;
 
 async function main() {
-    // await db.connect();
+    await db.connect();
     const server = new ApolloServer({
       schema: makeExecutableSchema({
         typeDefs: [DateTimeTypeDefinition, typeDefs],

@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  import-service:
+    build:
+      context: .
+      dockerfile: ./import-service/Dockerfile.dev
+    image: node:18-alpine
+    container_name: import-service
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=db
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./import-service:/app
+      - node_modules:/app/node_modules
+    networks:
+      - app-network
+    command: sh /wait-for.sh db:27017 -- npm run dev
+  db:
+    image: mongo:6-jammy
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:

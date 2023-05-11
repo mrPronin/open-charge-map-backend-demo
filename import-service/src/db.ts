@@ -22,7 +22,9 @@ export const connect = async () => {
   const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
 
   try {
-    await mongoose.connect(url, { connectTimeoutMS: 10000 });
+    // await mongoose.connect(url, { connectTimeoutMS: 10000 });
+    console.log(`url: ${url}`)
+    await mongoose.connect(url);
     console.log('Connected to MongoDB successfully.');
   } catch (error) {
     console.error('Failed to connect to MongoDB:', error);
