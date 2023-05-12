@@ -9,7 +9,7 @@ interface IImportSession extends Document {
   endDate: Date;
 }
 
-const ImportSessionSchema: Schema = new Schema({
+const ImportSessionSchema: Schema = new Schema<IImportSession>({
   _id: { type: String, default: uuidv4 },
   poiAmount: { type: Number, required: true },
   modifiedsince: { type: Date, required: true },

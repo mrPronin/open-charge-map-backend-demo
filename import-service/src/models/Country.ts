@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-interface ICountry extends Document {
+export interface ICountry extends Document {
   _id: string;
   ID: number;
   ISOCode: string;
@@ -9,7 +9,7 @@ interface ICountry extends Document {
   Title: string;
 }
 
-const CountrySchema = new Schema<ICountry>(
+export const CountrySchema = new Schema<ICountry>(
   {
     _id: { type: String, default: uuidv4 },
     ID: Number,
