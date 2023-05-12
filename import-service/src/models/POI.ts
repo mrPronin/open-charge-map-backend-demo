@@ -14,6 +14,7 @@ interface IPOI extends Document {
   StatusType: IStatusType;
   AddressInfo: IAddressInfo;
   Connections: IConnectionInfo[];
+  DateLastStatusUpdate?: Date;
 }
 
 const POISchema = new Schema<IPOI>(
@@ -25,6 +26,7 @@ const POISchema = new Schema<IPOI>(
     StatusType: { type: StatusTypeSchema, required: true },
     AddressInfo: { type: AddressInfoSchema, required: true },
     Connections: { type: [ConnectionInfoSchema], required: true },
+    DateLastStatusUpdate: { type: Date },
   },
   { _id: false }
 );
