@@ -41,6 +41,9 @@
     - [ ] implement MongoDB integration
         - [x] define mongoose schema for ImportSession
         - [x] implement db connector as db.ts
+        - [x] import-service - define mongoose models for OCM data
+            - [x] import-service - define mongoose model for Country
+            - [x] import-service - define mongoose models POI, AddressInfo, ConnectionInfo, ConnectionType, LevelType, OperatorInfo, StatusType, SupplyType
     - [x] refactor project
         - [x] refactor: import-service, extract type definition to separate schema.graphql file
         - [x] refactor: import-service, extract resolvers from index.ts
@@ -53,7 +56,9 @@
     - [ ] adjust import-service to work as a subgraph
     - [x] fix: issue with start script ERR_UNSUPPORTED_DIR_IMPORT
     - [ ] etc
-- [ ] db
+- [ ] docker-compose
+    - [x] feat: define initial docker-compose
+    - [x] fix: MongoServerError: Authentication failed.
     - [ ] etc
 - [ ] client-api
     - [ ] etc
