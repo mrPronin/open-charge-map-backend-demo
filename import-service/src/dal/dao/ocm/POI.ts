@@ -5,7 +5,7 @@ import { OperatorInfoSchema } from "./OperatorInfo.js";
 import { StatusTypeSchema } from "./StatusType.js";
 import { AddressInfoSchema } from "./AddressInfo.js";
 import { ConnectionInfoSchema } from "./ConnectionInfo.js";
-import { POI as IPOI } from '../../../domain/models/POI.js';
+import { POI as IPOI } from '../../../domain/models/ocm/POI.js';
 
 interface POIDocument extends IPOI, Document {
   _id: string;

@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import { Country as ICountry } from "../../../domain/models/Country.js";
+import { Country as ICountry } from '../../../domain/models/ocm/Country.js';
 
 interface CountryDocument extends ICountry, Document {
   _id: string;

@@ -1,15 +1,13 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-interface IImportSession extends Document {
+import { ImportSession as IImportSession } from '../../../domain/models/import/ImportSession.js';
+
+interface ImportSessionDocument extends IImportSession, Document {
   _id: string;
-  poiAmount: number;
-  modifiedsince: Date;
-  startDate: Date;
-  endDate: Date;
 }
 
-const ImportSessionSchema: Schema = new Schema<IImportSession>({
+const ImportSessionSchema: Schema = new Schema<ImportSessionDocument>({
   _id: { type: String, default: uuidv4 },
   poiAmount: { type: Number, required: true },
   modifiedsince: { type: Date, required: true },
@@ -17,7 +15,7 @@ const ImportSessionSchema: Schema = new Schema<IImportSession>({
   endDate: { type: Date, required: true },
 });
 
-const ImportSession = mongoose.model<IImportSession>(
+const ImportSession = mongoose.model<ImportSessionDocument>(
   'ImportSession',
   ImportSessionSchema
 );

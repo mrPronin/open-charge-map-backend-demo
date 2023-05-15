@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
 import { AddressInfoSchema } from "./AddressInfo.js";
-import { OperatorInfo as IOperatorInfo } from '../../../domain/models/OperatorInfo.js';
+import { OperatorInfo as IOperatorInfo } from '../../../domain/models/ocm/OperatorInfo.js';
 
 interface OperatorInfoDocument extends IOperatorInfo, Document {
   _id: string;
