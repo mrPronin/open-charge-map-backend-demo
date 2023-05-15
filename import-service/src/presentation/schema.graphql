@@ -27,5 +27,6 @@ type Mutation {
   import: ImportMutationResponse!
 }
 type Query {
+  "Returns a list of import sessions that have already taken place."
   importSessions: [ImportSession]
 }

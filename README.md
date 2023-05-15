@@ -38,23 +38,33 @@
     - [x] define import-service GraphQL schema and mock response
     - [x] implement 'dev' script, add ts-node-dev
     - [x] setup linter and formatter
+    - [x] refactor project
+        - [x] refactor: import-service, extract type definition to separate schema.graphql file
+        - [x] refactor: import-service, extract resolvers from index.ts
+    - [x] define port from PORT environment variable 
+    - [x] create Dockerfile for import-service
+        - [x] import-service - define initial Dockerfile
+        - [x] refacor: Dockerfile for production and Dockerfile.dev for development
+        - [x] feat: import-service, create production Dockerfile
     - [ ] implement MongoDB integration
         - [x] define mongoose schema for ImportSession
         - [x] implement db connector as db.ts
         - [x] import-service - define mongoose models for OCM data
             - [x] import-service - define mongoose model for Country
             - [x] import-service - define mongoose models POI, AddressInfo, ConnectionInfo, ConnectionType, LevelType, OperatorInfo, StatusType, SupplyType
-    - [x] refactor project
-        - [x] refactor: import-service, extract type definition to separate schema.graphql file
-        - [x] refactor: import-service, extract resolvers from index.ts
-    - [x] define port from PORT environment variable 
+        - [ ] create indexes
+    - [x] import-service - define DDD structure, create placeholders
+    - [ ] import-service - define interfaces for service and repositories
+    - [ ] import-service - implement ImportService
+    - [ ] import-service - implement ImportSessionRepository
+    - [ ] import-service - implement OCMDataPersistenceRepository
+    - [ ] import-service - implement OpenChargeMapRepository
+    - [ ] import-service - setup dependency injection
     - [ ] define cors configuration
-    - [ ] create Dockerfile for import-service
-        - [x] import-service - define initial Dockerfile
-        - [x] refacor: Dockerfile for production and Dockerfile.dev for development
-        - [x] feat: import-service, create production Dockerfile
     - [ ] adjust import-service to work as a subgraph
     - [x] fix: issue with start script ERR_UNSUPPORTED_DIR_IMPORT
+    - [ ] add logger
+    - [ ] add path aliases
     - [ ] etc
 - [ ] docker-compose
     - [x] feat: define initial docker-compose

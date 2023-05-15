@@ -5,15 +5,15 @@ import { DateTimeTypeDefinition, DateTimeResolver } from 'graphql-scalars';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { resolver as QueryResolver } from "./resolvers/Query.js";
-import { resolver as MutationResolver } from "./resolvers/Mutation.js";
+import { resolver as QueryResolver } from "./presentation/resolvers/Query.js";
+import { resolver as MutationResolver } from "./presentation/resolvers/Mutation.js";
 import * as db from './db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const typeDefs = fs.readFileSync(
-  path.join(__dirname, 'schema.graphql'),
+  path.join(__dirname, 'presentation/schema.graphql'),
   'utf8'
 );
 
