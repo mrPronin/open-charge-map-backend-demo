@@ -1,23 +1,17 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-import { IOperatorInfo, OperatorInfoSchema } from "./OperatorInfo.js";
-import { IStatusType, StatusTypeSchema } from "./StatusType.js";
-import { IAddressInfo, AddressInfoSchema } from "./AddressInfo.js";
-import { IConnectionInfo, ConnectionInfoSchema } from "./ConnectionInfo.js";
+import { OperatorInfoSchema } from "./OperatorInfo.js";
+import { StatusTypeSchema } from "./StatusType.js";
+import { AddressInfoSchema } from "./AddressInfo.js";
+import { ConnectionInfoSchema } from "./ConnectionInfo.js";
+import { POI as IPOI } from '../../../domain/models/POI.js';
 
-interface IPOI extends Document {
+interface POIDocument extends IPOI, Document {
   _id: string;
-  ID: number;
-  UUID: string;
-  OperatorInfo: IOperatorInfo;
-  StatusType: IStatusType;
-  AddressInfo: IAddressInfo;
-  Connections: IConnectionInfo[];
-  DateLastStatusUpdate?: Date;
 }
 
-const POISchema = new Schema<IPOI>(
+const POISchema = new Schema<POIDocument>(
   {
     _id: { type: String, default: uuidv4 },
     ID: { type: Number, required: true },
@@ -31,6 +25,6 @@ const POISchema = new Schema<IPOI>(
   { _id: false }
 );
 
-const POI = mongoose.model<IPOI>('POI', POISchema);
+const POI = mongoose.model<POIDocument>('POI', POISchema);
 
 export default POI;

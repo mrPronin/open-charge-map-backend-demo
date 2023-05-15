@@ -1,13 +1,12 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
+import { SupplyType as ISupplyType } from '../../../domain/models/SupplyType.js';
 
-export interface ISupplyType extends Document {
+interface SupplyTypeDocument extends ISupplyType, Document {
   _id: string;
-  ID: number;
-  Title: string;
 }
 
-export const SupplyTypeSchema = new Schema<ISupplyType>(
+export const SupplyTypeSchema = new Schema<SupplyTypeDocument>(
   {
     _id: { type: String, default: uuidv4 },
     ID: Number,
@@ -16,6 +15,6 @@ export const SupplyTypeSchema = new Schema<ISupplyType>(
   { _id: false }
 );
 
-const SupplyType = mongoose.model<ISupplyType>('SupplyType', SupplyTypeSchema);
+const SupplyType = mongoose.model<SupplyTypeDocument>('SupplyType', SupplyTypeSchema);
 
 export default SupplyType;

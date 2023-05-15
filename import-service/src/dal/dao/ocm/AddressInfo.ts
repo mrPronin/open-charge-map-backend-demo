@@ -1,31 +1,14 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ICountry, CountrySchema } from "./Country.js";
+import { CountrySchema } from "./Country.js";
+import { AddressInfo as IAddressInfo } from '../../../domain/models/AddressInfo.js';
 
-export interface IAddressInfo extends Document {
+interface AddressInfoDocument extends IAddressInfo, Document {
   _id: string;
-  ID: number;
-  AddressLine1: string;
-  AddressLine2: string;
-  Town: string;
-  StateOrProvince: string;
-  Postcode: string;
-  CountryID: number;
-  Country: ICountry;
-  Latitude: number;
-  Longitude: number;
-  ContactTelephone1: string;
-  ContactTelephone2: string;
-  ContactEmail: string;
-  AccessComments: string;
-  RelatedURL: string;
-  Distance: number;
-  DistanceUnit: number;
-  Title: string;
 }
 
-export const AddressInfoSchema = new Schema<IAddressInfo>(
+export const AddressInfoSchema = new Schema<AddressInfoDocument>(
   {
     _id: { type: String, default: uuidv4 },
     ID: Number,
@@ -50,7 +33,7 @@ export const AddressInfoSchema = new Schema<IAddressInfo>(
   { _id: false }
 );
 
-const AddressInfo = mongoose.model<IAddressInfo>(
+const AddressInfo = mongoose.model<AddressInfoDocument>(
   'AddressInfo',
   AddressInfoSchema
 );

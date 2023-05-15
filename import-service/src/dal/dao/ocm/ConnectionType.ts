@@ -1,16 +1,12 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
+import { ConnectionType as IConnectionType } from '../../../domain/models/ConnectionType.js';
 
-export interface IConnectionType extends Document {
+interface ConnectionTypeDocument extends IConnectionType, Document {
   _id: string;
-  FormalName: string;
-  IsDiscontinued: boolean;
-  IsObsolete: boolean;
-  ID: number;
-  Title: string;
 }
 
-export const ConnectionTypeSchema = new Schema<IConnectionType>(
+export const ConnectionTypeSchema = new Schema<ConnectionTypeDocument>(
   {
     _id: { type: String, default: uuidv4 },
     FormalName: String,
@@ -22,7 +18,7 @@ export const ConnectionTypeSchema = new Schema<IConnectionType>(
   { _id: false }
 );
 
-const ConnectionType = mongoose.model<IConnectionType>(
+const ConnectionType = mongoose.model<ConnectionTypeDocument>(
   'ConnectionType',
   ConnectionTypeSchema
 );

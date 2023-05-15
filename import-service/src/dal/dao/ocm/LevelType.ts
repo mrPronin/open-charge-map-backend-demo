@@ -1,15 +1,12 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
+import { LevelType as ILevelType } from '../../../domain/models/LevelType.js';
 
-export interface ILevelType extends Document {
+interface LevelTypeDocument extends ILevelType, Document {
   _id: string;
-  ID: number;
-  Title: string;
-  Comments: string;
-  IsFastChargeCapable: boolean;
 }
 
-export const LevelTypeSchema = new Schema<ILevelType>(
+export const LevelTypeSchema = new Schema<LevelTypeDocument>(
   {
     _id: { type: String, default: uuidv4 },
     ID: Number,
@@ -20,6 +17,6 @@ export const LevelTypeSchema = new Schema<ILevelType>(
   { _id: false }
 );
 
-const LevelType = mongoose.model<ILevelType>('LevelType', LevelTypeSchema);
+const LevelType = mongoose.model<LevelTypeDocument>('LevelType', LevelTypeSchema);
 
 export default LevelType;

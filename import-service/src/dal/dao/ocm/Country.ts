@@ -1,15 +1,12 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
+import { Country as ICountry } from "../../../domain/models/Country.js";
 
-export interface ICountry extends Document {
+interface CountryDocument extends ICountry, Document {
   _id: string;
-  ID: number;
-  ISOCode: string;
-  ContinentCode: string;
-  Title: string;
 }
 
-export const CountrySchema = new Schema<ICountry>(
+export const CountrySchema = new Schema<CountryDocument>(
   {
     _id: { type: String, default: uuidv4 },
     ID: Number,
@@ -20,6 +17,6 @@ export const CountrySchema = new Schema<ICountry>(
   { _id: false }
 );
 
-const Country = mongoose.model<ICountry>('Country', CountrySchema);
+const Country = mongoose.model<CountryDocument>('Country', CountrySchema);
 
 export default Country;

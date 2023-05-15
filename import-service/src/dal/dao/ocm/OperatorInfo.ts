@@ -1,25 +1,14 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-import { IAddressInfo, AddressInfoSchema } from "./AddressInfo.js";
+import { AddressInfoSchema } from "./AddressInfo.js";
+import { OperatorInfo as IOperatorInfo } from '../../../domain/models/OperatorInfo.js';
 
-export interface IOperatorInfo extends Document {
+interface OperatorInfoDocument extends IOperatorInfo, Document {
   _id: string;
-  WebsiteURL?: string;
-  Comments?: string;
-  PhonePrimaryContact?: string;
-  PhoneSecondaryContact?: string;
-  IsPrivateIndividual?: boolean;
-  AddressInfo?: IAddressInfo;
-  BookingURL?: string;
-  ContactEmail?: string;
-  FaultReportEmail?: string;
-  IsRestrictedEdit?: boolean;
-  ID: number;
-  Title: string;
 }
 
-export const OperatorInfoSchema = new Schema<IOperatorInfo>(
+export const OperatorInfoSchema = new Schema<OperatorInfoDocument>(
   {
     _id: { type: String, default: uuidv4 },
     WebsiteURL: { type: String },
@@ -38,7 +27,7 @@ export const OperatorInfoSchema = new Schema<IOperatorInfo>(
   { _id: false }
 );
 
-const OperatorInfo = mongoose.model<IOperatorInfo>(
+const OperatorInfo = mongoose.model<OperatorInfoDocument>(
   'OperatorInfo',
   OperatorInfoSchema
 );
