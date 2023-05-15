@@ -13,7 +13,7 @@
     "target": "ES2020",
     "sourceMap": true,
     "outDir": "dist",
-    "rootDirs": ["src"],
+    "rootDir": "src",
     "lib": ["es2022"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && npm run pre-build",
-    "pre-build": "cp src/*.graphql dist",
+    "pre-build": "cp src/presentation/*.graphql dist/presentation",
     "dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/index.ts",
     "start": "node ./dist/index.js"
   },
@@ -44,7 +44,9 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-unicorn": "^19.0.1",
     "prettier": "^2.0.5",
-    "ts-node-dev": "^2.0.0",
+    "ts-node": "^10.9.1",
+    "ts-paths-esm-loader": "^1.4.3",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   }
 }
