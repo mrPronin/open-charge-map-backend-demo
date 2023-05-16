@@ -4,7 +4,7 @@ import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPer
 import { POIModel } from '@dal/dao/ocm/POI.js';
 
 
-class OCMPersistenceRepositoryImplementation
+export class OCMPersistenceRepositoryImplementation
   implements OCMPersistenceRepository
 {
   storeCoreReferenceData = async (data: CoreReferenceData): Promise<void> => {
@@ -27,5 +27,3 @@ class OCMPersistenceRepositoryImplementation
     return poiDocument ? poiDocument.toObject() : null;
   };
 }
-
-export default OCMPersistenceRepositoryImplementation;

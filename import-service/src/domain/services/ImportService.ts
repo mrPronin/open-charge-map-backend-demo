@@ -5,7 +5,7 @@ import { OpenChargeMapRepository } from '@domain/interfaces/repositories/OpenCha
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
 
-class ImportServiceImplementation implements ImportService {
+export class ImportServiceImplementation implements ImportService {
   private openChargeMapRepository: OpenChargeMapRepository;
   private ocmPersistenceRepository: OCMPersistenceRepository;
   private importSessionRepository: ImportSessionRepository;
@@ -59,5 +59,3 @@ class ImportServiceImplementation implements ImportService {
     return await this.importSessionRepository.getAll();
   };
 }
-
-export default ImportServiceImplementation;
