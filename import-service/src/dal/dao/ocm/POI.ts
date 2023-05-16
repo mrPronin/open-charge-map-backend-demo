@@ -25,4 +25,6 @@ const POISchema = new Schema<POIDocument>(
   { _id: false }
 );
 
+POISchema.index({ DateLastStatusUpdate: 1 });
+
 export const POIModel = mongoose.model<POIDocument>('POI', POISchema);
