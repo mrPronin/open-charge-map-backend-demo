@@ -60,10 +60,11 @@
     - [x] import-service - define interface for OCMPersistenceRepository, ImportSessionRepository
     - [x] import-service - define CoreReferenceData
     - [x] fix: issue with start script ERR_UNSUPPORTED_DIR_IMPORT
-    - [ ] import-service - implement ImportService
-    - [ ] import-service - implement ImportSessionRepository
-    - [ ] import-service - implement OCMDataPersistenceRepository
-    - [ ] import-service - implement OpenChargeMapRepository
+    - [x] import-service - implement initial version for ImportService, ImportSessionRepository, OCMPersistenceRepository, OpenChargeMapRepository
+    - [x] import-service - implement ImportService
+    - [ ] import-service - update ImportSessionRepository
+    - [ ] import-service - update OCMDataPersistenceRepository
+    - [ ] import-service - update OpenChargeMapRepository
     - [ ] import-service - setup dependency injection
     - [ ] define cors configuration
     - [ ] adjust import-service to work as a subgraph
