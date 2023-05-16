@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import { LevelType as ILevelType } from '../../../domain/models/ocm/LevelType.js';
+import { LevelType as ILevelType } from '@domain/models/ocm/LevelType.js';
 
 interface LevelTypeDocument extends ILevelType, Document {
   _id: string;

@@ -5,7 +5,7 @@ import { ConnectionTypeSchema } from "./ConnectionType.js";
 import { StatusTypeSchema } from "./StatusType.js";
 import { LevelTypeSchema } from "./LevelType.js";
 import { SupplyTypeSchema } from "./SupplyType.js";
-import { ConnectionInfo as IConnectionInfo } from '../../../domain/models/ocm/ConnectionInfo.js';
+import { ConnectionInfo as IConnectionInfo } from '@domain/models/ocm/ConnectionInfo.js';
 
 interface ConnectionInfoDocument extends IConnectionInfo, Document {
   _id: string;

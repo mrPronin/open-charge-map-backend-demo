@@ -1,26 +1,18 @@
 {
-  "ts-node": {
-    "transpileOnly": true,
-    "files": true,
-    "esm": true,
-    "compilerOptions": {
-      "module": "ESNext"
-    }
-  },
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ES2020",
-    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@presentation/*": ["./src/presentation/*"],
+      "@dal/*": ["./src/dal/*"],
+      "@domain/*": ["./src/domain/*"]
+    },
+    "rootDirs": ["src"],
     "outDir": "dist",
-    "rootDir": "src",
-    "lib": ["es2022"],
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["node"],
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
-  },
-  "exclude": ["node_modules", "dist"]
+    "types": ["node"]
+  }
 }

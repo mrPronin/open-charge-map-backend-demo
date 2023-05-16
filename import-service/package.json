@@ -5,10 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc && npm run pre-build",
-    "pre-build": "cp src/presentation/*.graphql dist/presentation",
-    "dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/index.ts",
-    "start": "node ./dist/index.js"
+    "prebuild": "npm run clean",
+    "build": "tsc && tsc-alias && cp src/presentation/*.graphql dist/presentation",
+    "dev": "tsx ./src/index.ts",
+    "start": "node ./dist/index.js",
+    "clean": "rm -r dist/**"
   },
   "keywords": [],
   "author": "",
@@ -44,9 +45,8 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-unicorn": "^19.0.1",
     "prettier": "^2.0.5",
-    "ts-node": "^10.9.1",
-    "ts-paths-esm-loader": "^1.4.3",
-    "tsconfig-paths": "^4.2.0",
+    "tsc-alias": "^1.8.6",
+    "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   }
 }

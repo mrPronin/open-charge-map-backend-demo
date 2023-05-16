@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
 import { CountrySchema } from "./Country.js";
-import { AddressInfo as IAddressInfo } from '../../../domain/models/ocm/AddressInfo.js';
+import { AddressInfo as IAddressInfo } from '@domain/models/ocm/AddressInfo.js';
 
 interface AddressInfoDocument extends IAddressInfo, Document {
   _id: string;

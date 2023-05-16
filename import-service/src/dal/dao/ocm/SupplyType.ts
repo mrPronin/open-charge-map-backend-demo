@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import { SupplyType as ISupplyType } from '../../../domain/models/ocm/SupplyType.js';
+import { SupplyType as ISupplyType } from '@domain/models/ocm/SupplyType.js';
 
 interface SupplyTypeDocument extends ISupplyType, Document {
   _id: string;

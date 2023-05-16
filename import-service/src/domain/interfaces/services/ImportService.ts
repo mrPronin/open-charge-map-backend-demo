@@ -1,5 +1,5 @@
-import { ImportSession } from '../../models/import/ImportSession.js';
-import { ImportMutationResponse } from '../../models/import/ImportMutationResponse.js';
+import { ImportSession } from '@domain/models/import/ImportSession.js';
+import { ImportMutationResponse } from '@domain/models/import/ImportMutationResponse.js';
 
 export interface ImportService {
   import: () => Promise<ImportMutationResponse>;
