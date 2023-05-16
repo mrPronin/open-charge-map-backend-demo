@@ -10,6 +10,8 @@ COPY ./import-service/ ./
 
 COPY ./wait-for.sh /wait-for.sh
 
+RUN npm install --global tsx
+
 EXPOSE 4000
 
 CMD ["npm", "run", "dev"]

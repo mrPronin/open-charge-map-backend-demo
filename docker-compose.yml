@@ -16,7 +16,7 @@ services:
       - "4000:4000"
     volumes:
       - ./import-service:/app
-      - node_modules:/app/node_modules
+      - /app/node_modules
     networks:
       - app-network
     command: sh /wait-for.sh mongodb:27017 -- npm run dev

@@ -7,7 +7,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { resolver as QueryResolver } from "@presentation/resolvers/Query.js";
 import { resolver as MutationResolver } from "@presentation/resolvers/Mutation.js";
-import * as db from './db.js';
+import * as db from '@dal/db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +20,7 @@ const typeDefs = fs.readFileSync(
 const port = (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4000;
 
 async function main() {
-    // await db.connect();
+    await db.connect();
     const server = new ApolloServer({
       schema: makeExecutableSchema({
         typeDefs: [DateTimeTypeDefinition, typeDefs],

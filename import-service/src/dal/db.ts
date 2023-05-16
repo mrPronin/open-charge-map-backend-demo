@@ -16,8 +16,6 @@ export const connect = async () => {
   const url = `${MONGODB_URI}/${MONGO_DB}?authSource=admin`;
 
   try {
-    // await mongoose.connect(url, { connectTimeoutMS: 10000 });
-    console.log(`url: ${url}`)
     await mongoose.connect(url);
     console.log('Connected to MongoDB successfully.');
   } catch (error) {
