@@ -25,6 +25,4 @@ const POISchema = new Schema<POIDocument>(
   { _id: false }
 );
 
-const POI = mongoose.model<POIDocument>('POI', POISchema);
-
-export default POI;
+export const POIModel = mongoose.model<POIDocument>('POI', POISchema);

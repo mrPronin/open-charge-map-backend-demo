@@ -15,9 +15,7 @@ const ImportSessionSchema: Schema = new Schema<ImportSessionDocument>({
   endDate: { type: Date, required: true },
 });
 
-const ImportSession = mongoose.model<ImportSessionDocument>(
+export const ImportSessionModel = mongoose.model<ImportSessionDocument>(
   'ImportSession',
   ImportSessionSchema
 );
-
-export default ImportSession;
