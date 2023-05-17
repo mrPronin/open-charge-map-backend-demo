@@ -9,7 +9,11 @@ interface LevelTypeDocument extends ILevelType, Document {
 export const LevelTypeSchema = new Schema<LevelTypeDocument>(
   {
     _id: { type: String, default: uuidv4 },
-    ID: Number,
+    ID: {
+      type: Number,
+      required: true,
+      index: true
+    },
     Title: String,
     Comments: String,
     IsFastChargeCapable: Boolean,
@@ -17,6 +21,4 @@ export const LevelTypeSchema = new Schema<LevelTypeDocument>(
   { _id: false }
 );
 
-const LevelType = mongoose.model<LevelTypeDocument>('LevelType', LevelTypeSchema);
-
-export default LevelType;
+export const LevelTypeModel = mongoose.model<LevelTypeDocument>('LevelType', LevelTypeSchema);

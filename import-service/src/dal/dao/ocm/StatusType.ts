@@ -17,9 +17,7 @@ export const StatusTypeSchema = new Schema<StatusTypeDocument>(
   { _id: false }
 );
 
-const StatusType = mongoose.model<StatusTypeDocument>(
+export const StatusTypeModel = mongoose.model<StatusTypeDocument>(
   'StatusType',
   StatusTypeSchema
 );
-
-export default StatusType;

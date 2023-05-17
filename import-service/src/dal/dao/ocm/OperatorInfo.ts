@@ -27,9 +27,7 @@ export const OperatorInfoSchema = new Schema<OperatorInfoDocument>(
   { _id: false }
 );
 
-const OperatorInfo = mongoose.model<OperatorInfoDocument>(
+export const OperatorInfoModel = mongoose.model<OperatorInfoDocument>(
   'OperatorInfo',
   OperatorInfoSchema
 );
-
-export default OperatorInfo;

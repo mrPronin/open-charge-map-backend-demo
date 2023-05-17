@@ -12,15 +12,17 @@ export const ConnectionTypeSchema = new Schema<ConnectionTypeDocument>(
     FormalName: String,
     IsDiscontinued: Boolean,
     IsObsolete: Boolean,
-    ID: Number,
+    ID: {
+      type: Number,
+      required: true,
+      index: true,
+    },
     Title: String,
   },
   { _id: false }
 );
 
-const ConnectionType = mongoose.model<ConnectionTypeDocument>(
+export const ConnectionTypeModel = mongoose.model<ConnectionTypeDocument>(
   'ConnectionType',
   ConnectionTypeSchema
 );
-
-export default ConnectionType;

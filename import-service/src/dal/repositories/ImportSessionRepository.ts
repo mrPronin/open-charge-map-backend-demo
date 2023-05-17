@@ -11,8 +11,7 @@ export class ImportSessionRepositoryImplementation
   implements ImportSessionRepository
 {
   isEmpty = async (): Promise<Boolean> => {
-    return true;
-    // return (await ImportSessionModel.count()) === 0;
+    return (await ImportSessionModel.count()) === 0;
   };
   create = async (importSession: ImportSession): Promise<void> => {
     // const importSessionDocument = new ImportSessionModel(importSession);

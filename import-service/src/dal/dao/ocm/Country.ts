@@ -17,6 +17,4 @@ export const CountrySchema = new Schema<CountryDocument>(
   { _id: false }
 );
 
-const Country = mongoose.model<CountryDocument>('Country', CountrySchema);
-
-export default Country;
+export const CountryModel = mongoose.model<CountryDocument>('Country', CountrySchema);

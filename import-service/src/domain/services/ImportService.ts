@@ -32,7 +32,6 @@ export class ImportServiceImplementation implements ImportService {
       modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
     }
     const poi = await this.openChargeMapRepository.getPOI(modifiedSince);
-    // console.log(`poi: ${poi.length}`);
     const startDate = new Date();
     if (!poi.length) {
       return {
@@ -43,9 +42,7 @@ export class ImportServiceImplementation implements ImportService {
     }
     const coreReferenceData =
       await this.openChargeMapRepository.getReferenceData();
-    await this.ocmPersistenceRepository.storeCoreReferenceData(
-      coreReferenceData
-    );
+    await this.ocmPersistenceRepository.storeReferenceData(coreReferenceData);
     await this.ocmPersistenceRepository.storePOIs(poi);
     const endDate = new Date();
     const importSession: ImportSession = {

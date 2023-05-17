@@ -33,9 +33,7 @@ export const AddressInfoSchema = new Schema<AddressInfoDocument>(
   { _id: false }
 );
 
-const AddressInfo = mongoose.model<AddressInfoDocument>(
+export const AddressInfoModel = mongoose.model<AddressInfoDocument>(
   'AddressInfo',
   AddressInfoSchema
 );
-
-export default AddressInfo;
