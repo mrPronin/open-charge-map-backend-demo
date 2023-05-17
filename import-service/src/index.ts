@@ -1,38 +1,10 @@
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-import { makeExecutableSchema } from "@graphql-tools/schema";
-import { DateTimeTypeDefinition, DateTimeResolver } from 'graphql-scalars';
-import * as fs from 'node:fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { resolver as QueryResolver } from "@presentation/resolvers/Query.js";
-import { resolver as MutationResolver } from "@presentation/resolvers/Mutation.js";
-import * as db from '@dal/db.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const typeDefs = fs.readFileSync(
-  path.join(__dirname, 'presentation/schema.graphql'),
-  'utf8'
-);
-
-const port = (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4000;
+import { bootstrap } from '@presentation/bootstrap.js';
 
 async function main() {
-    await db.connect();
-    const server = new ApolloServer({
-      schema: makeExecutableSchema({
-        typeDefs: [DateTimeTypeDefinition, typeDefs],
-        resolvers: {
-          DateTime: DateTimeResolver,
-          ...QueryResolver,
-          ...MutationResolver,
-        },
-      }),
-    });
-    const { url } = await startStandaloneServer(server, { listen: { port } });
-    console.log(`🚀  Server ready at: ${url}`);
+  const port =
+    (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4000;
+  const { MONGODB_URI, MONGO_DB } = process.env;
+  await bootstrap(port, MONGODB_URI, MONGO_DB);
 }
 
 main().catch((error) => console.error('failed starting server', error));

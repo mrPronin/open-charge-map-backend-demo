@@ -1,19 +1,11 @@
 import mongoose from 'mongoose';
 
-export const connect = async () => {
-  const {
-    MONGODB_URI,
-    MONGO_DB,
-  } = process.env;
-
-  if (
-    !MONGODB_URI ||
-    !MONGO_DB
-  ) {
+export const connect = async (dbURI?: string, dbName?: string) => {
+  if (!dbURI || !dbName) {
     throw new Error('Required MongoDB environment variables are missing.');
   }
 
-  const url = `${MONGODB_URI}/${MONGO_DB}?authSource=admin`;
+  const url = `${dbURI}/${dbName}?authSource=admin`;
 
   try {
     await mongoose.connect(url);
