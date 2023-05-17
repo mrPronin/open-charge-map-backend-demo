@@ -1,9 +1,18 @@
+import { injectable, inject } from 'inversify';
 import axios from 'axios';
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
 import { OpenChargeMapRepository } from '@domain/interfaces/repositories/OpenChargeMapRepository.js';
 
-export class OpenChargeMapRepositoryImplementation implements OpenChargeMapRepository {
+@injectable()
+export class OpenChargeMapRepositoryImplementation
+  implements OpenChargeMapRepository
+{
+  // debug
+  constructor() {
+    console.log('OpenChargeMapRepositoryImplementation constructor');
+  }
+  // debug
   private baseUrl = 'https://api.openchargemap.io/v3/';
   private apiKey = process.env.OCM_API_KEY;
 

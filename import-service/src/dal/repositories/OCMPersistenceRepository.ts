@@ -1,15 +1,28 @@
+import { injectable, inject } from 'inversify';
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
 import { POIModel } from '@dal/dao/ocm/POI.js';
 
-
+@injectable()
 export class OCMPersistenceRepositoryImplementation
   implements OCMPersistenceRepository
 {
+  // debug
+  constructor() {
+    console.log('OCMPersistenceRepositoryImplementation constructor');
+  }
+  // debug
   storeCoreReferenceData = async (data: CoreReferenceData): Promise<void> => {
-    const { ChargerTypes, ConnectionTypes, Countries, Operators, StatusTypes } = data;
-    console.log(ChargerTypes, ConnectionTypes, Countries, Operators, StatusTypes);
+    const { ChargerTypes, ConnectionTypes, Countries, Operators, StatusTypes } =
+      data;
+    console.log(
+      ChargerTypes,
+      ConnectionTypes,
+      Countries,
+      Operators,
+      StatusTypes
+    );
     // TODO: store reference data
     // const coreReferenceDataDocument = new CoreReferenceDataModel(data);
     // await coreReferenceDataDocument.save();

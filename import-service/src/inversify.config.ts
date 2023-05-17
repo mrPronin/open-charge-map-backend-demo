@@ -15,7 +15,7 @@ import { ImportSessionRepositoryImplementation } from "@dal/repositories/ImportS
 import { OCMPersistenceRepositoryImplementation } from "@dal/repositories/OCMPersistenceRepository.js";
 import { OpenChargeMapRepositoryImplementation } from "@dal/repositories/OpenChargeMapRepository.js";
 
-const container = new Container();
+export const container = new Container();
 
 container
   .bind<ImportService>(TYPES.ImportService)
@@ -29,5 +29,3 @@ container
 container
   .bind<OpenChargeMapRepository>(TYPES.OpenChargeMapRepository)
   .to(OpenChargeMapRepositoryImplementation);
-
-  export default container;

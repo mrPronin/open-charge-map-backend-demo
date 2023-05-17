@@ -1,13 +1,11 @@
 "Generic response interface for any mutation"
 interface MutationResponse {
-  code: String!
   success: Boolean!
   message: String!
 }
 
 "Response type for import mutation"
 type ImportMutationResponse implements MutationResponse {
-  code: String!
   success: Boolean!
   message: String!
   importSession: ImportSession

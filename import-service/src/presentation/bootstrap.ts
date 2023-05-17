@@ -5,8 +5,11 @@ import { ApolloServer } from '@apollo/server';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { DateTimeTypeDefinition, DateTimeResolver } from 'graphql-scalars';
-import * as db from '@dal/db.js';
+import 'reflect-metadata';
 
+import * as db from '@dal/db.js';
+import { container } from "@/inversify.config.js";
+import { GraphQLContext } from '@presentation/GraphQLContext.js';
 import { resolver as QueryResolver } from '@presentation/resolvers/Query.js';
 import { resolver as MutationResolver } from '@presentation/resolvers/Mutation.js';
 
@@ -25,7 +28,7 @@ export async function bootstrap(
     'utf8'
   );
 
-  const server = new ApolloServer({
+  const server = new ApolloServer<GraphQLContext>({
     schema: makeExecutableSchema({
       typeDefs: [DateTimeTypeDefinition, typeDefs],
       resolvers: {
@@ -35,6 +38,10 @@ export async function bootstrap(
       },
     }),
   });
-  const { url } = await startStandaloneServer(server, { listen: { port: appPort } });
+const { url } = await startStandaloneServer(server, {
+  context: async () => ({
+    container,
+  }),
+});
   console.log(`🚀  Server ready at: ${url}`);
 }

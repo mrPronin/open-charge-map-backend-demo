@@ -4,7 +4,8 @@
     "paths": {
       "@presentation/*": ["./src/presentation/*"],
       "@dal/*": ["./src/dal/*"],
-      "@domain/*": ["./src/domain/*"]
+      "@domain/*": ["./src/domain/*"],
+      "@/*":["./src/*"]
     },
     "rootDirs": ["src"],
     "outDir": "dist",
