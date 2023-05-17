@@ -10,6 +10,7 @@ import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportS
 // debug
 import { mockedImportMutationResponse } from "@presentation/mocked/mockedImportMutationResponse.js";
 import { mockedImportSessions } from "@presentation/mocked/mockedImportSessions.js";
+import { v4 as uuidv4 } from 'uuid';
 // debug
 
 @injectable()
@@ -24,17 +25,14 @@ export class ImportServiceImplementation implements ImportService {
   ) {}
 
   import = async (): Promise<ImportMutationResponse> => {
-    // debug
-     return mockedImportMutationResponse;
-    // debug
     const isFirstSession = await this.importSessionRepository.isEmpty();
     let modifiedSince: Date = null;
     if (!isFirstSession) {
-      const lastPOI = await this.ocmPersistenceRepository.getLastPOIUpdate();
       // TODO: extract 10 minutes
-      modifiedSince = lastPOI.DateLastStatusUpdate;
+      modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
     }
     const poi = await this.openChargeMapRepository.getPOI(modifiedSince);
+    // console.log(`poi: ${poi.length}`);
     const startDate = new Date();
     if (!poi.length) {
       return {
@@ -51,8 +49,9 @@ export class ImportServiceImplementation implements ImportService {
     await this.ocmPersistenceRepository.storePOIs(poi);
     const endDate = new Date();
     const importSession: ImportSession = {
+      id: uuidv4(),
       poiAmount: poi.length,
-      modifiedsince: modifiedSince,
+      modifiedsince: modifiedSince || new Date(),
       startDate,
       endDate,
     };
@@ -65,9 +64,6 @@ export class ImportServiceImplementation implements ImportService {
   };
 
   importSessions = async (): Promise<ImportSession[]> => {
-    // debug
-    return mockedImportSessions;
-    // debug
     return await this.importSessionRepository.getAll();
   };
 }

@@ -1,0 +1,242 @@
+[
+  {
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2023-05-11T16:47:00Z",
+    "ID": 265459,
+    "UUID": "12989DFF-4849-4B96-8D2F-0ACD56BA7421",
+    "DataProviderID": 1,
+    "OperatorID": 1240,
+    "UsageTypeID": 1,
+    "AddressInfo": {
+      "ID": 265843,
+      "Title": "Pfalzwerke Rossmann",
+      "AddressLine1": "Nansenstraße 2",
+      "Town": "Kandel",
+      "StateOrProvince": "GER",
+      "CountryID": 87,
+      "Latitude": 49.086194,
+      "Longitude": 8.210559,
+      "RelatedURL": "https://www.forumelettrico.it/forum/colonnine-hfc-300-kw-pfalzwerke-nansenstrade-2-kandel-supermercato-rossmann-t26770.html",
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 451197,
+        "ConnectionTypeID": 33,
+        "LevelID": 3,
+        "PowerKW": 300.0,
+        "CurrentTypeID": 30,
+        "Quantity": 3
+      }
+    ],
+    "NumberOfPoints": 2,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-05-11T16:47:00Z",
+    "DataQualityLevel": 1,
+    "DateCreated": "2023-05-11T06:35:00Z",
+    "SubmissionStatusTypeID": 200
+  },
+  {
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2023-05-10T10:18:00Z",
+    "ID": 265415,
+    "UUID": "09891E13-AA19-4CCE-AB21-1B58D6267343",
+    "DataProviderID": 1,
+    "OperatorID": 1,
+    "UsageTypeID": 6,
+    "UsageCost": "kostenpflichtig / chargeable",
+    "AddressInfo": {
+      "ID": 265799,
+      "Title": "Ferienhaus AVIVA",
+      "AddressLine1": "Haffdroom 13",
+      "Town": "Pepelow",
+      "StateOrProvince": "Landkreis Rostock",
+      "Postcode": "18233",
+      "CountryID": 87,
+      "Latitude": 54.03538103036786,
+      "Longitude": 11.592652518261389,
+      "ContactTelephone1": " +49 (0)38294 78 370",
+      "RelatedURL": "https://www.haffdroom.de/detailseite/haus-13-aviva",
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 450430,
+        "ConnectionTypeID": 1036,
+        "StatusTypeID": 50,
+        "LevelID": 2,
+        "Amps": 16,
+        "PowerKW": 11.0,
+        "CurrentTypeID": 20,
+        "Quantity": 1
+      }
+    ],
+    "NumberOfPoints": 1,
+    "GeneralComments": "nur für Gäste, bitte bei der Reservierung angeben; only for guests, please specify when booking",
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-05-10T10:18:00Z",
+    "DataQualityLevel": 1,
+    "DateCreated": "2023-05-10T07:33:00Z",
+    "SubmissionStatusTypeID": 200
+  },
+  {
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2023-05-09T17:53:00Z",
+    "ID": 265391,
+    "UUID": "7D4ED200-40F7-405C-8F28-D5CD62DD7B35",
+    "DataProviderID": 1,
+    "OperatorID": 1,
+    "UsageTypeID": 5,
+    "AddressInfo": {
+      "ID": 265775,
+      "Title": "Ladestation für Elektrofahrzeuge ",
+      "AddressLine1": "Ost-West-Straße",
+      "AddressLine2": "Seehafen Fähre",
+      "Town": "Rostock",
+      "StateOrProvince": "Mecklenburg-Vorpommern",
+      "Postcode": "18147",
+      "CountryID": 87,
+      "Latitude": 54.14251844473688,
+      "Longitude": 12.102371885353335,
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 450396,
+        "ConnectionTypeID": 2,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 50.0,
+        "CurrentTypeID": 30,
+        "Quantity": 1
+      },
+      {
+        "ID": 450397,
+        "ConnectionTypeID": 33,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 50.0,
+        "CurrentTypeID": 30,
+        "Quantity": 1
+      }
+    ],
+    "NumberOfPoints": 2,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-05-09T17:53:00Z",
+    "DataQualityLevel": 1,
+    "DateCreated": "2023-05-09T08:46:00Z",
+    "SubmissionStatusTypeID": 200
+  },
+  {
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2023-05-05T17:16:00Z",
+    "ID": 183014,
+    "UUID": "8DF42F27-ABFB-4F7E-8DA7-0DF8BF5092D4",
+    "DataProviderID": 1,
+    "OperatorID": 86,
+    "AddressInfo": {
+      "ID": 183373,
+      "Title": "Kentener Heide",
+      "AddressLine1": "Kentener Heide",
+      "AddressLine2": "Kenten",
+      "Town": "Bergheim",
+      "StateOrProvince": "Nordrhein-Westfalen",
+      "Postcode": "50127",
+      "CountryID": 87,
+      "Latitude": 50.9430806373729,
+      "Longitude": 6.651503089850507,
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 289461,
+        "ConnectionTypeID": 33,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 300.0,
+        "CurrentTypeID": 30
+      },
+      {
+        "ID": 289462,
+        "ConnectionTypeID": 33,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 300.0,
+        "CurrentTypeID": 30
+      },
+      {
+        "ID": 298491,
+        "ConnectionTypeID": 2,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 50.0,
+        "CurrentTypeID": 30
+      }
+    ],
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-05-05T17:16:00Z",
+    "MetadataValues": [
+      {
+        "ID": 15307,
+        "MetadataFieldID": 4,
+        "ItemValue": "Data from the German chargepoint registry provided by Bundesnetzagentur.de under the CC-BY 4.0 license"
+      }
+    ],
+    "DataQualityLevel": 3,
+    "DateCreated": "2021-07-08T10:03:00Z",
+    "SubmissionStatusTypeID": 100
+  },
+  {
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2023-05-09T20:25:00Z",
+    "ID": 181462,
+    "UUID": "00EF8DA2-6E60-4481-B163-D6128AAF3B05",
+    "DataProviderID": 1,
+    "OperatorID": 86,
+    "UsageTypeID": 1,
+    "AddressInfo": {
+      "ID": 181821,
+      "Title": "EnBW Shell",
+      "AddressLine1": "Dürener Straße 176/A",
+      "Town": "Kreuzau",
+      "Postcode": "52372",
+      "CountryID": 87,
+      "Latitude": 50.755075,
+      "Longitude": 6.488923,
+      "RelatedURL": "https://www.forumelettrico.it/forum/colonnine-hfc-300-kw-enbw-durener-str-176-kreuzau-t26769.html",
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 285807,
+        "ConnectionTypeID": 33,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 300.0,
+        "CurrentTypeID": 30,
+        "Quantity": 4
+      },
+      {
+        "ID": 285808,
+        "ConnectionTypeID": 2,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 50.0,
+        "CurrentTypeID": 30,
+        "Quantity": 1
+      }
+    ],
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-05-09T20:25:00Z",
+    "MetadataValues": [
+      {
+        "ID": 13756,
+        "MetadataFieldID": 4,
+        "ItemValue": "Data from the German chargepoint registry provided by Bundesnetzagentur.de under the CC-BY 4.0 license"
+      }
+    ],
+    "DataQualityLevel": 3,
+    "DateCreated": "2021-07-08T10:01:00Z",
+    "SubmissionStatusTypeID": 100
+  }
+]
