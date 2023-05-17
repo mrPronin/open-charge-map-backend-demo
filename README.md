@@ -52,7 +52,7 @@
         - [x] import-service - define mongoose models for OCM data
             - [x] import-service - define mongoose model for Country
             - [x] import-service - define mongoose models POI, AddressInfo, ConnectionInfo, ConnectionType, LevelType, OperatorInfo, StatusType, SupplyType
-        - [ ] create indexes
+        - [x] create index for POI based on DateLastStatusUpdate
     - [x] import-service - define DDD structure, refactor existing code, create placeholders
     - [x] import-service - define domain models, refactor dao
     - [x] import-service - define interfaces for ImportService
@@ -60,16 +60,19 @@
     - [x] import-service - define interface for OCMPersistenceRepository, ImportSessionRepository
     - [x] import-service - define CoreReferenceData
     - [x] fix: issue with start script ERR_UNSUPPORTED_DIR_IMPORT
+    - [x] import-service - define path aliases @dal, @domain and @presentation
     - [x] import-service - implement initial version for ImportService, ImportSessionRepository, OCMPersistenceRepository, OpenChargeMapRepository
     - [x] import-service - implement ImportService
+    - [x] refactor: import-service - implement bootstrap module
+    - [x] import-service - setup dependency injection
+    - [ ] import-service - debug ImportService with mocked repositories
     - [ ] import-service - update ImportSessionRepository
     - [ ] import-service - update OCMDataPersistenceRepository
     - [ ] import-service - update OpenChargeMapRepository
-    - [ ] import-service - setup dependency injection
+    - [ ] import-service - use transaction
     - [ ] define cors configuration
-    - [ ] adjust import-service to work as a subgraph
     - [ ] add logger
-    - [ ] import-service - define path aliases @dal, @domaon and @presentation
+    - [ ] adjust import-service to work as a subgraph
     - [ ] etc
 - [ ] docker-compose
     - [x] feat: define initial docker-compose
