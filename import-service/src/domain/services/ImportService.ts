@@ -25,14 +25,16 @@ export class ImportServiceImplementation implements ImportService {
   ) {}
 
   import = async (): Promise<ImportMutationResponse> => {
+        const startDate = new Date();
+
     const isFirstSession = await this.importSessionRepository.isEmpty();
     let modifiedSince: Date = null;
     if (!isFirstSession) {
       // TODO: extract 10 minutes
       modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
     }
+    // fetch POI data from OCM
     const poi = await this.openChargeMapRepository.getPOI(modifiedSince);
-    const startDate = new Date();
     if (!poi.length) {
       return {
         success: true,
@@ -43,7 +45,7 @@ export class ImportServiceImplementation implements ImportService {
     const coreReferenceData =
       await this.openChargeMapRepository.getReferenceData();
     await this.ocmPersistenceRepository.storeReferenceData(coreReferenceData);
-    await this.ocmPersistenceRepository.storePOIs(poi);
+    await this.ocmPersistenceRepository.storePOIs(poi, isFirstSession);
     const endDate = new Date();
     const importSession: ImportSession = {
       id: uuidv4(),

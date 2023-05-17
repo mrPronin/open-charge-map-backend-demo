@@ -28,7 +28,7 @@ export class OCMPersistenceRepositoryImplementation
     await processModel(StatusTypeModel, StatusTypes);
   };
 
-  storePOIs = async (pois: POI[]): Promise<void> => {
+  storePOIs = async (pois: POI[], isFirstSession: Boolean): Promise<void> => {
     // for (const poi of pois) {
     //   const poiDocument = new POIModel(poi);
     // await poiDocument.save();
