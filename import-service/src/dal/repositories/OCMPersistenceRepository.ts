@@ -29,6 +29,7 @@ export class OCMPersistenceRepositoryImplementation
   };
 
   storePOIs = async (pois: POI[], isFirstSession: Boolean): Promise<void> => {
+    await POIModel.deleteMany();
     const documents = await Promise.all(
       pois.map(async function (poi) {
         let poiDocument = await POIModel.findOneAndUpdate({ ID: poi.ID }, poi, {
@@ -69,34 +70,28 @@ export class OCMPersistenceRepositoryImplementation
       documents.map(async (document) => {
         const connections = await Promise.all(
           document.Connections.map(async (connection) => {
-            // find and populate ConnectionType
-            if (connection.ConnectionTypeID) {
-              const connectionType = await ConnectionTypeModel.findOne({
-                ID: connection.ConnectionTypeID,
-              });
-              if (connectionType) {
-                connection.ConnectionType = connectionType;
-              }
-            }
-            // find and populate StatusType
-            if (connection.StatusTypeID) {
-              const statusType = await StatusTypeModel.findOne({
-                ID: connection.StatusTypeID,
-              });
-              if (statusType) {
-                connection.StatusType = statusType;
-              }
-            }
-            // find and populate CurrentType
-            if (connection.CurrentTypeID) {
-              const currentType = await SupplyTypeModel.findOne({
-                ID: connection.CurrentTypeID,
-              });
-              if (currentType) {
-                connection.CurrentType = currentType;
-              }
-            }
-            return connection;
+            const connectionType = await findAndPopulate(
+              ConnectionTypeModel,
+              connection.ConnectionTypeID,
+              'ConnectionType'
+            );
+            const statusType = await findAndPopulate(
+              StatusTypeModel,
+              connection.StatusTypeID,
+              'StatusType'
+            );
+            const currentType = await findAndPopulate(
+              SupplyTypeModel,
+              connection.CurrentTypeID,
+              'CurrentType'
+            );
+
+            return {
+              ...connection,
+              ...connectionType,
+              ...statusType,
+              ...currentType,
+            };
           })
         );
         document.Connections = connections;
@@ -123,4 +118,18 @@ export class OCMPersistenceRepositoryImplementation
 async function processModel<T>(model: mongoose.Model<any>, data: T[]) {
   await model.deleteMany();
   await model.bulkSave(data.map((item) => new model(item)));
+}
+
+async function findAndPopulate<D extends mongoose.Document>(
+  model: mongoose.Model<D>,
+  fieldId: any,
+  fieldName: string
+) {
+  if (fieldId) {
+    const document = await model.findOne({ ID: fieldId });
+    if (document) {
+      return { [fieldName]: document };
+    }
+  }
+  return {};
 }
