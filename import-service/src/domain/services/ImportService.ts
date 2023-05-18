@@ -32,6 +32,7 @@ export class ImportServiceImplementation implements ImportService {
     if (!isFirstSession) {
       // TODO: extract 10 minutes
       modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
+      console.log('modifiedSince: ', modifiedSince);
     }
     // fetch POI data from OCM
     const poi = await this.openChargeMapRepository.getPOI(modifiedSince);

@@ -29,7 +29,7 @@ export class OCMPersistenceRepositoryImplementation
   };
 
   storePOIs = async (pois: POI[], isFirstSession: Boolean): Promise<void> => {
-    await POIModel.deleteMany();
+    // await POIModel.deleteMany();
     const documents = await Promise.all(
       pois.map(async function (poi) {
         let poiDocument = await POIModel.findOneAndUpdate({ ID: poi.ID }, poi, {
@@ -99,17 +99,10 @@ export class OCMPersistenceRepositoryImplementation
       })
     );
     const writeResult = await POIModel.bulkSave(documents);
-    console.dir(writeResult, { depth: null });
+    // console.dir(writeResult, { depth: null });
   };
 
   getLastPOIUpdate = async (): Promise<Date | null> => {
-    if (mockPOIData.length === 0) {
-      return null;
-    }
-    return mockPOIData
-      .map((poi) => new Date(poi.DateLastStatusUpdate))
-      .reduce((a, b) => (a > b ? a : b));
-
     const poiDocument = await POIModel.findOne().sort('-DateLastStatusUpdate');
     return poiDocument ? poiDocument.toObject() : null;
   };
