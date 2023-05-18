@@ -24,6 +24,7 @@
     "@apollo/server": "^4.7.1",
     "@graphql-tools/schema": "^9.0.19",
     "axios": "^1.4.0",
+    "class-transformer": "^0.5.1",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.21.3",
     "inversify": "^6.0.1",

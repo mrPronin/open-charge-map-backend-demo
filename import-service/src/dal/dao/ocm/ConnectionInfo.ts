@@ -17,7 +17,7 @@ export const ConnectionInfoSchema = new Schema<ConnectionInfoDocument>(
     ConnectionTypeID: { type: Number, required: false, default: null },
     ConnectionType: { type: ConnectionTypeSchema, required: false },
     Reference: { type: String, required: false },
-    StatusTypeID: { type: Number, required: true, default: 0 },
+    StatusTypeID: { type: Number, required: false, default: 0 },
     StatusType: { type: StatusTypeSchema, required: false },
     Amps: { type: Number, required: false, default: null },
     Voltage: { type: Number, required: false, default: null },

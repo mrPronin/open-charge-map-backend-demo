@@ -8,7 +8,7 @@ export interface ConnectionInfo {
   ConnectionTypeID?: number;
   ConnectionType?: ConnectionType;
   Reference?: string;
-  StatusTypeID: number;
+  StatusTypeID?: number;
   StatusType?: StatusType;
   Amps?: number;
   Voltage?: number;

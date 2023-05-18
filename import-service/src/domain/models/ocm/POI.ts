@@ -10,7 +10,7 @@ export interface POI {
   OperatorInfo?: OperatorInfo;
   StatusTypeID: number;
   StatusType?: StatusType;
-  AddressInfo: AddressInfo;
+  AddressInfo?: AddressInfo;
   Connections: ConnectionInfo[];
   DateLastStatusUpdate?: Date;
 }

@@ -20,7 +20,7 @@ const POISchema = new Schema<POIDocument>(
     OperatorInfo: { type: OperatorInfoSchema, required: false },
     StatusTypeID: { type: Number, required: true, default: 0 },
     StatusType: { type: StatusTypeSchema, required: false },
-    AddressInfo: { type: AddressInfoSchema, required: true },
+    AddressInfo: { type: AddressInfoSchema, required: false },
     Connections: { type: [ConnectionInfoSchema], required: true, default: [] },
     DateLastStatusUpdate: { type: Date, required: true },
   },

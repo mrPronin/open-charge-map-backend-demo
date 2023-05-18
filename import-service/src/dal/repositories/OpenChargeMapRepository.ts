@@ -1,14 +1,34 @@
 import { injectable, inject } from 'inversify';
 import axios from 'axios';
+import { plainToInstance, Type, Expose } from 'class-transformer';
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
 import { OpenChargeMapRepository } from '@domain/interfaces/repositories/OpenChargeMapRepository.js';
 
+import { OperatorInfo } from '@domain/models/ocm/OperatorInfo.js';
+import { StatusType } from '@domain/models/ocm/StatusType.js';
+import { AddressInfo } from '@domain/models/ocm/AddressInfo.js';
+import { ConnectionInfo } from '@domain/models/ocm/ConnectionInfo.js';
+
 // debug
 import * as referenceData from '@presentation/mocked/openchargemap-referencedata.json';
-// import * as mockPOIData from '@presentation/mocked/openchargemap-poi-compact.json';
 import mockPOIData from '@presentation/mocked/openchargemap-poi-compact.json';
+// import mockPOIData from '@presentation/mocked/openchargemap-poi-one.json';//
 // debug
+
+class POIDTO implements POI {
+  @Expose() ID: number;
+  @Expose() UUID: string;
+  @Expose() OperatorID: number;
+  @Expose() OperatorInfo?: OperatorInfo;
+  @Expose() StatusTypeID: number;
+  @Expose() StatusType?: StatusType;
+  @Expose() AddressInfo: AddressInfo;
+  @Expose() Connections: ConnectionInfo[];
+  @Type(() => Date)
+  @Expose()
+  DateLastStatusUpdate?: Date;
+}
 
 @injectable()
 export class OpenChargeMapRepositoryImplementation
@@ -24,7 +44,14 @@ export class OpenChargeMapRepositoryImplementation
   };
 
   getPOI = async (modifiedSince?: Date): Promise<POI[]> => {
-    return mockPOIData.map(convertToPOI);
+    const poi = plainToInstance(POIDTO, mockPOIData, {
+      excludeExtraneousValues: true,
+    });
+    // console.dir(poi, { depth: null });
+    return poi
+    // return mockPOIData;
+
+    // return mockPOIData.map(convertToPOI);
     let url = `${this.baseUrl}poi?key=${this.apiKey}&output=json&client=open-charge-map-backend&camelcase=false&verbose=false&compact=true`;
 
     if (modifiedSince) {

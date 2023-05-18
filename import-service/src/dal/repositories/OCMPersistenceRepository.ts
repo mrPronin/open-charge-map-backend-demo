@@ -8,7 +8,7 @@ import { ConnectionTypeModel } from '@dal/dao/ocm/ConnectionType.js';
 import { CountryModel } from '@dal/dao/ocm/Country.js';
 import { OperatorInfoModel } from '@dal/dao/ocm/OperatorInfo.js';
 import { StatusTypeModel } from '@dal/dao/ocm/StatusType.js';
-import { SupplyTypeModel } from "@dal/dao/ocm/SupplyType";
+import { SupplyTypeModel } from '@dal/dao/ocm/SupplyType';
 
 // debug
 import * as mockPOIData from '@presentation/mocked/openchargemap-poi-compact.json';
@@ -29,10 +29,82 @@ export class OCMPersistenceRepositoryImplementation
   };
 
   storePOIs = async (pois: POI[], isFirstSession: Boolean): Promise<void> => {
-    // for (const poi of pois) {
-    //   const poiDocument = new POIModel(poi);
-    // await poiDocument.save();
-    // }
+    const documents = await Promise.all(
+      pois.map(async function (poi) {
+        let poiDocument = await POIModel.findOneAndUpdate({ ID: poi.ID }, poi, {
+          new: true,
+        });
+        // create new POI if needed
+        if (!poiDocument) {
+          poiDocument = new POIModel(poi);
+        }
+        // find and populate OperatorInfo
+        const operatorDocument = await OperatorInfoModel.findOne({
+          ID: poi.OperatorID,
+        });
+        if (operatorDocument) {
+          poiDocument.OperatorInfo = operatorDocument;
+        }
+        // find and populate StatusType
+        const statusTypeDocument = await StatusTypeModel.findOne({
+          ID: poi.StatusTypeID,
+        });
+        if (statusTypeDocument) {
+          poiDocument.StatusType = statusTypeDocument;
+        }
+        // find and populate Country for AddressInfo
+        if (poi.AddressInfo.CountryID) {
+          const countryDocument = await CountryModel.findOne({
+            ID: poi.AddressInfo.CountryID,
+          });
+          if (countryDocument) {
+            poiDocument.AddressInfo.Country = countryDocument;
+          }
+        }
+        return poiDocument;
+      })
+    );
+    // process Connections
+    await Promise.all(
+      documents.map(async (document) => {
+        const connections = await Promise.all(
+          document.Connections.map(async (connection) => {
+            // find and populate ConnectionType
+            if (connection.ConnectionTypeID) {
+              const connectionType = await ConnectionTypeModel.findOne({
+                ID: connection.ConnectionTypeID,
+              });
+              if (connectionType) {
+                connection.ConnectionType = connectionType;
+              }
+            }
+            // find and populate StatusType
+            if (connection.StatusTypeID) {
+              const statusType = await StatusTypeModel.findOne({
+                ID: connection.StatusTypeID,
+              });
+              if (statusType) {
+                connection.StatusType = statusType;
+              }
+            }
+            // find and populate CurrentType
+            if (connection.CurrentTypeID) {
+              const currentType = await SupplyTypeModel.findOne({
+                ID: connection.CurrentTypeID,
+              });
+              if (currentType) {
+                connection.CurrentType = currentType;
+              }
+            }
+            return connection;
+          })
+        );
+        document.Connections = connections;
+        return document;
+      })
+    );
+    const writeResult = await POIModel.bulkSave(documents);
+    console.dir(writeResult, { depth: null });
   };
 
   getLastPOIUpdate = async (): Promise<Date | null> => {
