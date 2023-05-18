@@ -13,7 +13,7 @@ type ImportMutationResponse implements MutationResponse {
 
 "Describes the result of the data import operation from the Open Charge Map service"
 type ImportSession {
-  id: ID!
+  ID: ID!
   poiAmount: Int!
   modifiedsince: DateTime!
   startDate: DateTime!

@@ -32,7 +32,7 @@ export class ImportServiceImplementation implements ImportService {
     if (!isFirstSession) {
       // TODO: extract 10 minutes
       modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
-      console.log('modifiedSince: ', modifiedSince);
+      // console.log('modifiedSince: ', modifiedSince);
     }
     // fetch POI data from OCM
     const poi = await this.openChargeMapRepository.getPOI(modifiedSince);
@@ -48,14 +48,13 @@ export class ImportServiceImplementation implements ImportService {
     await this.ocmPersistenceRepository.storeReferenceData(referenceData);
     await this.ocmPersistenceRepository.storePOIs(poi, isFirstSession);
     const endDate = new Date();
-    const importSession: ImportSession = {
-      id: uuidv4(),
-      poiAmount: poi.length,
-      modifiedsince: modifiedSince || new Date(),
-      startDate,
-      endDate,
-    };
-    await this.importSessionRepository.create(importSession);
+    const importSession =
+      await this.importSessionRepository.create({
+        poiAmount: poi.length,
+        modifiedsince: modifiedSince || new Date(),
+        startDate,
+        endDate,
+      });
     return {
       success: true,
       importSession,

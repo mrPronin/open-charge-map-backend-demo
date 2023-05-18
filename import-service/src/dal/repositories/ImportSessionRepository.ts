@@ -1,10 +1,8 @@
-import { injectable, inject } from 'inversify';
+import mongoose from 'mongoose';
+import { injectable } from 'inversify';
 import { ImportSession } from '@domain/models/import/ImportSession.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
 import { ImportSessionModel } from '@dal/dao/import/ImportSession.js';
-// debug
-import { mockedImportSessions } from "@presentation/mocked/mockedImportSessions.js";
-// debug
 
 @injectable()
 export class ImportSessionRepositoryImplementation
@@ -13,17 +11,24 @@ export class ImportSessionRepositoryImplementation
   isEmpty = async (): Promise<Boolean> => {
     return (await ImportSessionModel.count()) === 0;
   };
-  create = async (importSession: ImportSession): Promise<void> => {
-    // const importSessionDocument = new ImportSessionModel(importSession);
-    // await importSessionDocument.save();
+  create = async (importSession: ImportSession): Promise<ImportSession> => {
+    const document = new ImportSessionModel(importSession);
+    await document.save();
+    return toModel<ImportSession>(document);
   };
 
   getAll = async (): Promise<ImportSession[]> => {
-    // debug
-    return mockedImportSessions;
-    // debug
-    ImportSessionModel.count();
     const importSessionDocuments = await ImportSessionModel.find();
-    return importSessionDocuments.map((doc) => doc.toObject());
+    return importSessionDocuments.map((doc) => toModel<ImportSession>(doc));
   };
+}
+
+function toModel<T>(doc: mongoose.Document): T {
+  const object = doc.toObject() as T & {
+    _id: string;
+    ID: string;
+  };
+  object.ID = doc.id;
+  delete object['_id'];
+  return object as T;
 }

@@ -1,4 +1,4 @@
-import { injectable, inject } from 'inversify';
+import { injectable } from 'inversify';
 import mongoose from 'mongoose';
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
@@ -9,10 +9,6 @@ import { CountryModel } from '@dal/dao/ocm/Country.js';
 import { OperatorInfoModel } from '@dal/dao/ocm/OperatorInfo.js';
 import { StatusTypeModel } from '@dal/dao/ocm/StatusType.js';
 import { SupplyTypeModel } from '@dal/dao/ocm/SupplyType';
-
-// debug
-import * as mockPOIData from '@presentation/mocked/openchargemap-poi-compact.json';
-// debug
 
 @injectable()
 export class OCMPersistenceRepositoryImplementation
@@ -99,12 +95,11 @@ export class OCMPersistenceRepositoryImplementation
       })
     );
     const writeResult = await POIModel.bulkSave(documents);
-    // console.dir(writeResult, { depth: null });
   };
 
   getLastPOIUpdate = async (): Promise<Date | null> => {
     const poiDocument = await POIModel.findOne().sort('-DateLastStatusUpdate');
-    return poiDocument ? poiDocument.toObject() : null;
+    return poiDocument ? poiDocument.DateLastStatusUpdate : null;
   };
 }
 
