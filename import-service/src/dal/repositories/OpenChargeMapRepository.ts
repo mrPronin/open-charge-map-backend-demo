@@ -50,8 +50,10 @@ const convertToPOI = (input: any): POI => {
   return {
     ID: input.ID,
     UUID: input.UUID,
-    OperatorInfo: operatorInfo, // Add null check if needed
-    StatusType: statusType, // Add null check if needed
+    OperatorID: input.OperatorID,
+    OperatorInfo: operatorInfo,
+    StatusTypeID: input.StatusTypeID,
+    StatusType: statusType,
     AddressInfo: input.AddressInfo,
     Connections: input.Connections,
     DateLastStatusUpdate: input.DateLastStatusUpdate

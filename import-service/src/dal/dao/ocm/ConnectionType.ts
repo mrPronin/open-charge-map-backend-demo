@@ -9,15 +9,15 @@ interface ConnectionTypeDocument extends IConnectionType, Document {
 export const ConnectionTypeSchema = new Schema<ConnectionTypeDocument>(
   {
     _id: { type: String, default: uuidv4 },
-    FormalName: String,
-    IsDiscontinued: Boolean,
-    IsObsolete: Boolean,
+    FormalName: { type: String, required: false, default: null },
+    IsDiscontinued: { type: Boolean, required: false, default: false },
+    IsObsolete: { type: Boolean, required: false, default: false },
     ID: {
       type: Number,
       required: true,
       index: true,
     },
-    Title: String,
+    Title: { type: String, required: false },
   },
   { _id: false }
 );

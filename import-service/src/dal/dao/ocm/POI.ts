@@ -16,14 +16,13 @@ const POISchema = new Schema<POIDocument>(
     _id: { type: String, default: uuidv4 },
     ID: { type: Number, required: true },
     UUID: { type: String, required: true },
-    // OperatorID
-    OperatorInfo: { type: OperatorInfoSchema, required: true },
-    // StatusTypeID
-    StatusType: { type: StatusTypeSchema, required: true },
+    OperatorID: { type: Number, required: true, default: 0 },
+    OperatorInfo: { type: OperatorInfoSchema, required: false },
+    StatusTypeID: { type: Number, required: true, default: 0 },
+    StatusType: { type: StatusTypeSchema, required: false },
     AddressInfo: { type: AddressInfoSchema, required: true },
-    // ConnectionTypeID
-    Connections: { type: [ConnectionInfoSchema], required: true },
-    DateLastStatusUpdate: { type: Date },
+    Connections: { type: [ConnectionInfoSchema], required: true, default: [] },
+    DateLastStatusUpdate: { type: Date, required: true },
   },
   { _id: false }
 );

@@ -42,9 +42,9 @@ export class ImportServiceImplementation implements ImportService {
         message: 'There are no new objects to import.',
       };
     }
-    const coreReferenceData =
+    const referenceData =
       await this.openChargeMapRepository.getReferenceData();
-    await this.ocmPersistenceRepository.storeReferenceData(coreReferenceData);
+    await this.ocmPersistenceRepository.storeReferenceData(referenceData);
     await this.ocmPersistenceRepository.storePOIs(poi, isFirstSession);
     const endDate = new Date();
     const importSession: ImportSession = {

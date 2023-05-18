@@ -1,7 +1,7 @@
 export interface ConnectionType {
-  FormalName: string;
-  IsDiscontinued: boolean;
-  IsObsolete: boolean;
+  FormalName?: string;
+  IsDiscontinued?: boolean;
+  IsObsolete?: boolean;
   ID: number;
-  Title: string;
+  Title?: string;
 }

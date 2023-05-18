@@ -5,12 +5,11 @@ export interface OperatorInfo {
   Comments?: string;
   PhonePrimaryContact?: string;
   PhoneSecondaryContact?: string;
-  IsPrivateIndividual?: boolean;
   AddressInfo?: AddressInfo;
   BookingURL?: string;
   ContactEmail?: string;
   FaultReportEmail?: string;
   IsRestrictedEdit?: boolean;
   ID: number;
-  Title: string;
+  Title?: string;
 }

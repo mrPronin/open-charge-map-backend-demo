@@ -15,14 +15,13 @@ export const OperatorInfoSchema = new Schema<OperatorInfoDocument>(
     Comments: { type: String },
     PhonePrimaryContact: { type: String },
     PhoneSecondaryContact: { type: String },
-    IsPrivateIndividual: { type: Boolean, default: false },
     AddressInfo: { type: AddressInfoSchema },
     BookingURL: { type: String },
-    ContactEmail: { type: String },
+    ContactEmail: { type: String, default: '' },
     FaultReportEmail: { type: String },
     IsRestrictedEdit: { type: Boolean },
     ID: { type: Number, required: true },
-    Title: { type: String, required: true },
+    Title: { type: String, required: false },
   },
   { _id: false }
 );

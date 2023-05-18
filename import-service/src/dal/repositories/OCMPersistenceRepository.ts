@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
-import { LevelTypeModel } from '@dal/dao/ocm/LevelType.js';
 import { POIModel } from '@dal/dao/ocm/POI.js';
 import { ConnectionTypeModel } from '@dal/dao/ocm/ConnectionType.js';
 import { CountryModel } from '@dal/dao/ocm/Country.js';
 import { OperatorInfoModel } from '@dal/dao/ocm/OperatorInfo.js';
 import { StatusTypeModel } from '@dal/dao/ocm/StatusType.js';
+import { SupplyTypeModel } from "@dal/dao/ocm/SupplyType";
 
 // debug
 import * as mockPOIData from '@presentation/mocked/openchargemap-poi-compact.json';
@@ -19,13 +19,13 @@ export class OCMPersistenceRepositoryImplementation
   implements OCMPersistenceRepository
 {
   storeReferenceData = async (data: CoreReferenceData): Promise<void> => {
-    const { ChargerTypes, ConnectionTypes, Countries, Operators, StatusTypes } =
+    const { ConnectionTypes, Countries, Operators, StatusTypes, CurrentTypes } =
       data;
-    await processModel(LevelTypeModel, ChargerTypes);
     await processModel(ConnectionTypeModel, ConnectionTypes);
     await processModel(CountryModel, Countries);
     await processModel(OperatorInfoModel, Operators);
     await processModel(StatusTypeModel, StatusTypes);
+    await processModel(SupplyTypeModel, CurrentTypes);
   };
 
   storePOIs = async (pois: POI[], isFirstSession: Boolean): Promise<void> => {

@@ -9,12 +9,10 @@ interface SupplyTypeDocument extends ISupplyType, Document {
 export const SupplyTypeSchema = new Schema<SupplyTypeDocument>(
   {
     _id: { type: String, default: uuidv4 },
-    ID: Number,
-    Title: String,
+    ID: { type: Number, required: true },
+    Title: { type: String, required: false },
   },
   { _id: false }
 );
 
-const SupplyType = mongoose.model<SupplyTypeDocument>('SupplyType', SupplyTypeSchema);
-
-export default SupplyType;
+export const SupplyTypeModel = mongoose.model<SupplyTypeDocument>('SupplyType', SupplyTypeSchema);

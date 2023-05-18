@@ -6,8 +6,10 @@ import { ConnectionInfo } from "./ConnectionInfo.js";
 export interface POI {
   ID: number;
   UUID: string;
-  OperatorInfo: OperatorInfo;
-  StatusType: StatusType;
+  OperatorID: number;
+  OperatorInfo?: OperatorInfo;
+  StatusTypeID: number;
+  StatusType?: StatusType;
   AddressInfo: AddressInfo;
   Connections: ConnectionInfo[];
   DateLastStatusUpdate?: Date;

@@ -9,10 +9,10 @@ interface StatusTypeDocument extends IStatusType, Document {
 export const StatusTypeSchema = new Schema<StatusTypeDocument>(
   {
     _id: { type: String, default: uuidv4 },
-    IsOperational: Boolean,
-    IsUserSelectable: Boolean,
-    ID: Number,
-    Title: String,
+    IsOperational: { type: Boolean, required: false, default: false },
+    IsUserSelectable: { type: Boolean, required: false, default: false },
+    ID: { type: Number, required: true },
+    Title: { type: String, required: true, default: '' },
   },
   { _id: false }
 );
