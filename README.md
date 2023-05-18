@@ -39,40 +39,49 @@
     - [x] implement 'dev' script, add ts-node-dev
     - [x] setup linter and formatter
     - [x] refactor project
-        - [x] refactor: import-service, extract type definition to separate schema.graphql file
-        - [x] refactor: import-service, extract resolvers from index.ts
+        - [x] refactor: extract type definition to separate schema.graphql file
+        - [x] refactor: extract resolvers from index.ts
     - [x] define port from PORT environment variable 
     - [x] create Dockerfile for import-service
-        - [x] import-service - define initial Dockerfile
+        - [x] define initial Dockerfile
         - [x] refacor: Dockerfile for production and Dockerfile.dev for development
-        - [x] feat: import-service, create production Dockerfile
-    - [ ] implement MongoDB integration
+        - [x] feat: create production Dockerfile
+    - [x] implement MongoDB integration
         - [x] define mongoose schema for ImportSession
         - [x] implement db connector as db.ts
-        - [x] import-service - define mongoose models for OCM data
-            - [x] import-service - define mongoose model for Country
-            - [x] import-service - define mongoose models POI, AddressInfo, ConnectionInfo, ConnectionType, LevelType, OperatorInfo, StatusType, SupplyType
+        - [x] define mongoose models for OCM data
+            - [x] define mongoose model for Country
+            - [x] define mongoose models POI, AddressInfo, ConnectionInfo, ConnectionType, LevelType, OperatorInfo, StatusType, SupplyType
         - [x] create index for POI based on DateLastStatusUpdate
-    - [x] import-service - define DDD structure, refactor existing code, create placeholders
-    - [x] import-service - define domain models, refactor dao
-    - [x] import-service - define interfaces for ImportService
-    - [x] import-service - define interface for OpenChargeMapRepository
-    - [x] import-service - define interface for OCMPersistenceRepository, ImportSessionRepository
-    - [x] import-service - define CoreReferenceData
+    - [x] define DDD structure, refactor existing code, create placeholders
+    - [x] define domain models, refactor dao
+    - [x] define interfaces for ImportService
+    - [x] define interface for OpenChargeMapRepository
+    - [x] define interface for OCMPersistenceRepository, ImportSessionRepository
+    - [x] define CoreReferenceData
     - [x] fix: issue with start script ERR_UNSUPPORTED_DIR_IMPORT
-    - [x] import-service - define path aliases @dal, @domain and @presentation
-    - [x] import-service - implement initial version for ImportService, ImportSessionRepository, OCMPersistenceRepository, OpenChargeMapRepository
-    - [x] import-service - implement ImportService
-    - [x] refactor: import-service - implement bootstrap module
-    - [x] import-service - setup dependency injection
-    - [ ] import-service - debug ImportService with mocked repositories
-    - [ ] import-service - update ImportSessionRepository
-    - [ ] import-service - update OCMDataPersistenceRepository
-    - [ ] import-service - update OpenChargeMapRepository
-    - [ ] import-service - use transaction
+    - [x] define path aliases @dal, @domain and @presentation
+    - [x] implement initial version for ImportService, ImportSessionRepository, OCMPersistenceRepository, OpenChargeMapRepository
+    - [x] implement ImportService
+    - [x] refactor: implement bootstrap module
+    - [x] setup dependency injection
+    - [x] redefine ImportService with mocked repositories
+    - [x] implement 'storeReferenceData' method for OCMPersistenceRepository
+    - [x] fine-tune dao and models according to OpenAPI docs
+    - [x] implement 'storePOIs' method for OCMPersistenceRepository
+    - [x] implement 'getLastPOIUpdate' for OCMDataPersistenceRepository
+    - [x] implement 'create' and 'getAll' methods for ImportSessionRepository
+    - [x] implement generic network API
+    - [x] dependency injection, implement composition point inside bootstrap function
+    - [x] implement 'getReferenceData' method for OpenChargeMapRepository with network api
+    - [ ] use transaction
+    - [ ] refactor ImportService
+    - [ ] implement generic middleware 
     - [ ] define cors configuration
     - [ ] add logger
-    - [ ] adjust import-service to work as a subgraph
+    - [ ] implement error handling
+    - [ ] adjust service to work as a subgraph
+    - [ ] unit-tests
     - [ ] etc
 - [ ] docker-compose
     - [x] feat: define initial docker-compose
