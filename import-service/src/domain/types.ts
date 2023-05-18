@@ -3,4 +3,5 @@ export const TYPES = {
   ImportSessionRepository: Symbol('ImportSessionRepository'),
   OCMPersistenceRepository: Symbol('OCMPersistenceRepository'),
   OpenChargeMapRepository: Symbol('OpenChargeMapRepository'),
+  API: Symbol('API'),
 };

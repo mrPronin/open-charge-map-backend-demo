@@ -1,5 +1,8 @@
 import { Container } from "inversify";
 
+// Network API interface
+import { API } from '@dal/api.js';
+
 // Interfaces & Types
 import { TYPES } from '@domain/types';
 import { ImportService } from '@domain/interfaces/services/ImportService.js';
@@ -17,6 +20,7 @@ import { OpenChargeMapRepositoryImplementation } from "@dal/repositories/OpenCha
 
 export const container = new Container();
 
+container.bind<API>(TYPES.API).toConstantValue
 container
   .bind<ImportService>(TYPES.ImportService)
   .to(ImportServiceImplementation);
