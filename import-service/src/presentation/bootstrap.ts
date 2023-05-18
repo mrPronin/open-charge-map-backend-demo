@@ -39,6 +39,7 @@ export async function bootstrap(
     }),
   });
 const { url } = await startStandaloneServer(server, {
+  listen: { port: appPort },
   context: async () => ({
     container,
   }),
