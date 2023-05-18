@@ -1,7 +1,7 @@
 import { ContainerModule } from 'inversify';
 
 // Network API interface
-import { API } from '@dal/api.js';
+import { API } from '@dal/api/api.js';
 
 // Interfaces & Types
 import { TYPES } from '@domain/types';

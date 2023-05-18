@@ -7,12 +7,6 @@ import { OpenChargeMapRepository } from '@domain/interfaces/repositories/OpenCha
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
 
-// debug
-import { mockedImportMutationResponse } from "@presentation/mocked/mockedImportMutationResponse.js";
-import { mockedImportSessions } from "@presentation/mocked/mockedImportSessions.js";
-import { v4 as uuidv4 } from 'uuid';
-// debug
-
 @injectable()
 export class ImportServiceImplementation implements ImportService {
   constructor(

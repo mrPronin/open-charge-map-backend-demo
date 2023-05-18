@@ -12,7 +12,7 @@ import { GraphQLContext } from '@presentation/GraphQLContext.js';
 import { resolver as QueryResolver } from '@presentation/resolvers/Query.js';
 import { resolver as MutationResolver } from '@presentation/resolvers/Mutation.js';
 import { TYPES } from "@domain/types.js";
-import { API, APIImplementation } from "@dal/api.js";
+import { API, APIImplementation } from "@dal/api/api.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,7 +28,7 @@ export async function bootstrap(
 ) {
   container
     .bind<API>(TYPES.API)
-    .toConstantValue(new APIImplementation(baseAPIUrl, apiKey));
+    .toConstantValue(new APIImplementation(baseAPIUrl, apiKey))
   container.load(...modules);
 
   await db.connect(dbURI, dbName);

@@ -11,7 +11,7 @@ export interface API {
 }
 
 @injectable()
-export class APIImplementation {
+export class APIImplementation implements API {
   private readonly api: ApisauceInstance;
   private readonly defaultParameters: Record<string, unknown>;
 
@@ -34,10 +34,14 @@ export class APIImplementation {
   ): Promise<T> {
     const res = await this.api.get<T>(
       url,
-      { ...params, ...this.defaultParameters },
+      { ...this.defaultParameters, ...params },
       {
         transformResponse:
-          objectType && ((res) => plainToClass(objectType, res)),
+          objectType &&
+          ((res) =>
+            plainToClass(objectType, res, {
+              excludeExtraneousValues: true,
+            })),
       }
     );
 

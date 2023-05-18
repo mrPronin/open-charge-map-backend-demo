@@ -8,7 +8,9 @@ services:
     image: node:18-alpine
     container_name: import-service
     restart: unless-stopped
-    env_file: .env
+    env_file:
+      - .env
+      - ./import-service/.env
     environment:
       - MONGODB_URI=$MONGODB_URI
       - MONGO_DB=$MONGO_DB
