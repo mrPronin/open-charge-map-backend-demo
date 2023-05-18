@@ -1,3 +1,4 @@
+import { Container, ContainerModule } from 'inversify';
 import * as fs from 'node:fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -5,22 +6,31 @@ import { ApolloServer } from '@apollo/server';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { DateTimeTypeDefinition, DateTimeResolver } from 'graphql-scalars';
-import 'reflect-metadata';
 
 import * as db from '@dal/db.js';
-import { container } from "@/inversify.config.js";
 import { GraphQLContext } from '@presentation/GraphQLContext.js';
 import { resolver as QueryResolver } from '@presentation/resolvers/Query.js';
 import { resolver as MutationResolver } from '@presentation/resolvers/Mutation.js';
+import { TYPES } from "@domain/types.js";
+import { API, APIImplementation } from "@dal/api.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export async function bootstrap(
+  container: Container,
   appPort: number,
   dbURI: string,
-  dbName: string
+  dbName: string,
+  baseAPIUrl: string,
+  apiKey: string,
+  ...modules: ContainerModule[]
 ) {
+  container
+    .bind<API>(TYPES.API)
+    .toConstantValue(new APIImplementation(baseAPIUrl, apiKey));
+  container.load(...modules);
+
   await db.connect(dbURI, dbName);
 
   const typeDefs = fs.readFileSync(
@@ -38,11 +48,11 @@ export async function bootstrap(
       },
     }),
   });
-const { url } = await startStandaloneServer(server, {
-  listen: { port: appPort },
-  context: async () => ({
-    container,
-  }),
-});
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: appPort },
+    context: async () => ({
+      container,
+    }),
+  });
   console.log(`🚀  Server ready at: ${url}`);
 }
