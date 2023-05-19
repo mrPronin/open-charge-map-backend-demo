@@ -1,5 +1,6 @@
 import { injectable, inject } from 'inversify';
 import { TYPES } from "@domain/types.js";
+import { CONSTANTS } from "@domain/constants.js";
 import { ImportSession } from '@domain/models/import/ImportSession.js';
 import { ImportMutationResponse } from '@domain/models/import/ImportMutationResponse.js';
 import { ImportService } from '@domain/interfaces/services/ImportService.js';
@@ -24,9 +25,9 @@ export class ImportServiceImplementation implements ImportService {
     const isFirstSession = await this.importSessionRepository.isEmpty();
     let modifiedSince: Date = null;
     if (!isFirstSession) {
-      // TODO: extract 10 minutes
       modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
-      console.log('modifiedSince: ', modifiedSince);
+      // subsctract time offset to ensure capturing the latest changes
+      modifiedSince = subtractFromDate( modifiedSince, CONSTANTS.timeOffsetForPOIImport);
     }
 
     // fetch POI data from OCM
@@ -59,3 +60,7 @@ export class ImportServiceImplementation implements ImportService {
     return await this.importSessionRepository.getAll();
   };
 }
+
+const subtractFromDate = (date: Date, minutes: number): Date => {
+  return new Date(date.getTime() - minutes * 60 * 1000);
+};
