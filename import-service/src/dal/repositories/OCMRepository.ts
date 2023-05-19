@@ -1,5 +1,4 @@
 import { injectable, inject } from 'inversify';
-import { plainToInstance } from 'class-transformer';
 import { TYPES } from '@domain/types.js';
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
@@ -7,10 +6,6 @@ import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js'
 
 import { API } from '@dal/api/api';
 import { POIDTO } from "@dal/api/dto.js";
-
-// debug
-import mockPOIData from '@presentation/mocked/openchargemap-poi-compact.json';
-// debug
 
 @injectable()
 export class OCMRepositoryImplementation
@@ -23,25 +18,19 @@ export class OCMRepositoryImplementation
   };
 
   getPOI = async (modifiedSince?: Date): Promise<POI[]> => {
-    const poi = plainToInstance(POIDTO, mockPOIData, {
-      excludeExtraneousValues: true,
-    });
-    // console.dir(poi, { depth: null });
+    const defaultParams = {
+      output: 'json',
+      camelcase: 'false',
+      verbose: 'false',
+      compact: 'true',
+    };
+
+    const dynamicParams = modifiedSince
+      ? { modifiedSince }
+      : { maxresults: 200000 };
+
+    const params = { ...defaultParams, ...dynamicParams };
+    const poi = await this.api.get<POIDTO[]>('/poi/', params);
     return poi;
-    // return mockPOIData;
-
-    // return mockPOIData.map(convertToPOI);
-
-    // let url = `${this.baseUrl}poi?key=${this.apiKey}&output=json&client=open-charge-map-backend&camelcase=false&verbose=false&compact=true`;
-
-    // if (modifiedSince) {
-    //   const isoDateString = modifiedSince.toISOString();
-    //   url += `&modifiedsince=${isoDateString}`;
-    // } else {
-    //   url += `&maxresults=200000`;
-    // }
-
-    // const response = await axios.get(url);
-    // return response.data;
   };
 }

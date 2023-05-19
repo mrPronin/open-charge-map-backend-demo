@@ -24,6 +24,7 @@ export class APIImplementation implements API {
     });
     this.defaultParameters = {
       key: apiKey,
+      client: 'open-charge-map-backend',
     };
   }
 

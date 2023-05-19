@@ -26,7 +26,7 @@ export const referenceIoCData = new ContainerModule((bind) => {
   bind<OCMPersistenceRepository>(TYPES.OCMPersistenceRepository).to(
     OCMPersistenceRepositoryImplementation
   );
-  bind<OCMRepository>(TYPES.OpenChargeMapRepository).to(
+  bind<OCMRepository>(TYPES.OCMRepository).to(
     OCMRepositoryImplementation
   );
 });

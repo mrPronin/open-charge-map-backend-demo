@@ -10,8 +10,8 @@ import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportS
 @injectable()
 export class ImportServiceImplementation implements ImportService {
   constructor(
-    @inject(TYPES.OpenChargeMapRepository)
-    private readonly openChargeMapRepository: OCMRepository,
+    @inject(TYPES.OCMRepository)
+    private readonly ocmRepository: OCMRepository,
     @inject(TYPES.OCMPersistenceRepository)
     private readonly ocmPersistenceRepository: OCMPersistenceRepository,
     @inject(TYPES.ImportSessionRepository)
@@ -19,17 +19,18 @@ export class ImportServiceImplementation implements ImportService {
   ) {}
 
   import = async (): Promise<ImportMutationResponse> => {
-        const startDate = new Date();
+    const startDate = new Date();
 
     const isFirstSession = await this.importSessionRepository.isEmpty();
     let modifiedSince: Date = null;
     if (!isFirstSession) {
       // TODO: extract 10 minutes
       modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
-      // console.log('modifiedSince: ', modifiedSince);
+      console.log('modifiedSince: ', modifiedSince);
     }
+
     // fetch POI data from OCM
-    const poi = await this.openChargeMapRepository.getPOI(modifiedSince);
+    const poi = await this.ocmRepository.getPOI(modifiedSince);
     if (!poi.length) {
       return {
         success: true,
@@ -37,18 +38,16 @@ export class ImportServiceImplementation implements ImportService {
         message: 'There are no new objects to import.',
       };
     }
-    const referenceData =
-      await this.openChargeMapRepository.getReferenceData();
+    const referenceData = await this.ocmRepository.getReferenceData();
     await this.ocmPersistenceRepository.storeReferenceData(referenceData);
     await this.ocmPersistenceRepository.storePOIs(poi, isFirstSession);
     const endDate = new Date();
-    const importSession =
-      await this.importSessionRepository.create({
-        poiAmount: poi.length,
-        modifiedsince: modifiedSince || new Date(),
-        startDate,
-        endDate,
-      });
+    const importSession = await this.importSessionRepository.create({
+      poiAmount: poi.length,
+      modifiedsince: modifiedSince || new Date(),
+      startDate,
+      endDate,
+    });
     return {
       success: true,
       importSession,
