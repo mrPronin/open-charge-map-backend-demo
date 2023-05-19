@@ -24,7 +24,7 @@ export class OCMPersistenceRepositoryImplementation
     await processModel(SupplyTypeModel, CurrentTypes);
   };
 
-  storePOIs = async (pois: POI[], isFirstSession: Boolean): Promise<void> => {
+  storePOIs = async (pois: POI[]): Promise<void> => {
     // await POIModel.deleteMany();
     const documents = await Promise.all(
       pois.map(async function (poi) {
@@ -109,7 +109,7 @@ export class OCMPersistenceRepositoryImplementation
     await OperatorInfoModel.deleteMany();
     await StatusTypeModel.deleteMany();
     await SupplyTypeModel.deleteMany();
-  }
+  };
 }
 
 async function processModel<T>(model: mongoose.Model<any>, data: T[]) {

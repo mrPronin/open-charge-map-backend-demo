@@ -3,7 +3,7 @@ import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
 
 export interface OCMPersistenceRepository {
   storeReferenceData(data: CoreReferenceData): Promise<void>;
-  storePOIs(pois: POI[], isFirstSession: Boolean): Promise<void>;
+  storePOIs(pois: POI[]): Promise<void>;
   getLastPOIUpdate(): Promise<Date | null>;
   cleanUp(): Promise<void>;
 }

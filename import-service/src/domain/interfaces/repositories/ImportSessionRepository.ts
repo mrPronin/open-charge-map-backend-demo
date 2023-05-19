@@ -6,10 +6,15 @@ export interface ImportSessionRepository {
   persistOCM(
     referenceData: CoreReferenceData,
     pois: POI[],
-    isFirstSession: Boolean,
     modifiedsince: Date,
     startDate: Date
   ): Promise<ImportSession>;
+  loadPOIFromFile(
+    path: string,
+    referenceData: CoreReferenceData,
+    startDate: Date
+  ): Promise<ImportSession>;
+
   getAll(): Promise<ImportSession[]>;
   isEmpty(): Promise<Boolean>;
   cleanUp(): Promise<void>;

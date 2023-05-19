@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import { injectable, inject } from 'inversify';
+import fs from "fs";
+import StreamArray from 'stream-json/streamers/StreamArray';
 import { TYPES } from '@domain/types.js';
 import { ImportSession } from '@domain/models/presentation/ImportSession.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
@@ -17,10 +19,35 @@ export class ImportSessionRepositoryImplementation
     private readonly ocmPersistenceRepository: OCMPersistenceRepository
   ) {}
 
+  loadPOIFromFile = async (
+    path: string,
+    referenceData: CoreReferenceData,
+    startDate: Date
+  ): Promise<ImportSession> => {
+
+    let counter = 0;
+    const pipeline = fs.createReadStream(path).pipe(StreamArray.withParser());
+    pipeline.on('data', (data) => {
+      ++counter;
+    });
+    pipeline.on('end', () => {
+      ++counter;
+      console.log('counter: ', counter);
+    });
+    // debug
+    return {
+      ID: '',
+      poiAmount: 0,
+      modifiedsince: new Date(),
+      startDate: new Date(),
+      endDate: new Date(),
+    };
+    // debug
+  };
+
   persistOCM = async (
     referenceData: CoreReferenceData,
     pois: POI[],
-    isFirstSession: Boolean,
     modifiedsince: Date,
     startDate: Date
   ): Promise<ImportSession> => {
@@ -28,7 +55,7 @@ export class ImportSessionRepositoryImplementation
     session.startTransaction();
     try {
       await this.ocmPersistenceRepository.storeReferenceData(referenceData);
-      await this.ocmPersistenceRepository.storePOIs(pois, isFirstSession);
+      await this.ocmPersistenceRepository.storePOIs(pois);
       const endDate = new Date();
       const document = new ImportSessionModel({
         poiAmount: pois.length,
@@ -41,9 +68,9 @@ export class ImportSessionRepositoryImplementation
       session.endSession();
       return toModel<ImportSession>(document);
     } catch (error) {
-       await session.abortTransaction();
-       session.endSession();
-       throw error;
+      await session.abortTransaction();
+      session.endSession();
+      throw error;
     }
   };
 
@@ -57,8 +84,8 @@ export class ImportSessionRepositoryImplementation
   };
 
   cleanUp = async (): Promise<void> => {
-      await ImportSessionModel.deleteMany();
-  }
+    await ImportSessionModel.deleteMany();
+  };
 }
 
 function toModel<T>(doc: mongoose.Document): T {

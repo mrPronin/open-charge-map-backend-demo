@@ -11,6 +11,8 @@ import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js'
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
 
+// import * as mockPOIData from '@/presentation/mocked/poi.json';
+
 @injectable()
 export class ImportServiceImplementation implements ImportService {
   constructor(
@@ -26,15 +28,30 @@ export class ImportServiceImplementation implements ImportService {
     const startDate = new Date();
     const isFirstSession = await this.importSessionRepository.isEmpty();
     console.log(`isFirstSession: ${isFirstSession}`);
-    let modifiedSince: Date = null;
-    if (!isFirstSession) {
-      modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
-      // subsctract time offset to ensure capturing the latest changes
-      modifiedSince = subtractFromDate(
-        modifiedSince,
-        CONSTANTS.timeOffsetForPOIImport
+    if (isFirstSession) {
+      // await this.ocmRepository.getPOIAndStoreToFile(CONSTANTS.poiFileName);
+      // const referenceData = await this.ocmRepository.getReferenceData();
+      await this.importSessionRepository.loadPOIFromFile(
+        CONSTANTS.poiFileName,
+        undefined,
+        startDate
       );
+
+      // debug
+      return {
+        success: true,
+        importSession: null,
+        message: 'There are no new objects to import.',
+      };
+      // debug
     }
+
+    let modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
+    // subsctract time offset to ensure capturing the latest changes
+    modifiedSince = subtractFromDate(
+      modifiedSince,
+      CONSTANTS.timeOffsetForPOIImport
+    );
 
     // fetch POI data from OCM
     const poi = await this.ocmRepository.getPOI(modifiedSince);
@@ -49,7 +66,6 @@ export class ImportServiceImplementation implements ImportService {
     const importSession = await this.importSessionRepository.persistOCM(
       referenceData,
       poi,
-      isFirstSession,
       // TODO: (?) get modifiedSince as most recent DateLastStatusUpdate from poi
       modifiedSince || new Date(),
       startDate
@@ -72,7 +88,7 @@ export class ImportServiceImplementation implements ImportService {
       success: true,
       message: 'Data successfully deleted',
     };
-  }
+  };
 }
 
 const subtractFromDate = (date: Date, minutes: number): Date => {

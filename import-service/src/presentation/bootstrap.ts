@@ -12,6 +12,7 @@ import { GraphQLContext } from '@presentation/GraphQLContext.js';
 import { resolver as QueryResolver } from '@presentation/resolvers/Query.js';
 import { resolver as MutationResolver } from '@presentation/resolvers/Mutation.js';
 import { TYPES } from "@domain/types.js";
+import { CONSTANTS } from "@domain/constants.js";
 import { API, APIImplementation } from "@dal/api/api.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,6 +34,20 @@ export async function bootstrap(
 
   await db.connect(dbURI, dbName);
 
+  // debug
+  /*
+  setTimeout(async () => {
+    const api = container.get<API>(TYPES.API)
+    console.log('Fetch large data: start')
+    await api.getLargeData(
+      '/poi?key=ff82541f-c8d1-4507-be67-bd07e3259c4e&output=json&client=open-charge-map-backend&camelcase=false&verbose=false&maxresults=200000&compact=true',
+      CONSTANTS.poiFileName,
+      30 * 60 * 1000
+    );
+    console.log('Fetch large data: finish');
+  }, 2000);
+  */
+  // debug
   const typeDefs = fs.readFileSync(
     path.join(__dirname, 'schema.graphql'),
     'utf8'
