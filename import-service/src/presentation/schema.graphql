@@ -11,6 +11,11 @@ type ImportMutationResponse implements MutationResponse {
   importSession: ImportSession
 }
 
+type CleanUpMutationResponse implements MutationResponse {
+  success: Boolean!
+  message: String!
+}
+
 "Describes the result of the data import operation from the Open Charge Map service"
 type ImportSession {
   ID: ID!
@@ -23,6 +28,8 @@ type ImportSession {
 type Mutation {
   "Starts the procedure of importing data from the Open Charge Map service. If this is the first import session, all data will be imported. If there are previous import sessions, the data from the modifiedsince date of the previous session will be imported."
   import: ImportMutationResponse!
+  "Delete all documents from ImportSessions, ReferenceData and POI."
+  cleanUp: CleanUpMutationResponse!
 }
 type Query {
   "Returns a list of import sessions that have already taken place."

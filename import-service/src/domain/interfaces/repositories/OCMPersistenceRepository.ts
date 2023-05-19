@@ -5,4 +5,5 @@ export interface OCMPersistenceRepository {
   storeReferenceData(data: CoreReferenceData): Promise<void>;
   storePOIs(pois: POI[], isFirstSession: Boolean): Promise<void>;
   getLastPOIUpdate(): Promise<Date | null>;
+  cleanUp(): Promise<void>;
 }

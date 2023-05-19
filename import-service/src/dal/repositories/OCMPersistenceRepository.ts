@@ -101,6 +101,15 @@ export class OCMPersistenceRepositoryImplementation
     const poiDocument = await POIModel.findOne().sort('-DateLastStatusUpdate');
     return poiDocument ? poiDocument.DateLastStatusUpdate : null;
   };
+
+  cleanUp = async (): Promise<void> => {
+    await POIModel.deleteMany();
+    await ConnectionTypeModel.deleteMany();
+    await CountryModel.deleteMany();
+    await OperatorInfoModel.deleteMany();
+    await StatusTypeModel.deleteMany();
+    await SupplyTypeModel.deleteMany();
+  }
 }
 
 async function processModel<T>(model: mongoose.Model<any>, data: T[]) {

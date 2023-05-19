@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ImportSession as IImportSession } from '@domain/models/import/ImportSession.js';
+import { ImportSession as IImportSession } from '@domain/models/presentation/ImportSession.js';
 
 interface ImportSessionDocument extends IImportSession, Document {
   _id: string;

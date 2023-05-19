@@ -10,5 +10,11 @@ export const resolver = {
       );
       return await importService.import();
     },
+    cleanUp: async (_, __, context: GraphQLContext) => {
+      const importService = context.container.get<ImportService>(
+        TYPES.ImportService
+      );
+      return await importService.cleanUp();
+    },
   },
 };

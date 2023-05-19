@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { injectable, inject } from 'inversify';
 import { TYPES } from '@domain/types.js';
-import { ImportSession } from '@domain/models/import/ImportSession.js';
+import { ImportSession } from '@domain/models/presentation/ImportSession.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
@@ -55,6 +55,10 @@ export class ImportSessionRepositoryImplementation
     const importSessionDocuments = await ImportSessionModel.find();
     return importSessionDocuments.map((doc) => toModel<ImportSession>(doc));
   };
+
+  cleanUp = async (): Promise<void> => {
+      await ImportSessionModel.deleteMany();
+  }
 }
 
 function toModel<T>(doc: mongoose.Document): T {

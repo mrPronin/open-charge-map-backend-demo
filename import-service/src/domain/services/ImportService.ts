@@ -1,8 +1,11 @@
 import { injectable, inject } from 'inversify';
 import { TYPES } from '@domain/types.js';
 import { CONSTANTS } from '@domain/constants.js';
-import { ImportSession } from '@domain/models/import/ImportSession.js';
-import { ImportMutationResponse } from '@domain/models/import/ImportMutationResponse.js';
+import {
+  ImportSession,
+  ImportMutationResponse,
+  CleanUpMutationResponse,
+} from '@domain/models/presentation/index.js';
 import { ImportService } from '@domain/interfaces/services/ImportService.js';
 import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js';
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
@@ -21,8 +24,8 @@ export class ImportServiceImplementation implements ImportService {
 
   import = async (): Promise<ImportMutationResponse> => {
     const startDate = new Date();
-
     const isFirstSession = await this.importSessionRepository.isEmpty();
+    console.log(`isFirstSession: ${isFirstSession}`);
     let modifiedSince: Date = null;
     if (!isFirstSession) {
       modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
@@ -47,7 +50,7 @@ export class ImportServiceImplementation implements ImportService {
       referenceData,
       poi,
       isFirstSession,
-      // TODO: get modifiedSince as most recent DateLastStatusUpdate from poi
+      // TODO: (?) get modifiedSince as most recent DateLastStatusUpdate from poi
       modifiedSince || new Date(),
       startDate
     );
@@ -61,6 +64,15 @@ export class ImportServiceImplementation implements ImportService {
   importSessions = async (): Promise<ImportSession[]> => {
     return await this.importSessionRepository.getAll();
   };
+
+  cleanUp = async (): Promise<CleanUpMutationResponse> => {
+    await this.ocmPersistenceRepository.cleanUp();
+    await this.importSessionRepository.cleanUp();
+    return {
+      success: true,
+      message: 'Data successfully deleted',
+    };
+  }
 }
 
 const subtractFromDate = (date: Date, minutes: number): Date => {
