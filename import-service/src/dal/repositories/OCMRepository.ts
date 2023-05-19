@@ -3,7 +3,7 @@ import { plainToInstance } from 'class-transformer';
 import { TYPES } from '@domain/types.js';
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
-import { OpenChargeMapRepository } from '@domain/interfaces/repositories/OpenChargeMapRepository.js';
+import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js';
 
 import { API } from '@dal/api/api';
 import { POIDTO } from "@dal/api/dto.js";
@@ -12,10 +12,9 @@ import { POIDTO } from "@dal/api/dto.js";
 import mockPOIData from '@presentation/mocked/openchargemap-poi-compact.json';
 // debug
 
-
 @injectable()
-export class OpenChargeMapRepositoryImplementation
-  implements OpenChargeMapRepository
+export class OCMRepositoryImplementation
+  implements OCMRepository
 {
   constructor(@inject(TYPES.API) private readonly api: API) {}
 

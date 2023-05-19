@@ -3,7 +3,7 @@ import { TYPES } from "@domain/types.js";
 import { ImportSession } from '@domain/models/import/ImportSession.js';
 import { ImportMutationResponse } from '@domain/models/import/ImportMutationResponse.js';
 import { ImportService } from '@domain/interfaces/services/ImportService.js';
-import { OpenChargeMapRepository } from '@domain/interfaces/repositories/OpenChargeMapRepository.js';
+import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js';
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
 
@@ -11,7 +11,7 @@ import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportS
 export class ImportServiceImplementation implements ImportService {
   constructor(
     @inject(TYPES.OpenChargeMapRepository)
-    private readonly openChargeMapRepository: OpenChargeMapRepository,
+    private readonly openChargeMapRepository: OCMRepository,
     @inject(TYPES.OCMPersistenceRepository)
     private readonly ocmPersistenceRepository: OCMPersistenceRepository,
     @inject(TYPES.ImportSessionRepository)
