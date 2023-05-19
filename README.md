@@ -83,13 +83,30 @@
     - [ ] adjust service to work as a subgraph
     - [ ] unit-tests
     - [ ] etc
-- [ ] docker-compose
-    - [x] feat: define initial docker-compose
-    - [x] fix: MongoServerError: Authentication failed.
-    - [ ] etc
 - [ ] client-api
+    - [ ] initial project setup, bootstrap
+    - [ ] define GraphQL schema
+    - [ ] define resolvers
+    - [ ] define domain models
+    - [ ] define interfaces for repository and services
+    - [ ] implement services
+    - [ ] implement DAO (data access objects)
+    - [ ] implement repositories
+    - [ ] implement dependency injection
+    - [ ] define DB connector
+    - [ ] create Dockerfile and Dockerfile.dev
+    - [ ] define cors configuration
+    - [ ] add logger
+    - [ ] implement errror handling
+    - [ ] adjust service to work as a subgraph
+    - [ ] unit-tests
     - [ ] etc
 - [ ] graph-router
     - [ ] create Dockerfile for graph-router
     - [ ] etc
-
+- [ ] docker-compose
+    - [x] feat: define initial docker-compose
+    - [x] fix: MongoServerError: Authentication failed
+    - [ ] add client-api instance
+    - [ ] add graph-router instance
+    - [ ] etc
