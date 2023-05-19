@@ -74,8 +74,9 @@
     - [x] implement generic network API
     - [x] dependency injection, implement composition point inside bootstrap function
     - [x] implement 'getReferenceData' method for OpenChargeMapRepository with network api
-    - [ ] use transaction
-    - [ ] refactor ImportService
+    - [x] implement 'getPOI' method for OpenChargeMapRepository with network api
+    - [x] improve ImportService - extract 10 minutes from modifiedSince to ensure that no data is lost when importing OPM, define global constanst for values such this
+    - [x] use transaction for OCMPersistenceRepository and ImportSessionRepository, refactor ImportService
     - [ ] implement generic middleware 
     - [ ] define cors configuration
     - [ ] add logger

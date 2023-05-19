@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 import { ApisauceInstance, create } from 'apisauce';
 import { plainToClass } from 'class-transformer';
+import { CONSTANTS } from "@domain/constants.js";
 
 export interface API {
   get<T>(
@@ -24,7 +25,7 @@ export class APIImplementation implements API {
     });
     this.defaultParameters = {
       key: apiKey,
-      client: 'open-charge-map-backend',
+      client: CONSTANTS.ocmClientName,
     };
   }
 

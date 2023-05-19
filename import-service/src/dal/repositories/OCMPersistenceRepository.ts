@@ -94,7 +94,7 @@ export class OCMPersistenceRepositoryImplementation
         return document;
       })
     );
-    const writeResult = await POIModel.bulkSave(documents);
+    await POIModel.bulkSave(documents);
   };
 
   getLastPOIUpdate = async (): Promise<Date | null> => {

@@ -1,6 +1,6 @@
 import { injectable, inject } from 'inversify';
-import { TYPES } from "@domain/types.js";
-import { CONSTANTS } from "@domain/constants.js";
+import { TYPES } from '@domain/types.js';
+import { CONSTANTS } from '@domain/constants.js';
 import { ImportSession } from '@domain/models/import/ImportSession.js';
 import { ImportMutationResponse } from '@domain/models/import/ImportMutationResponse.js';
 import { ImportService } from '@domain/interfaces/services/ImportService.js';
@@ -27,7 +27,10 @@ export class ImportServiceImplementation implements ImportService {
     if (!isFirstSession) {
       modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
       // subsctract time offset to ensure capturing the latest changes
-      modifiedSince = subtractFromDate( modifiedSince, CONSTANTS.timeOffsetForPOIImport);
+      modifiedSince = subtractFromDate(
+        modifiedSince,
+        CONSTANTS.timeOffsetForPOIImport
+      );
     }
 
     // fetch POI data from OCM
@@ -40,15 +43,14 @@ export class ImportServiceImplementation implements ImportService {
       };
     }
     const referenceData = await this.ocmRepository.getReferenceData();
-    await this.ocmPersistenceRepository.storeReferenceData(referenceData);
-    await this.ocmPersistenceRepository.storePOIs(poi, isFirstSession);
-    const endDate = new Date();
-    const importSession = await this.importSessionRepository.create({
-      poiAmount: poi.length,
-      modifiedsince: modifiedSince || new Date(),
-      startDate,
-      endDate,
-    });
+    const importSession = await this.importSessionRepository.persistOCM(
+      referenceData,
+      poi,
+      isFirstSession,
+      // TODO: get modifiedSince as most recent DateLastStatusUpdate from poi
+      modifiedSince || new Date(),
+      startDate
+    );
     return {
       success: true,
       importSession,
