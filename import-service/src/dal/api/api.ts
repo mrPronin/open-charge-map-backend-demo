@@ -15,7 +15,8 @@ export interface API {
   fetchAndStoreToFile(
     url: string,
     path: string,
-    timeout: number
+    timeout: number,
+    params?: Record<string, unknown>
   ): Promise<void>;
 }
 
@@ -33,7 +34,7 @@ export class APIImplementation implements API {
     });
     this.defaultParameters = {
       key: apiKey,
-      client: CONSTANTS.ocmClientName,
+      client: CONSTANTS.OCM_CLIENT_NAME,
     };
   }
 
@@ -63,9 +64,13 @@ export class APIImplementation implements API {
 
   async fetchAndStoreToFile(
     url: string,
-    destinationFilePath: string,
-    timeout = 30 * 60 * 1000
+    path: string,
+    timeout = 30 * 60 * 1000,
+    params?: Record<string, unknown>,
   ): Promise<void> {
+    const startTime = new Date();
+    let downloaded = 0;
+
     const source = axios.CancelToken.source();
 
     const timeoutId = setTimeout(() => {
@@ -73,15 +78,12 @@ export class APIImplementation implements API {
     }, timeout);
 
     const response = await this.api.axiosInstance.get(url, {
+      params: { ...this.defaultParameters, ...params },
       responseType: 'stream',
       cancelToken: source.token,
     });
 
-    const fileStream = fs.createWriteStream(destinationFilePath);
-
-    let downloaded = 0;
-    const contentLength = +response.headers['content-length'];
-    const startTime = Date.now();
+    const fileStream = fs.createWriteStream(path);
 
     const writeData = (chunk: any) => {
       downloaded += chunk.length;
@@ -92,29 +94,15 @@ export class APIImplementation implements API {
           response.data.resume();
         });
       }
-      const elapsedMins = (Date.now() - startTime) / (1000 * 60);
-      const downloadPortion = downloaded / contentLength;
-      const percent = downloadPortion * 100;
-      const totalEstimateMins = (1 / downloadPortion) * elapsedMins;
-      const remainingMins = totalEstimateMins - elapsedMins;
-
-      const logString = `Elapsed ${elapsedMins.toFixed(
-        2
-      )} mins, ${percent.toFixed(1)}% complete, ${Math.ceil(
-        remainingMins
-      )} mins remaining, downloaded ${(downloaded / (1024 * 1024)).toFixed(
-        2
-      )} MB of ${destinationFilePath} \r`;
-      process.stdout.write(logString);
+      const logString = `Downloaded ${(downloaded / (1024 * 1024)).toFixed(2)} MB`;
       console.log(logString);
     };
 
     response.data.on('data', writeData);
 
     return new Promise<void>((resolve, reject) => {
-
       response.data.on('end', () => {
-        console.log(`${destinationFilePath} downloaded successfully.`);
+        console.log(`${path} downloaded successfully.`);
         fileStream.end();
         clearTimeout(timeoutId);
         resolve();

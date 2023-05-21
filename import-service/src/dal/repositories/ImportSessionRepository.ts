@@ -3,7 +3,11 @@ import { injectable, inject } from 'inversify';
 import fs from "fs";
 import StreamArray from 'stream-json/streamers/StreamArray';
 import { TYPES } from '@domain/types.js';
-import { ImportSession } from '@domain/models/presentation/ImportSession.js';
+import { CONSTANTS } from "@domain/constants.js";
+import {
+  ImportSession,
+  ImportSessionInput,
+} from '@domain/models/presentation/ImportSession.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
@@ -23,32 +27,73 @@ export class ImportSessionRepositoryImplementation
     path: string,
     referenceData: CoreReferenceData,
     startDate: Date
-  ): Promise<ImportSession> => {
+  ): Promise<ImportSession | null> => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+      await this.ocmPersistenceRepository.storeReferenceData(referenceData);
 
-    let counter = 0;
-    const pipeline = fs.createReadStream(path).pipe(StreamArray.withParser());
-    pipeline.on('data', (data) => {
-      ++counter;
-    });
-    pipeline.on('end', () => {
-      ++counter;
-      console.log('counter: ', counter);
-    });
-    // debug
-    return {
-      ID: '',
-      poiAmount: 0,
-      modifiedsince: new Date(),
-      startDate: new Date(),
-      endDate: new Date(),
-    };
-    // debug
+      let counter = 0;
+      let batchCounter = 0;
+      const pipeline = fs.createReadStream(path).pipe(StreamArray.withParser());
+      let poiBuffer: POI[] = [];
+
+      pipeline.on('data', async (poiItemData) => {
+        ++counter;
+        poiBuffer.push(poiItemData.value);
+        if (poiBuffer.length === CONSTANTS.POI_BATCH_PERSIST_AMOUNT) {
+          ++batchCounter;
+          pipeline.pause();
+          const memoryUsage = Math.round(
+            process.memoryUsage().heapUsed / 1024 / 1024
+          );
+          await this.ocmPersistenceRepository.storePOIs(poiBuffer);
+          console.log(
+            `Buffer: ${batchCounter} items saved: ${counter}. Memory usage: ${memoryUsage} Mb`
+          );
+          poiBuffer = [];
+          pipeline.resume();
+        }
+      });
+
+      return new Promise<ImportSession>((resolve, reject) => {
+        pipeline.on('end', async () => {
+          ++counter;
+          await this.ocmPersistenceRepository.storePOIs(poiBuffer);
+          const memoryUsage = Math.round(
+            process.memoryUsage().heapUsed / 1024 / 1024
+          );
+          console.log(
+            `Items saved: ${counter} memory usage: ${memoryUsage} Mb`
+          );
+          const endDate = new Date();
+          const importSession: ImportSessionInput = {
+            poiAmount: counter,
+            modifiedsince: endDate,
+            startDate,
+            endDate,
+          };
+          const document = new ImportSessionModel(importSession);
+          await document.save();
+          await session.commitTransaction();
+          session.endSession();
+          resolve(toModel<ImportSession>(document));
+        });
+        mongoose.connection.on('error', (err) => {
+          reject(err);
+        });
+      });
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      throw error;
+    }
   };
 
   persistOCM = async (
     referenceData: CoreReferenceData,
     pois: POI[],
-    modifiedsince: Date,
+    modifiedsince: Date | null,
     startDate: Date
   ): Promise<ImportSession> => {
     const session = await mongoose.startSession();
@@ -59,7 +104,7 @@ export class ImportSessionRepositoryImplementation
       const endDate = new Date();
       const document = new ImportSessionModel({
         poiAmount: pois.length,
-        modifiedsince: modifiedsince,
+        modifiedsince: modifiedsince || endDate,
         startDate,
         endDate,
       });

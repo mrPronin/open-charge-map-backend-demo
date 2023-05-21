@@ -27,30 +27,27 @@ export class ImportServiceImplementation implements ImportService {
   import = async (): Promise<ImportMutationResponse> => {
     const startDate = new Date();
     const isFirstSession = await this.importSessionRepository.isEmpty();
-    console.log(`isFirstSession: ${isFirstSession}`);
+    // const isFirstSession = true;
     if (isFirstSession) {
-      // await this.ocmRepository.getPOIAndStoreToFile(CONSTANTS.poiFileName);
-      // const referenceData = await this.ocmRepository.getReferenceData();
-      await this.importSessionRepository.loadPOIFromFile(
-        CONSTANTS.poiFileName,
-        undefined,
+      const referenceData = await this.ocmRepository.getReferenceData();
+      await this.ocmRepository.getPOIAndStoreToFile(CONSTANTS.POI_FILE_NAME);
+      const importSession = await this.importSessionRepository.loadPOIFromFile(
+        CONSTANTS.POI_FILE_NAME,
+        referenceData,
         startDate
       );
-
-      // debug
       return {
         success: true,
-        importSession: null,
-        message: 'There are no new objects to import.',
+        importSession: importSession,
+        message: 'The initial data import has been completed successfully',
       };
-      // debug
     }
 
     let modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
     // subsctract time offset to ensure capturing the latest changes
     modifiedSince = subtractFromDate(
       modifiedSince,
-      CONSTANTS.timeOffsetForPOIImport
+      CONSTANTS.MINUTES_OFFSET_FOR_POI_UPDATE
     );
 
     // fetch POI data from OCM
@@ -67,7 +64,7 @@ export class ImportServiceImplementation implements ImportService {
       referenceData,
       poi,
       // TODO: (?) get modifiedSince as most recent DateLastStatusUpdate from poi
-      modifiedSince || new Date(),
+      modifiedSince,
       startDate
     );
     return {

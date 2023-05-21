@@ -25,7 +25,6 @@ export class OCMPersistenceRepositoryImplementation
   };
 
   storePOIs = async (pois: POI[]): Promise<void> => {
-    // await POIModel.deleteMany();
     const documents = await Promise.all(
       pois.map(async function (poi) {
         let poiDocument = await POIModel.findOneAndUpdate({ ID: poi.ID }, poi, {

@@ -1,5 +1,6 @@
 import { injectable, inject } from 'inversify';
 import { TYPES } from '@domain/types.js';
+import { CONSTANTS } from "@domain/constants.js";
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
 import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js';
@@ -34,9 +35,14 @@ export class OCMRepositoryImplementation implements OCMRepository {
 
   getPOIAndStoreToFile = async (path: string): Promise<void> => {
     const dynamicParams = {
-      maxresults: 200000,
+      maxresults: CONSTANTS.POI_INITIAL_IMPORT_MAX_RESULTS,
     };
     const params = { ...this.defaultParams, ...dynamicParams };
-    // TODO: implement network request
+    await this.api.fetchAndStoreToFile(
+      '/poi/',
+      CONSTANTS.POI_FILE_NAME,
+      CONSTANTS.POI_INITIAL_IMPORT_TIMEOUT,
+      params
+    );
   };
 }

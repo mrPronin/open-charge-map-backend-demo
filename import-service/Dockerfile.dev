@@ -10,7 +10,7 @@ COPY ./import-service/ ./
 
 COPY ./wait-for.sh /wait-for.sh
 
-COPY ./data/poi.json /tmp/poi.json
+# COPY ./data/poi-10000.json /tmp/poi.json
 
 RUN npm install --global tsx
 
