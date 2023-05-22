@@ -39,17 +39,11 @@
     "no-console": "off",
     "import/prefer-default-export": "off",
     "import/named": "off",
+    "import/extensions": "off",
     "@typescript-eslint/indent": "off",
     "unicorn/no-null": "off",
-    "unicorn/filename-case": [
-      "error",
-      {
-        "cases": {
-          "camelCase": true,
-          "pascalCase": true
-        }
-      }
-    ],
-    "unicorn/prevent-abbreviations": "off"
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/import-index": "off",
+    "unicorn/filename-case": "off"
   }
 }

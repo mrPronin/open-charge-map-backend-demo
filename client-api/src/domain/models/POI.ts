@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/filename-case */
 import { OperatorInfo } from './OperatorInfo.js';
 import { StatusType } from './StatusType.js';
 import { AddressInfo } from './AddressInfo.js';
