@@ -4,5 +4,5 @@ type POI {
 
 type Query {
   "Returns a list of POI."
-  poi: [POI]
+  pois: [POI]
 }

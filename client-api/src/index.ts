@@ -6,7 +6,7 @@ import { bootstrap } from '@presentation/bootstrap.js';
 async function main() {
   const port =
     (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4001;
-  const { MONGODB_URI, MONGO_DB, BASE_OCM_URL, OCM_API_KEY } = process.env;
+  const { MONGODB_URI, MONGO_DB } = process.env;
   await bootstrap(
     container,
     port,

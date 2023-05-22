@@ -5,7 +5,7 @@ import { GraphQLContext } from '@presentation/GraphQLContext.js';
 
 export const resolver = {
   Query: {
-    poi: async (_, __, context: GraphQLContext) => {
+    pois: async (_, __, context: GraphQLContext) => {
       //   const importService = context.container.get<ImportService>(
       //     TYPES.ImportService
       //   );
