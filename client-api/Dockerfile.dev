@@ -2,11 +2,11 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY ./import-service/package*.json ./
+COPY ./client-api/package*.json ./
 
 RUN npm install 
 
-COPY ./import-service/ ./
+COPY ./client-api/ ./
 
 COPY ./wait-for.sh /wait-for.sh
 

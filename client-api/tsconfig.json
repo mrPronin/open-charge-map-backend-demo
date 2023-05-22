@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@presentation/*": ["./src/presentation/*"],
+      "@dal/*": ["./src/dal/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@/*": ["./src/*"]
+    },
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "types": ["node"]
+  }
+}

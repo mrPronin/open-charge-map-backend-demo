@@ -1,7 +1,7 @@
 {
-  "name": "import-service",
+  "name": "client-api",
   "version": "1.0.0",
-  "description": "Fetches data from Open Charge Map, checks for changes, and updates the MongoDB database when necessary.",
+  "description": "Connects to the MongoDB database to read the charging station data and serves it to clients through a /graphql endpoint, supporting relay-style pagination.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -11,7 +11,6 @@
     "start": "node ./dist/index.js",
     "clean": "rm -r dist/**"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "eslintConfig": {
@@ -23,15 +22,12 @@
   "dependencies": {
     "@apollo/server": "^4.7.1",
     "@graphql-tools/schema": "^9.0.19",
-    "apisauce": "^3.0.0",
-    "axios": "^1.4.0",
-    "class-transformer": "^0.5.1",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.21.3",
     "inversify": "^6.0.1",
     "mongoose": "^7.1.0",
+    "nodemon": "^2.0.22",
     "reflect-metadata": "^0.1.13",
-    "stream-json": "^1.7.5",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

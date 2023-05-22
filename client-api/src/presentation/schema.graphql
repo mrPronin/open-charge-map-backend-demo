@@ -1,0 +1,8 @@
+type POI {
+    ID: Int!
+}
+
+type Query {
+  "Returns a list of POI."
+  poi: [POI]
+}
