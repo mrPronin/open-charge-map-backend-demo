@@ -3,7 +3,6 @@ import { ConnectionType } from './ConnectionType.js';
 import { SupplyType } from './SupplyType.js';
 
 export interface ConnectionInfo {
-  _id: string;
   ID: number;
   ConnectionTypeID?: number;
   ConnectionType?: ConnectionType;

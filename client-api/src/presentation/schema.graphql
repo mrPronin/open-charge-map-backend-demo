@@ -1,5 +1,85 @@
 type POI {
     ID: Int!
+    UUID: String!
+    OperatorInfo: OperatorInfo
+    StatusType: StatusType
+    AddressInfo: AddressInfo
+    Connections: [ConnectionInfo]!
+    DateLastStatusUpdate: DateTime
+}
+
+type OperatorInfo {
+  ID: Int!
+  Title: String
+  WebsiteURL: String
+  Comments: String
+  PhonePrimaryContact: String
+  PhoneSecondaryContact: String
+  AddressInfo: AddressInfo
+  BookingURL: String
+  ContactEmail: String
+  FaultReportEmail: String
+  IsRestrictedEdit: Boolean
+}
+
+type StatusType {
+  ID: Int!
+  Title: String
+  IsOperational: Boolean
+  IsUserSelectable: Boolean
+}
+
+type AddressInfo {
+  ID: Int!
+  Title: String
+  AddressLine1: String
+  AddressLine2: String
+  Town: String
+  StateOrProvince: String
+  Postcode: String
+  Country: Country
+  Latitude: Float!
+  Longitude: Float!
+  ContactTelephone1: String
+  ContactTelephone2: String
+  ContactEmail: String
+  AccessComments: String
+  RelatedURL: String
+  Distance: Float
+  DistanceUnit: Int
+}
+
+type ConnectionInfo {
+  ID: Int!
+  ConnectionType: ConnectionType
+  Reference: String
+  StatusType: StatusType
+  Amps: Int
+  Voltage: Float
+  PowerKW: Float
+  CurrentType: SupplyType
+  Quantity: Int
+  Comments: String
+}
+
+type Country {
+  ID: Int!
+  Title: String
+  ISOCode: String!
+  ContinentCode: String
+}
+
+type ConnectionType {
+  ID: Int!
+  Title: String
+  FormalName: String
+  IsDiscontinued: Boolean
+  IsObsolete: Boolean
+}
+
+type SupplyType {
+  ID: Int!
+  Title: String
 }
 
 type Query {
