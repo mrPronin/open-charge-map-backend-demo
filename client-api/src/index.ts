@@ -3,8 +3,9 @@ import { container } from '@presentation/ioc_container.js';
 import { bootstrap } from '@presentation/bootstrap.js';
 import { referenceIoCData } from '@/inversify.config';
 // debug
-// eslint-disable-next-line import/order
+// eslint-disable-next-line import/order, import/no-extraneous-dependencies
 import { PrismaClient } from '@prisma/client';
+
 const prisma = new PrismaClient();
 // debug
 
@@ -14,7 +15,7 @@ async function main() {
   const { MONGODB_URI, MONGO_DB } = process.env;
   await bootstrap(container, port, MONGODB_URI, MONGO_DB, referenceIoCData);
 
-  const firstTenPOI = await prisma.pois.findMany({ take: 10 });
+  const firstTenPOI = await prisma.pOI.findMany({ take: 10 });
   console.log(firstTenPOI);
 }
 

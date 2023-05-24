@@ -15,7 +15,7 @@ type PoisAddressInfo {
   Town              String?
   StateOrProvince   String?
   Postcode          String?
-  Country           PoisAddressInfoCountry?
+  Country           Country?
   Latitude          Float
   Longitude         Float
   ContactTelephone1 String?
@@ -28,7 +28,7 @@ type PoisAddressInfo {
   Title             String?
 }
 
-type PoisAddressInfoCountry {
+type Country {
   id            String @map("_id")
   ID            Int
   ISOCode       String
@@ -36,21 +36,21 @@ type PoisAddressInfoCountry {
   Title         String?
 }
 
-type PoisConnections {
+type ConnectionInfo {
   id               String                        @map("_id")
   ID               Int
-  ConnectionType   PoisConnectionsConnectionType?
+  ConnectionType   ConnectionType?
   Reference        String? 
-  StatusType       PoisStatusType?
+  StatusType       StatusType?
   Amps             Int?
   Voltage          Int?
   PowerKW          Float?
-  CurrentType      PoisConnectionsCurrentType?
+  CurrentType      CurrentType?
   Quantity         Int?
   Comments         String?
 }
 
-type PoisConnectionsConnectionType {
+type ConnectionType {
   id             String   @map("_id")
   ID             Int
   FormalName     String?
@@ -59,13 +59,13 @@ type PoisConnectionsConnectionType {
   Title          String?
 }
 
-type PoisConnectionsCurrentType {
+type CurrentType {
   id    String @map("_id")
   ID    Int
   Title String?
 }
 
-type PoisOperatorInfo {
+type OperatorInfo {
   id                    String   @map("_id")
   ID                    Int
   WebsiteURL            String?
@@ -80,7 +80,7 @@ type PoisOperatorInfo {
   Title                 String?
 }
 
-type PoisStatusType {
+type StatusType {
   id               String  @map("_id")
   ID               Int
   IsOperational    Boolean?
@@ -88,14 +88,15 @@ type PoisStatusType {
   Title            String?
 }
 
-model pois {
+model POI {
+  @@map("pois")
   id                   String            @id @map("_id")
   ID                   Int
   UUID                 String
-  OperatorInfo         PoisOperatorInfo?
-  StatusType           PoisStatusType?
+  OperatorInfo         OperatorInfo?
+  StatusType           StatusType?
   AddressInfo          PoisAddressInfo?
-  Connections          PoisConnections[]
+  Connections          ConnectionInfo[]
   DateLastStatusUpdate DateTime?          @db.Date
 
   @@index([DateLastStatusUpdate], map: "DateLastStatusUpdate_1")
