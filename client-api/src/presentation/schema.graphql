@@ -82,7 +82,24 @@ type SupplyType {
   Title: String
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type POIEdge {
+  node: POI!
+  cursor: String!
+}
+
+type POIConnection {
+  edges: [POIEdge!]!
+  pageInfo: PageInfo!
+}
+
 type Query {
-  "Returns a list of POI."
-  pois: [POI]
+  "Support list of POI with relay-style pagination. Including a value for both the 'first' and the 'last' item is not supported. If both parameters are set, an error (TODO: define error) is returned. The 'first' and 'last' parameters must be positive integers. Otherwise, an error (TODO: define error) will be returned."
+  pois(first: Int, last: Int, before: String, after: String): POIConnection!
 }
