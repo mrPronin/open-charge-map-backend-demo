@@ -1,4 +1,5 @@
 export const TYPES = {
   OCMService: Symbol('OCMService'),
-  OCMRepository: Symbol('OCMRepository')
+  OCMRepository: Symbol('OCMRepository'),
+  PrismaClient: Symbol('PrismaClient'),
 };

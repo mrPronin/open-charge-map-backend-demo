@@ -10,8 +10,7 @@ const prisma = new PrismaClient();
 async function main() {
   const port =
     (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4001;
-  const { MONGODB_URI, MONGO_DB } = process.env;
-  await bootstrap(container, port, MONGODB_URI, MONGO_DB, referenceIoCData);
+  await bootstrap(container, port, referenceIoCData);
 }
 
 main()

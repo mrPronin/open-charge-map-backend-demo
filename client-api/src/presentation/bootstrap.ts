@@ -3,6 +3,8 @@ import * as fs from 'node:fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { ApolloServer } from '@apollo/server';
+// eslint-disable-next-line import/order, import/no-extraneous-dependencies
+import { PrismaClient } from '@prisma/client';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { DateTimeTypeDefinition, DateTimeResolver } from 'graphql-scalars';
@@ -10,7 +12,7 @@ import { DateTimeTypeDefinition, DateTimeResolver } from 'graphql-scalars';
 // import * as db from '@dal/db.js';
 import { GraphQLContext } from '@presentation/GraphQLContext.js';
 import { resolver as QueryResolver } from '@presentation/resolvers/Query.js';
-// import { TYPES } from "@domain/types.js";
+import { TYPES } from '@domain/types.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -20,10 +22,11 @@ const __dirname = path.dirname(__filename);
 export async function bootstrap(
   container: Container,
   appPort: number,
-  dbURI: string,
-  dbName: string,
   ...modules: ContainerModule[]
 ) {
+  container
+    .bind<PrismaClient>(TYPES.PrismaClient)
+    .toConstantValue(new PrismaClient());
   container.load(...modules);
 
   // await db.connect(dbURI, dbName);
