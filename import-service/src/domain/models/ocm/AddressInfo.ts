@@ -1,4 +1,4 @@
-import { Country } from "./Country.js";
+import { Country } from './Country.js';
 
 export interface AddressInfo {
   ID: number;

@@ -1,7 +1,7 @@
-import { OperatorInfo } from "./OperatorInfo.js";
-import { StatusType } from "./StatusType.js";
-import { AddressInfo } from "./AddressInfo.js";
-import { ConnectionInfo } from "./ConnectionInfo.js";
+import { OperatorInfo } from './OperatorInfo.js';
+import { StatusType } from './StatusType.js';
+import { AddressInfo } from './AddressInfo.js';
+import { ConnectionInfo } from './ConnectionInfo.js';
 
 export interface POI {
   ID: number;

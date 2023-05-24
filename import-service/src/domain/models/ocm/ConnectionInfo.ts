@@ -1,6 +1,6 @@
-import { StatusType } from "./StatusType.js";
-import { ConnectionType } from "./ConnectionType.js";
-import { SupplyType } from "./SupplyType.js";
+import { StatusType } from './StatusType.js';
+import { ConnectionType } from './ConnectionType.js';
+import { SupplyType } from './SupplyType.js';
 
 export interface ConnectionInfo {
   ID: number;

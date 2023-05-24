@@ -1,6 +1,6 @@
 export interface StatusType {
+  ID: number;
   IsOperational?: boolean;
   IsUserSelectable?: boolean;
-  ID: number;
   Title?: string;
 }

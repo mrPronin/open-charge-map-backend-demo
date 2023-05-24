@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type PoisAddressInfo {
+  id                String                 @map("_id")
+  ID                Int
+  AddressLine1      String?
+  AddressLine2      String?
+  Town              String?
+  StateOrProvince   String?
+  Postcode          String?
+  Country           PoisAddressInfoCountry?
+  Latitude          Float
+  Longitude         Float
+  ContactTelephone1 String?
+  ContactTelephone2 String?
+  ContactEmail      String?
+  AccessComments    String?
+  RelatedURL        String?
+  Distance          Float?
+  DistanceUnit      Int?
+  Title             String?
+}
+
+type PoisAddressInfoCountry {
+  id            String @map("_id")
+  ID            Int
+  ISOCode       String
+  ContinentCode String?
+  Title         String?
+}
+
+type PoisConnections {
+  id               String                        @map("_id")
+  ID               Int
+  ConnectionType   PoisConnectionsConnectionType?
+  Reference        String? 
+  StatusType       PoisStatusType?
+  Amps             Int?
+  Voltage          Int?
+  PowerKW          Float?
+  CurrentType      PoisConnectionsCurrentType?
+  Quantity         Int?
+  Comments         String?
+}
+
+type PoisConnectionsConnectionType {
+  id             String   @map("_id")
+  ID             Int
+  FormalName     String?
+  IsDiscontinued Boolean?
+  IsObsolete     Boolean?
+  Title          String?
+}
+
+type PoisConnectionsCurrentType {
+  id    String @map("_id")
+  ID    Int
+  Title String?
+}
+
+type PoisOperatorInfo {
+  id                    String   @map("_id")
+  ID                    Int
+  WebsiteURL            String?
+  Comments              String?
+  PhonePrimaryContact   String?
+  PhoneSecondaryContact String?
+  AddressInfo           PoisAddressInfo?
+  BookingURL            String?
+  ContactEmail          String?
+  FaultReportEmail      String?
+  IsRestrictedEdit      Boolean?
+  Title                 String?
+}
+
+type PoisStatusType {
+  id               String  @map("_id")
+  ID               Int
+  IsOperational    Boolean?
+  IsUserSelectable Boolean?
+  Title            String?
+}
+
+model pois {
+  id                   String            @id @map("_id")
+  ID                   Int
+  UUID                 String
+  OperatorInfo         PoisOperatorInfo?
+  StatusType           PoisStatusType?
+  AddressInfo          PoisAddressInfo?
+  Connections          PoisConnections[]
+  DateLastStatusUpdate DateTime?          @db.Date
+
+  @@index([DateLastStatusUpdate], map: "DateLastStatusUpdate_1")
+  @@index([Connections.ConnectionType.ID], map: "Connections.ConnectionType.ID_1")
+  @@index([AddressInfo.Country.ID], map: "AddressInfo.Country.ID_1")
+}

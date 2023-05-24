@@ -1,11 +1,12 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-import { OperatorInfoSchema } from "./OperatorInfo.js";
-import { StatusTypeSchema } from "./StatusType.js";
-import { AddressInfoSchema } from "./AddressInfo.js";
-import { ConnectionInfoSchema } from "./ConnectionInfo.js";
 import { POI as IPOI } from '@domain/models/ocm/POI.js';
+
+import { OperatorInfoSchema } from './OperatorInfo.js';
+import { StatusTypeSchema } from './StatusType.js';
+import { AddressInfoSchema } from './AddressInfo.js';
+import { ConnectionInfoSchema } from './ConnectionInfo.js';
 
 interface POIDocument extends IPOI, Document {
   _id: string;

@@ -1,6 +1,7 @@
 import { AddressInfo } from './AddressInfo.js';
 
 export interface OperatorInfo {
+  ID: number;
   WebsiteURL?: string;
   Comments?: string;
   PhonePrimaryContact?: string;
@@ -10,6 +11,5 @@ export interface OperatorInfo {
   ContactEmail?: string;
   FaultReportEmail?: string;
   IsRestrictedEdit?: boolean;
-  ID: number;
   Title?: string;
 }

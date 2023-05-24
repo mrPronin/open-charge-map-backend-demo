@@ -7,12 +7,14 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { DateTimeTypeDefinition, DateTimeResolver } from 'graphql-scalars';
 
-import * as db from '@dal/db.js';
+// import * as db from '@dal/db.js';
 import { GraphQLContext } from '@presentation/GraphQLContext.js';
 import { resolver as QueryResolver } from '@presentation/resolvers/Query.js';
-import { TYPES } from "@domain/types.js";
+// import { TYPES } from "@domain/types.js";
 
+// eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
 const __dirname = path.dirname(__filename);
 
 export async function bootstrap(
@@ -22,7 +24,6 @@ export async function bootstrap(
   dbName: string,
   ...modules: ContainerModule[]
 ) {
-  container
   container.load(...modules);
 
   // await db.connect(dbURI, dbName);
@@ -48,5 +49,4 @@ export async function bootstrap(
     }),
   });
   console.log(`🚀  Server ready at: ${url}`);
-
 }
