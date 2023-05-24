@@ -50,5 +50,8 @@
     "tsc-alias": "^1.8.6",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4"
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }

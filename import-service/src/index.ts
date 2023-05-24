@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { container } from '@presentation/ioc_container.js';
-import { referenceIoCData } from '@/inversify.config';
 import { bootstrap } from '@presentation/bootstrap.js';
+import { referenceIoCData } from '@/inversify.config';
 
 async function main() {
   const port =

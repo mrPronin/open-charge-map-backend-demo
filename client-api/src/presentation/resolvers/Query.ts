@@ -1,26 +1,16 @@
-// import { TYPES } from '@domain/types';
-// TODO: import service
-// import { ImportService } from '@domain/interfaces/services/ImportService.js';
-// eslint-disable-next-line import/order, import/no-extraneous-dependencies
+import { TYPES } from '@domain/types';
+import { OCMService } from '@domain/interfaces/services/OCMService.js';
 import { parsePaginationArgs } from 'prisma-cursor-pagination';
-// import { GraphQLContext } from '@presentation/GraphQLContext.js';
-// debug
-// eslint-disable-next-line import/order, import/no-extraneous-dependencies
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
-// debug
+import { GraphQLContext } from '@presentation/GraphQLContext.js';
 
 export const resolver = {
   Query: {
-    pois: async (_, args /* , context: GraphQLContext */) => {
-      const { findManyArgs, toConnection } = parsePaginationArgs(args);
-      const poi = await prisma.pOI.findMany(findManyArgs);
+    pois: async (_, args, context: GraphQLContext) => {
+      const { toConnection } = parsePaginationArgs(args);
+      const ocmService = context.container.get<OCMService>(TYPES.OCMService);
+
+      const poi = await ocmService.pois(args);
       return toConnection(poi);
-      //   const importService = context.container.get<ImportService>(
-      //     TYPES.ImportService
-      //   );
-      //   return await importService.importSessions();
     },
   },
 };

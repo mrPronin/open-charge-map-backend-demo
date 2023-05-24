@@ -7,7 +7,6 @@ export interface AddressInfo {
   Town?: string;
   StateOrProvince?: string;
   Postcode?: string;
-  CountryID: number;
   Country?: Country;
   Latitude: number;
   Longitude: number;

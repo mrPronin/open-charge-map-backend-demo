@@ -1,8 +1,5 @@
 import { ContainerModule } from 'inversify';
 
-// Network API interface
-import { API } from '@dal/api/api.js';
-
 // Interfaces & Types
 import { TYPES } from '@domain/types';
 import { ImportService } from '@domain/interfaces/services/ImportService.js';
@@ -26,7 +23,5 @@ export const referenceIoCData = new ContainerModule((bind) => {
   bind<OCMPersistenceRepository>(TYPES.OCMPersistenceRepository).to(
     OCMPersistenceRepositoryImplementation
   );
-  bind<OCMRepository>(TYPES.OCMRepository).to(
-    OCMRepositoryImplementation
-  );
+  bind<OCMRepository>(TYPES.OCMRepository).to(OCMRepositoryImplementation);
 });

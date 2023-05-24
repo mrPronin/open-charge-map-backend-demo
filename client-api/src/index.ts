@@ -1,9 +1,8 @@
 import 'reflect-metadata';
 import { container } from '@presentation/ioc_container.js';
 import { bootstrap } from '@presentation/bootstrap.js';
-import { referenceIoCData } from '@/inversify.config';
-// eslint-disable-next-line import/order, import/no-extraneous-dependencies
 import { PrismaClient } from '@prisma/client';
+import { referenceIoCData } from '@/inversify.config';
 
 const prisma = new PrismaClient();
 

@@ -1,12 +1,20 @@
-// eslint-disable-next-line import/order, import/no-extraneous-dependencies
-import { PaginationArgs } from 'prisma-cursor-pagination';
+import { injectable, inject } from 'inversify';
+import { PaginationArgs, parsePaginationArgs } from 'prisma-cursor-pagination';
 import { POI } from '@domain/models/POI.js';
+import { TYPES } from '@domain/types.js';
+import { PrismaClient } from '@prisma/client';
 
 import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js';
 
 @injectable()
 export class OCMRepositoryImplementation implements OCMRepository {
+  constructor(
+    @inject(TYPES.PrismaClient)
+    private readonly prisma: PrismaClient
+  ) {}
+
   pois = async (args: PaginationArgs): Promise<POI[]> => {
-    return [];
+    const { findManyArgs } = parsePaginationArgs(args);
+    return this.prisma.pOI.findMany(findManyArgs);
   };
 }

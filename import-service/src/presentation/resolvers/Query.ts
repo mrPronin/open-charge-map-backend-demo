@@ -8,7 +8,7 @@ export const resolver = {
       const importService = context.container.get<ImportService>(
         TYPES.ImportService
       );
-      return await importService.importSessions();
+      return importService.importSessions();
     },
   },
 };

@@ -4,11 +4,10 @@ import { AddressInfo } from './AddressInfo.js';
 import { ConnectionInfo } from './ConnectionInfo.js';
 
 export interface POI {
+  id: string;
   ID: number;
   UUID: string;
-  OperatorID: number;
   OperatorInfo?: OperatorInfo;
-  StatusTypeID: number;
   StatusType?: StatusType;
   AddressInfo?: AddressInfo;
   Connections: ConnectionInfo[];
