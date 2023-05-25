@@ -100,6 +100,6 @@ type POIConnection {
 }
 
 type Query {
-  "Support list of POI with relay-style pagination. Including a value for both the 'first' and the 'last' item is not supported. If both parameters are set, an error (TODO: define error) is returned. The 'first' and 'last' parameters must be positive integers. Otherwise, an error (TODO: define error) will be returned."
+  "Support list of POI with relay-style pagination. Including a value for both the 'first' and the 'last' parameter is not supported. If both parameters are set, an error (BAD_USER_INPUT) is returned. The 'first' and 'last' parameters must be positive integers. Otherwise, an error (BAD_USER_INPUT) will be returned."
   pois(first: Int, last: Int, before: String, after: String): POIConnection!
 }
