@@ -4,13 +4,13 @@ WORKDIR /app
 
 COPY ./client-api/package*.json ./
 
-RUN npm install
-
 COPY ./client-api/ ./
 
 COPY ./wait-for.sh /wait-for.sh
 
-RUN npm install --global tsx
+RUN npm install
+
+# RUN npm install --global tsx
 RUN npm run prisma-generate
 RUN npm install @prisma/client
 

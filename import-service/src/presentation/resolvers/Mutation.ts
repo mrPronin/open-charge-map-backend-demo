@@ -1,4 +1,4 @@
-import { TYPES } from '@domain/types';
+import { TYPES } from '@domain/types.js';
 import { ImportService } from '@domain/interfaces/services/ImportService.js';
 import { GraphQLContext } from '@presentation/GraphQLContext.js';
 

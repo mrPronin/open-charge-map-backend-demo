@@ -22,9 +22,10 @@ export async function bootstrap(
   appPort: number,
   ...modules: ContainerModule[]
 ) {
+  const prisma = new PrismaClient();
   container
     .bind<PrismaClient>(TYPES.PrismaClient)
-    .toConstantValue(new PrismaClient());
+    .toConstantValue(prisma);
   container.load(...modules);
 
   const typeDefs = fs.readFileSync(
@@ -47,5 +48,14 @@ export async function bootstrap(
       container,
     }),
   });
+  async function closeGracefully(signal) {
+    console.log(`Received signal to terminate: ${signal}`)
+
+    await prisma.$disconnect();
+    process.kill(process.pid, signal);
+  }
+  process.once('SIGINT', closeGracefully)
+  process.once('SIGTERM', closeGracefully)
+
   console.log(`🚀  Server ready at: ${url}`);
 }

@@ -55,5 +55,14 @@ export async function bootstrap(
       container,
     }),
   });
+  async function closeGracefully(signal) {
+    console.log(`Received signal to terminate: ${signal}`)
+
+    await db.disconnect()
+    process.kill(process.pid, signal);
+  }
+  process.once('SIGINT', closeGracefully)
+  process.once('SIGTERM', closeGracefully)
+
   console.log(`🚀  Server ready at: ${url}`);
 }

@@ -8,7 +8,7 @@ import { ConnectionTypeModel } from '@dal/dao/ocm/ConnectionType.js';
 import { CountryModel } from '@dal/dao/ocm/Country.js';
 import { OperatorInfoModel } from '@dal/dao/ocm/OperatorInfo.js';
 import { StatusTypeModel } from '@dal/dao/ocm/StatusType.js';
-import { SupplyTypeModel } from '@dal/dao/ocm/SupplyType';
+import { SupplyTypeModel } from '@dal/dao/ocm/SupplyType.js';
 
 @injectable()
 // eslint-disable-next-line prettier/prettier

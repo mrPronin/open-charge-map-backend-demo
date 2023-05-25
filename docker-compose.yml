@@ -3,44 +3,37 @@ version: '3'
 services:
   import-service:
     build:
-      context: .
-      dockerfile: ./import-service/Dockerfile.dev
+      context: ./import-service
+      dockerfile: Dockerfile
     image: node:18-alpine
     container_name: import-service
     restart: unless-stopped
     env_file:
-      - .env
       - ./import-service/.env
-    environment:
-      - DATABASE_URL=$DATABASE_URL
     ports:
       - "4000:4000"
-    volumes:
-      - ./import-service:/app
-      - /app/node_modules
     networks:
       - app-network
-    command: sh /wait-for.sh mongodb:27017 -- npm run dev
+    depends_on:
+      mongodb:
+        condition: service_started
   
   client-api:
     build:
-      context: .
-      dockerfile: ./client-api/Dockerfile.dev
+      context: ./client-api
+      dockerfile: Dockerfile
     image: node:18-alpine
     container_name: client-api
     restart: unless-stopped
     env_file:
-      - .env
-    environment:
-      - DATABASE_URL=$DATABASE_URL
+      - ./client-api/.env
     ports:
       - "4001:4001"
-    volumes:
-      - ./client-api:/app
-      - /app/node_modules
     networks:
       - app-network
-    command: sh /wait-for.sh mongodb:27017 -- npm run dev
+    depends_on:
+      mongodb:
+        condition: service_started
 
   mongodb:
     image: mongo:6-jammy
@@ -52,7 +45,7 @@ services:
       - dbdata:/data/db
     networks:
       - app-network
-    # command: mongod --quiet --logpath /dev/null
+    command: mongod --quiet --logpath /dev/null
 
 networks:
   app-network:

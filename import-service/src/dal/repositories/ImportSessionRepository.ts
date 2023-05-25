@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { injectable, inject } from 'inversify';
 import fs from 'fs';
-import StreamArray from 'stream-json/streamers/StreamArray';
+import StreamArray from 'stream-json/streamers/StreamArray.js';
 import { TYPES } from '@domain/types.js';
 import { CONSTANTS } from '@domain/constants.js';
 import {

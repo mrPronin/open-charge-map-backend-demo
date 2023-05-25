@@ -9,9 +9,12 @@ export const connect = async (dbURI?: string) => {
 
   try {
     await mongoose.connect(url);
-    // console.log('Connected to MongoDB successfully.');
   } catch (error) {
     console.error('Failed to connect to MongoDB:', error);
     throw error;
   }
 };
+
+export const disconnect = async () => {
+  await mongoose.disconnect();
+}

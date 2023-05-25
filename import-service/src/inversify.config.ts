@@ -1,7 +1,7 @@
 import { ContainerModule } from 'inversify';
 
 // Interfaces & Types
-import { TYPES } from '@domain/types';
+import { TYPES } from '@domain/types.js';
 import { ImportService } from '@domain/interfaces/services/ImportService.js';
 import { ImportSessionRepository } from '@domain/interfaces/repositories/ImportSessionRepository.js';
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';

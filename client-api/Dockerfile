@@ -23,6 +23,9 @@ RUN npm ci --only=production
 # Copy built app and graphql schemas from the 'build' stage
 COPY --from=build /home/node/app/dist ./dist
 COPY --from=build /home/node/app/src/*.graphql ./dist
+COPY --from=build /home/node/app/prisma ./prisma
+
+RUN npx prisma generate
 
 EXPOSE 4000
 

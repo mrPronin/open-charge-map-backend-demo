@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { container } from '@presentation/ioc_container.js';
 import { bootstrap } from '@presentation/bootstrap.js';
 import { PrismaClient } from '@prisma/client';
-import { referenceIoCData } from '@/inversify.config';
+import { referenceIoCData } from '@/inversify.config.js';
 
 const prisma = new PrismaClient();
 

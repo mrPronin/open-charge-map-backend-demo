@@ -1,6 +1,6 @@
-import { TYPES } from '@domain/types';
-import { OCMService } from '@domain/interfaces/services/OCMService.js';
 import { parsePaginationArgs } from 'prisma-cursor-pagination';
+import { TYPES } from '@domain/types.js';
+import { OCMService } from '@domain/interfaces/services/OCMService.js';
 import { GraphQLContext } from '@presentation/GraphQLContext.js';
 
 export const resolver = {

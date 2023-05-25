@@ -4,13 +4,17 @@ WORKDIR /app
 
 COPY ./import-service/package*.json ./
 
-RUN npm install 
-
 COPY ./import-service/ ./
 
 COPY ./wait-for.sh /wait-for.sh
 
-RUN npm install --global tsx
+RUN npm install 
+
+# RUN ls 
+# ./node_modules
+#  | grep mongoose
+# RUN npm install reflect-metadata
+# RUN npm install mongoose
 
 EXPOSE 4000
 
