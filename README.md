@@ -77,30 +77,39 @@
     - [x] implement 'getPOI' method for OpenChargeMapRepository with network api
     - [x] improve ImportService - extract 10 minutes from modifiedSince to ensure that no data is lost when importing OPM, define global constanst for values such this
     - [x] use transaction for OCMPersistenceRepository and ImportSessionRepository, refactor ImportService
+    - [x] handle initial POI import using streams
+    - [x] graceful shutdown import-service
+    - [ ] unit-tests
+    - [ ] adjust service to work as a subgraph
+    - [ ] implement error handling
     - [ ] implement generic middleware 
     - [ ] define cors configuration
     - [ ] add logger
-    - [ ] implement error handling
-    - [ ] adjust service to work as a subgraph
-    - [ ] unit-tests
+    - [ ] documentation
     - [ ] etc
 - [ ] client-api
-    - [ ] initial project setup, bootstrap
-    - [ ] define GraphQL schema
-    - [ ] define resolvers
-    - [ ] define domain models
-    - [ ] define interfaces for repository and services
-    - [ ] implement services
-    - [ ] implement DAO (data access objects)
-    - [ ] implement repositories
-    - [ ] implement dependency injection
-    - [ ] define DB connector
-    - [ ] create Dockerfile and Dockerfile.dev
+    - [x] initial project setup
+    - [x] define domain models (interfaces)
+    - [x] implement DAO (data access objects)
+    - [x] define DB connector
+    - [x] define GraphQL schema
+    - [x] add prisma support
+    - [x] define query for one POI
+    - [x] define query for POI list with relay-style pagination
+    - [x] define resolvers
+    - [x] define interfaces for repository and services
+    - [x] implement services
+    - [x] implement repositories
+    - [x] implement dependency injection
+    - [x] create Dockerfile and Dockerfile.dev
+    - [x] graceful shutdown import-service
+    - [ ] define input parameter validation, generate an error
+    - [ ] unit-tests
+    - [ ] adjust service to work as a subgraph
     - [ ] define cors configuration
     - [ ] add logger
     - [ ] implement errror handling
-    - [ ] adjust service to work as a subgraph
-    - [ ] unit-tests
+    - [ ] documentation
     - [ ] etc
 - [ ] graph-router
     - [ ] create Dockerfile for graph-router
@@ -108,6 +117,6 @@
 - [ ] docker-compose
     - [x] feat: define initial docker-compose
     - [x] fix: MongoServerError: Authentication failed
-    - [ ] add client-api instance
+    - [x] add client-api instance
     - [ ] add graph-router instance
     - [ ] etc
