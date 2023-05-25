@@ -23,7 +23,6 @@ export async function bootstrap(
   container: Container,
   appPort: number,
   dbURI: string,
-  dbName: string,
   baseAPIUrl: string,
   apiKey: string,
   ...modules: ContainerModule[]
@@ -33,7 +32,7 @@ export async function bootstrap(
     .toConstantValue(new APIImplementation(baseAPIUrl, apiKey));
   container.load(...modules);
 
-  await db.connect(dbURI, dbName);
+  await db.connect(dbURI);
 
   const typeDefs = fs.readFileSync(
     path.join(__dirname, 'schema.graphql'),

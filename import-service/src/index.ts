@@ -6,12 +6,11 @@ import { referenceIoCData } from '@/inversify.config';
 async function main() {
   const port =
     (process.env.PORT && Number.parseInt(process.env.PORT, 10)) || 4000;
-  const { MONGODB_URI, MONGO_DB, BASE_OCM_URL, OCM_API_KEY } = process.env;
+  const { DATABASE_URL, BASE_OCM_URL, OCM_API_KEY } = process.env;
   await bootstrap(
     container,
     port,
-    MONGODB_URI,
-    MONGO_DB,
+    DATABASE_URL,
     BASE_OCM_URL,
     OCM_API_KEY,
     referenceIoCData

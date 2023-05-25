@@ -12,17 +12,36 @@ services:
       - .env
       - ./import-service/.env
     environment:
-      - MONGODB_URI=$MONGODB_URI
-      - MONGO_DB=$MONGO_DB
+      - DATABASE_URL=$DATABASE_URL
     ports:
       - "4000:4000"
-      - 9229:9229
     volumes:
       - ./import-service:/app
       - /app/node_modules
     networks:
       - app-network
     command: sh /wait-for.sh mongodb:27017 -- npm run dev
+  
+  client-api:
+    build:
+      context: .
+      dockerfile: ./client-api/Dockerfile.dev
+    image: node:18-alpine
+    container_name: client-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=$DATABASE_URL
+    ports:
+      - "4001:4001"
+    volumes:
+      - ./client-api:/app
+      - /app/node_modules
+    networks:
+      - app-network
+    command: sh /wait-for.sh mongodb:27017 -- npm run dev
+
   mongodb:
     image: mongo:6-jammy
     container_name: mongodb
@@ -33,7 +52,7 @@ services:
       - dbdata:/data/db
     networks:
       - app-network
-    command: mongod --quiet --logpath /dev/null
+    # command: mongod --quiet --logpath /dev/null
 
 networks:
   app-network:
@@ -41,4 +60,4 @@ networks:
 
 volumes:
   dbdata:
-  node_modules:
+  

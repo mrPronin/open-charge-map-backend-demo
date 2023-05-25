@@ -14,6 +14,6 @@ export const CONSTANTS = {
   // Initial POI import request timeout: 30 minutes
   POI_INITIAL_IMPORT_TIMEOUT: 30 * 60 * 1000,
 
-  // Initial POI import request max results
-  POI_INITIAL_IMPORT_MAX_RESULTS: 200000,
+  // Initial POI import request max results, documented value 200000
+  POI_INITIAL_IMPORT_MAX_RESULTS: 5000,
 } as const;

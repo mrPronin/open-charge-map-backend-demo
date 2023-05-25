@@ -12,6 +12,7 @@ COPY ./wait-for.sh /wait-for.sh
 
 RUN npm install --global tsx
 RUN npm run prisma-generate
+RUN npm install @prisma/client
 
 EXPOSE 4000
 
