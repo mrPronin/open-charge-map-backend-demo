@@ -45,6 +45,7 @@
     "unicorn/prevent-abbreviations": "off",
     "unicorn/import-index": "off",
     "unicorn/filename-case": "off",
-    "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/brace-style": "off"
   }
 }

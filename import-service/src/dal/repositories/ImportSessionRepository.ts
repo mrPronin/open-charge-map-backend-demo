@@ -16,7 +16,9 @@ import { ImportSessionModel } from '@dal/dao/import/ImportSession.js';
 
 @injectable()
 // eslint-disable-next-line prettier/prettier
-export class ImportSessionRepositoryImplementation implements ImportSessionRepository {
+export class ImportSessionRepositoryImplementation
+  implements ImportSessionRepository
+{
   constructor(
     @inject(TYPES.OCMPersistenceRepository)
     private readonly ocmPersistenceRepository: OCMPersistenceRepository

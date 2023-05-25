@@ -12,6 +12,7 @@
     "clean": "rm -r dist/**",
     "type-check": "tsc --noEmit",
     "lint-check": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write \"**/*.{js,ts,json,md,test.js}\"",
     "format-check": "prettier -c \"**/*.{js,ts,json,md,test.js}\""
   },
   "keywords": [],

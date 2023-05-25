@@ -12,7 +12,9 @@ import { SupplyTypeModel } from '@dal/dao/ocm/SupplyType';
 
 @injectable()
 // eslint-disable-next-line prettier/prettier
-export class OCMPersistenceRepositoryImplementation implements OCMPersistenceRepository {
+export class OCMPersistenceRepositoryImplementation
+  implements OCMPersistenceRepository
+{
   storeReferenceData = async (data: CoreReferenceData): Promise<void> => {
     const { ConnectionTypes, Countries, Operators, StatusTypes, CurrentTypes } =
       data;
