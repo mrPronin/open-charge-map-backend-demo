@@ -1,12 +1,12 @@
 import { injectable, inject } from 'inversify';
 import { TYPES } from '@domain/types.js';
-import { CONSTANTS } from "@domain/constants.js";
+import { CONSTANTS } from '@domain/constants.js';
 import { POI } from '@domain/models/ocm/POI.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
 import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js';
 
 import { API } from '@dal/api/api';
-import { POIDTO } from "@dal/api/dto.js";
+import { POIDTO } from '@dal/api/dto/index.js';
 
 @injectable()
 export class OCMRepositoryImplementation implements OCMRepository {
@@ -22,7 +22,7 @@ export class OCMRepositoryImplementation implements OCMRepository {
   }
 
   getReferenceData = async (): Promise<CoreReferenceData> => {
-    return await this.api.get<CoreReferenceData>('/referencedata/');
+    return this.api.get<CoreReferenceData>('/referencedata/');
   };
 
   getPOI = async (modifiedSince?: Date): Promise<POI[]> => {

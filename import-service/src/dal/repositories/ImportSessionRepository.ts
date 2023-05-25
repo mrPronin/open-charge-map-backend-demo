@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import { injectable, inject } from 'inversify';
-import fs from "fs";
+import fs from 'fs';
 import StreamArray from 'stream-json/streamers/StreamArray';
 import { TYPES } from '@domain/types.js';
-import { CONSTANTS } from "@domain/constants.js";
+import { CONSTANTS } from '@domain/constants.js';
 import {
   ImportSession,
   ImportSessionInput,
@@ -15,9 +15,8 @@ import { POI } from '@domain/models/ocm/POI.js';
 import { ImportSessionModel } from '@dal/dao/import/ImportSession.js';
 
 @injectable()
-export class ImportSessionRepositoryImplementation
-  implements ImportSessionRepository
-{
+// eslint-disable-next-line prettier/prettier
+export class ImportSessionRepositoryImplementation implements ImportSessionRepository {
   constructor(
     @inject(TYPES.OCMPersistenceRepository)
     private readonly ocmPersistenceRepository: OCMPersistenceRepository
@@ -39,10 +38,10 @@ export class ImportSessionRepositoryImplementation
       let poiBuffer: POI[] = [];
 
       pipeline.on('data', async (poiItemData) => {
-        ++counter;
+        counter += 1;
         poiBuffer.push(poiItemData.value);
         if (poiBuffer.length === CONSTANTS.POI_BATCH_PERSIST_AMOUNT) {
-          ++batchCounter;
+          batchCounter += 1;
           pipeline.pause();
           const memoryUsage = Math.round(
             process.memoryUsage().heapUsed / 1024 / 1024
@@ -58,7 +57,7 @@ export class ImportSessionRepositoryImplementation
 
       return new Promise<ImportSession>((resolve, reject) => {
         pipeline.on('end', async () => {
-          ++counter;
+          counter += 1;
           await this.ocmPersistenceRepository.storePOIs(poiBuffer);
           const memoryUsage = Math.round(
             process.memoryUsage().heapUsed / 1024 / 1024
@@ -77,7 +76,7 @@ export class ImportSessionRepositoryImplementation
           await document.save();
           await session.commitTransaction();
           session.endSession();
-          resolve(toModel<ImportSession>(document));
+          resolve(this.toModel<ImportSession>(document));
         });
         mongoose.connection.on('error', (err) => {
           reject(err);
@@ -111,7 +110,7 @@ export class ImportSessionRepositoryImplementation
       await document.save();
       await session.commitTransaction();
       session.endSession();
-      return toModel<ImportSession>(document);
+      return this.toModel<ImportSession>(document);
     } catch (error) {
       await session.abortTransaction();
       session.endSession();
@@ -125,20 +124,23 @@ export class ImportSessionRepositoryImplementation
 
   getAll = async (): Promise<ImportSession[]> => {
     const importSessionDocuments = await ImportSessionModel.find();
-    return importSessionDocuments.map((doc) => toModel<ImportSession>(doc));
+    return importSessionDocuments.map((doc) =>
+      this.toModel<ImportSession>(doc)
+    );
   };
 
   cleanUp = async (): Promise<void> => {
     await ImportSessionModel.deleteMany();
   };
-}
 
-function toModel<T>(doc: mongoose.Document): T {
-  const object = doc.toObject() as T & {
-    _id: string;
-    ID: string;
-  };
-  object.ID = doc.id;
-  delete object['_id'];
-  return object as T;
+  private toModel<T>(doc: mongoose.Document): T {
+    const object = doc.toObject() as T & {
+      _id: string;
+      ID: string;
+    };
+    object.ID = doc.id;
+    // eslint-disable-next-line no-underscore-dangle
+    delete object._id;
+    return object as T;
+  }
 }

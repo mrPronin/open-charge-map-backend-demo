@@ -30,7 +30,7 @@ export async function bootstrap(
 ) {
   container
     .bind<API>(TYPES.API)
-    .toConstantValue(new APIImplementation(baseAPIUrl, apiKey))
+    .toConstantValue(new APIImplementation(baseAPIUrl, apiKey));
   container.load(...modules);
 
   await db.connect(dbURI, dbName);

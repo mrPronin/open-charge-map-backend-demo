@@ -1,4 +1,4 @@
-import { ImportSession } from '@domain/models/presentation/ImportSession.js'
+import { ImportSession } from '@domain/models/presentation/ImportSession.js';
 import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
 import { POI } from '@domain/models/ocm/POI.js';
 

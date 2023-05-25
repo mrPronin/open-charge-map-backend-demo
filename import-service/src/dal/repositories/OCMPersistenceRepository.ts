@@ -11,22 +11,21 @@ import { StatusTypeModel } from '@dal/dao/ocm/StatusType.js';
 import { SupplyTypeModel } from '@dal/dao/ocm/SupplyType';
 
 @injectable()
-export class OCMPersistenceRepositoryImplementation
-  implements OCMPersistenceRepository
-{
+// eslint-disable-next-line prettier/prettier
+export class OCMPersistenceRepositoryImplementation implements OCMPersistenceRepository {
   storeReferenceData = async (data: CoreReferenceData): Promise<void> => {
     const { ConnectionTypes, Countries, Operators, StatusTypes, CurrentTypes } =
       data;
-    await processModel(ConnectionTypeModel, ConnectionTypes);
-    await processModel(CountryModel, Countries);
-    await processModel(OperatorInfoModel, Operators);
-    await processModel(StatusTypeModel, StatusTypes);
-    await processModel(SupplyTypeModel, CurrentTypes);
+    await this.processModel(ConnectionTypeModel, ConnectionTypes);
+    await this.processModel(CountryModel, Countries);
+    await this.processModel(OperatorInfoModel, Operators);
+    await this.processModel(StatusTypeModel, StatusTypes);
+    await this.processModel(SupplyTypeModel, CurrentTypes);
   };
 
   storePOIs = async (pois: POI[]): Promise<void> => {
     const documents = await Promise.all(
-      pois.map(async function (poi) {
+      pois.map(async (poi) => {
         let poiDocument = await POIModel.findOneAndUpdate({ ID: poi.ID }, poi, {
           new: true,
         });
@@ -62,20 +61,20 @@ export class OCMPersistenceRepositoryImplementation
     );
     // process Connections
     await Promise.all(
-      documents.map(async (document) => {
+      documents.map(async (originalDocument) => {
         const connections = await Promise.all(
-          document.Connections.map(async (connection) => {
-            const connectionType = await findAndPopulate(
+          originalDocument.Connections.map(async (connection) => {
+            const connectionType = await this.findAndPopulate(
               ConnectionTypeModel,
               connection.ConnectionTypeID,
               'ConnectionType'
             );
-            const statusType = await findAndPopulate(
+            const statusType = await this.findAndPopulate(
               StatusTypeModel,
               connection.StatusTypeID,
               'StatusType'
             );
-            const currentType = await findAndPopulate(
+            const currentType = await this.findAndPopulate(
               SupplyTypeModel,
               connection.CurrentTypeID,
               'CurrentType'
@@ -89,8 +88,11 @@ export class OCMPersistenceRepositoryImplementation
             };
           })
         );
-        document.Connections = connections;
-        return document;
+        const updatedDocument = {
+          ...originalDocument.toObject(),
+          Connections: connections,
+        };
+        return updatedDocument;
       })
     );
     await POIModel.bulkSave(documents);
@@ -109,23 +111,23 @@ export class OCMPersistenceRepositoryImplementation
     await StatusTypeModel.deleteMany();
     await SupplyTypeModel.deleteMany();
   };
-}
 
-async function processModel<T>(model: mongoose.Model<any>, data: T[]) {
-  await model.deleteMany();
-  await model.bulkSave(data.map((item) => new model(item)));
-}
-
-async function findAndPopulate<D extends mongoose.Document>(
-  model: mongoose.Model<D>,
-  fieldId: any,
-  fieldName: string
-) {
-  if (fieldId) {
-    const document = await model.findOne({ ID: fieldId });
-    if (document) {
-      return { [fieldName]: document };
-    }
+  private async processModel<T>(Model: mongoose.Model<any>, data: T[]) {
+    await Model.deleteMany();
+    await Model.bulkSave(data.map((item) => new Model(item)));
   }
-  return {};
+
+  private async findAndPopulate<D extends mongoose.Document>(
+    model: mongoose.Model<D>,
+    fieldId: any,
+    fieldName: string
+  ) {
+    if (fieldId) {
+      const document = await model.findOne({ ID: fieldId });
+      if (document) {
+        return { [fieldName]: document };
+      }
+    }
+    return {};
+  }
 }

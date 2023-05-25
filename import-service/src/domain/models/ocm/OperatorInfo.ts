@@ -1,4 +1,4 @@
-import { AddressInfo } from "./AddressInfo.js";
+import { AddressInfo } from './AddressInfo.js';
 
 export interface OperatorInfo {
   WebsiteURL?: string;

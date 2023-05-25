@@ -3,7 +3,7 @@ import apisauce, { ApisauceInstance } from 'apisauce';
 import axios from 'axios';
 import fs from 'fs';
 import { plainToClass } from 'class-transformer';
-import { CONSTANTS } from "@domain/constants.js";
+import { CONSTANTS } from '@domain/constants.js';
 
 export interface API {
   get<T>(
@@ -23,6 +23,7 @@ export interface API {
 @injectable()
 export class APIImplementation implements API {
   private readonly api: ApisauceInstance;
+
   private readonly defaultParameters: Record<string, unknown>;
 
   constructor(url: string, apiKey: string) {
@@ -43,7 +44,7 @@ export class APIImplementation implements API {
     params?: Record<string, unknown>,
     objectType?: { new (): Unboxed<T> }
   ): Promise<T> {
-    const res = await this.api.get<T>(
+    const response = await this.api.get<T>(
       url,
       { ...this.defaultParameters, ...params },
       {
@@ -56,17 +57,17 @@ export class APIImplementation implements API {
       }
     );
 
-    if (!res.ok) {
-      throw new Error(`Failed to GET ${url} - ${res.problem}`);
+    if (!response.ok) {
+      throw new Error(`Failed to GET ${url} - ${response.problem}`);
     }
-    return res.data;
+    return response.data;
   }
 
   async fetchAndStoreToFile(
     url: string,
     path: string,
     timeout = 30 * 60 * 1000,
-    params?: Record<string, unknown>,
+    params?: Record<string, unknown>
   ): Promise<void> {
     const startTime = new Date();
     let downloaded = 0;
@@ -94,7 +95,9 @@ export class APIImplementation implements API {
           response.data.resume();
         });
       }
-      const logString = `Downloaded ${(downloaded / (1024 * 1024)).toFixed(2)} MB`;
+      const logString = `Downloaded ${(downloaded / (1024 * 1024)).toFixed(
+        2
+      )} MB`;
       console.log(logString);
     };
 

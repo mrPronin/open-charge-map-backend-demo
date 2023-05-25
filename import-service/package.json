@@ -9,7 +9,10 @@
     "build": "tsc && tsc-alias && cp src/presentation/*.graphql dist/presentation",
     "dev": "tsx watch ./src/index.ts",
     "start": "node ./dist/index.js",
-    "clean": "rm -r dist/**"
+    "clean": "rm -r dist/**",
+    "type-check": "tsc --noEmit",
+    "lint-check": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format-check": "prettier -c \"**/*.{js,ts,json,md,test.js}\""
   },
   "keywords": [],
   "author": "",

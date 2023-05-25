@@ -1,10 +1,10 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-
-import { ConnectionTypeSchema } from "./ConnectionType.js";
-import { StatusTypeSchema } from "./StatusType.js";
-import { SupplyTypeSchema } from "./SupplyType.js";
 import { ConnectionInfo as IConnectionInfo } from '@domain/models/ocm/ConnectionInfo.js';
+
+import { ConnectionTypeSchema } from './ConnectionType.js';
+import { StatusTypeSchema } from './StatusType.js';
+import { SupplyTypeSchema } from './SupplyType.js';
 
 interface ConnectionInfoDocument extends IConnectionInfo, Document {
   _id: string;

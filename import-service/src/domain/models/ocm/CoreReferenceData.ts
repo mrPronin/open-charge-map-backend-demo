@@ -1,8 +1,10 @@
-import { ConnectionType } from './ConnectionType.js';
-import { Country } from './Country.js';
-import { OperatorInfo } from './OperatorInfo.js';
-import { StatusType } from './StatusType.js';
-import { SupplyType } from "./SupplyType.js";
+import {
+  SupplyType,
+  StatusType,
+  OperatorInfo,
+  Country,
+  ConnectionType,
+} from './index.js';
 
 export interface CoreReferenceData {
   ConnectionTypes: ConnectionType[];

@@ -38,21 +38,21 @@ export class ImportServiceImplementation implements ImportService {
       );
       return {
         success: true,
-        importSession: importSession,
+        importSession,
         message: 'The initial data import has been completed successfully',
       };
     }
 
     let modifiedSince = await this.ocmPersistenceRepository.getLastPOIUpdate();
     // subsctract time offset to ensure capturing the latest changes
-    modifiedSince = subtractFromDate(
+    modifiedSince = this.subtractFromDate(
       modifiedSince,
       CONSTANTS.MINUTES_OFFSET_FOR_POI_UPDATE
     );
 
     // fetch POI data from OCM
     const poi = await this.ocmRepository.getPOI(modifiedSince);
-    if (!poi.length) {
+    if (poi.length === 0) {
       return {
         success: true,
         importSession: null,
@@ -75,7 +75,7 @@ export class ImportServiceImplementation implements ImportService {
   };
 
   importSessions = async (): Promise<ImportSession[]> => {
-    return await this.importSessionRepository.getAll();
+    return this.importSessionRepository.getAll();
   };
 
   cleanUp = async (): Promise<CleanUpMutationResponse> => {
@@ -86,8 +86,8 @@ export class ImportServiceImplementation implements ImportService {
       message: 'Data successfully deleted',
     };
   };
-}
 
-const subtractFromDate = (date: Date, minutes: number): Date => {
-  return new Date(date.getTime() - minutes * 60 * 1000);
-};
+  subtractFromDate = (date: Date, minutes: number): Date => {
+    return new Date(date.getTime() - minutes * 60 * 1000);
+  };
+}

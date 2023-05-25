@@ -15,4 +15,7 @@ export const SupplyTypeSchema = new Schema<SupplyTypeDocument>(
   { _id: false }
 );
 
-export const SupplyTypeModel = mongoose.model<SupplyTypeDocument>('SupplyType', SupplyTypeSchema);
+export const SupplyTypeModel = mongoose.model<SupplyTypeDocument>(
+  'SupplyType',
+  SupplyTypeSchema
+);
