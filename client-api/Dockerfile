@@ -27,6 +27,6 @@ COPY --from=build /home/node/app/prisma ./prisma
 
 RUN npx prisma generate
 
-EXPOSE 4000
+EXPOSE 4001
 
 CMD ["node", "./dist/index.js"]

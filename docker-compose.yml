@@ -5,13 +5,12 @@ services:
     build:
       context: ./import-service
       dockerfile: Dockerfile
-    image: node:18-alpine
     container_name: import-service
     restart: unless-stopped
     env_file:
       - ./import-service/.env
     ports:
-      - "4000:4000"
+      - 4000:4000
     networks:
       - app-network
     depends_on:
@@ -22,13 +21,12 @@ services:
     build:
       context: ./client-api
       dockerfile: Dockerfile
-    image: node:18-alpine
     container_name: client-api
     restart: unless-stopped
     env_file:
       - ./client-api/.env
     ports:
-      - "4001:4001"
+      - 4001:4001
     networks:
       - app-network
     depends_on:

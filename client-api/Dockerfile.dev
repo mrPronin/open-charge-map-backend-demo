@@ -14,6 +14,6 @@ RUN npm install
 RUN npm run prisma-generate
 RUN npm install @prisma/client
 
-EXPOSE 4000
+EXPOSE 4001
 
 CMD ["npm", "run", "dev"]
