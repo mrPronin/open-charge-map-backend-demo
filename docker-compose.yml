@@ -17,21 +17,21 @@ services:
       mongodb:
         condition: service_started
   
-  client-api:
-    build:
-      context: ./client-api
-      dockerfile: Dockerfile
-    container_name: client-api
-    restart: unless-stopped
-    env_file:
-      - ./client-api/.env
-    ports:
-      - 4001:4001
-    networks:
-      - app-network
-    depends_on:
-      mongodb:
-        condition: service_started
+  # client-api:
+  #   build:
+  #     context: ./client-api
+  #     dockerfile: Dockerfile
+  #   container_name: client-api
+  #   restart: unless-stopped
+  #   env_file:
+  #     - ./client-api/.env
+  #   ports:
+  #     - 4001:4001
+  #   networks:
+  #     - app-network
+  #   depends_on:
+  #     mongodb:
+  #       condition: service_started
 
   mongodb:
     image: mongo:6-jammy

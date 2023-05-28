@@ -15,7 +15,7 @@ export class OCMServiceImplementation implements OCMService {
   ) {}
 
   pois = async (args: PaginationArgs): Promise<POI[]> => {
-    if (args.first || args.first) {
+    if (args.first && args.last) {
       throw new GraphQLError(
         'Including a value for both the [first] and the [last] parameter is not supported',
         {
