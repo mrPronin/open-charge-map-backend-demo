@@ -69,4 +69,17 @@ describe('OCMRepositoryImplementation', () => {
 
     await expect(ocmRepository.pois(args)).rejects.toThrow('Database error');
   });
+
+  it('should return an empty array when there are no results', async () => {
+    findManyMock.mockImplementation(() => Promise.resolve([]) as any);
+
+    args = {
+      first: 1,
+    };
+
+    const result = await ocmRepository.pois(args);
+
+    // Check the returned result
+    expect(result).toEqual([]);
+  });
 });
