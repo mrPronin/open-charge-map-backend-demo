@@ -15,6 +15,7 @@ export class OCMRepositoryImplementation implements OCMRepository {
 
   pois = async (args: PaginationArgs): Promise<POI[]> => {
     const { findManyArgs } = parsePaginationArgs(args);
+    // console.log('findManyArgs:', findManyArgs);
     return this.prisma.pOI.findMany(findManyArgs);
   };
 }

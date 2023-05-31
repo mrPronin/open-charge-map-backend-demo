@@ -1,6 +1,6 @@
 export interface Country {
   ID: number;
   ISOCode: string;
-  ContinentCode?: string;
-  Title?: string;
+  ContinentCode?: string | null;
+  Title?: string | null;
 }

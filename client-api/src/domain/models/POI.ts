@@ -7,9 +7,9 @@ export interface POI {
   id: string;
   ID: number;
   UUID: string;
-  OperatorInfo?: OperatorInfo;
-  StatusType?: StatusType;
-  AddressInfo?: AddressInfo;
+  OperatorInfo?: OperatorInfo | null;
+  StatusType?: StatusType | null;
+  AddressInfo?: AddressInfo | null;
   Connections: ConnectionInfo[];
-  DateLastStatusUpdate?: Date;
+  DateLastStatusUpdate?: Date | null;
 }

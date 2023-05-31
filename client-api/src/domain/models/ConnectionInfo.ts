@@ -4,16 +4,16 @@ import { SupplyType } from './SupplyType.js';
 
 export interface ConnectionInfo {
   ID: number;
-  ConnectionTypeID?: number;
-  ConnectionType?: ConnectionType;
-  Reference?: string;
-  StatusTypeID?: number;
-  StatusType?: StatusType;
-  Amps?: number;
-  Voltage?: number;
-  PowerKW?: number;
-  CurrentTypeID?: number;
-  CurrentType?: SupplyType;
-  Quantity?: number;
-  Comments?: string;
+  ConnectionTypeID?: number | null;
+  ConnectionType?: ConnectionType | null;
+  Reference?: string | null;
+  StatusTypeID?: number | null;
+  StatusType?: StatusType | null;
+  Amps?: number | null;
+  Voltage?: number | null;
+  PowerKW?: number | null;
+  CurrentTypeID?: number | null;
+  CurrentType?: SupplyType | null;
+  Quantity?: number | null;
+  Comments?: string | null;
 }

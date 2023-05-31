@@ -2,14 +2,14 @@ import { AddressInfo } from './AddressInfo.js';
 
 export interface OperatorInfo {
   ID: number;
-  WebsiteURL?: string;
-  Comments?: string;
-  PhonePrimaryContact?: string;
-  PhoneSecondaryContact?: string;
-  AddressInfo?: AddressInfo;
-  BookingURL?: string;
-  ContactEmail?: string;
-  FaultReportEmail?: string;
-  IsRestrictedEdit?: boolean;
-  Title?: string;
+  WebsiteURL?: string | null;
+  Comments?: string | null;
+  PhonePrimaryContact?: string | null;
+  PhoneSecondaryContact?: string | null;
+  AddressInfo?: AddressInfo | null;
+  BookingURL?: string | null;
+  ContactEmail?: string | null;
+  FaultReportEmail?: string | null;
+  IsRestrictedEdit?: boolean | null;
+  Title?: string | null;
 }

@@ -1,0 +1,148 @@
+[
+  {
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2023-05-21T15:49:00Z",
+    "ID": 265818,
+    "UUID": "C2C297C2-1281-4B31-8DE4-1F44E5965E14",
+    "DataProviderID": 1,
+    "OperatorID": 80,
+    "UsageTypeID": 1,
+    "AddressInfo": {
+      "ID": 266202,
+      "Title": "Enel X Way ",
+      "AddressLine1": "Via Baden Powell 5",
+      "Town": "Valeggio sul Mincio",
+      "StateOrProvince": "VR",
+      "CountryID": 112,
+      "Latitude": 45.355721,
+      "Longitude": 10.736628,
+      "RelatedURL": "https://www.forumelettrico.it/forum/colonnina-enel-x-way-fast-valeggio-sul-mincio-vr-via-baden-powell-5-t31711.html",
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 452171,
+        "ConnectionTypeID": 33,
+        "LevelID": 3,
+        "PowerKW": 60.0,
+        "CurrentTypeID": 30,
+        "Quantity": 2
+      }
+    ],
+    "NumberOfPoints": 1,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-05-21T15:49:00Z",
+    "DataQualityLevel": 1,
+    "DateCreated": "2023-05-21T15:48:00Z",
+    "SubmissionStatusTypeID": 200
+  },
+  {
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2023-05-21T15:05:00Z",
+    "ID": 265817,
+    "UUID": "7B1F36BF-9C9D-47F8-9856-DD1C43A4B84C",
+    "DataProviderID": 1,
+    "OperatorID": 22,
+    "UsageTypeID": 4,
+    "AddressInfo": {
+      "ID": 266201,
+      "Title": "Park Ri SS",
+      "AddressLine1": "Cavan Road",
+      "Postcode": "A82 E7F3",
+      "CountryID": 3,
+      "Latitude": 53.73125787390026,
+      "Longitude": -6.888524430174584,
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 452166,
+        "ConnectionTypeID": 33,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 50.0,
+        "CurrentTypeID": 30,
+        "Quantity": 2
+      },
+      {
+        "ID": 452167,
+        "ConnectionTypeID": 2,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 50.0,
+        "CurrentTypeID": 30,
+        "Quantity": 2
+      },
+      {
+        "ID": 452168,
+        "ConnectionTypeID": 1036,
+        "StatusTypeID": 50,
+        "LevelID": 2,
+        "PowerKW": 22.0,
+        "CurrentTypeID": 20,
+        "Quantity": 2
+      },
+      {
+        "ID": 452169,
+        "ConnectionTypeID": 33,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 150.0,
+        "CurrentTypeID": 30,
+        "Quantity": 1
+      },
+      {
+        "ID": 452170,
+        "ConnectionTypeID": 2,
+        "StatusTypeID": 50,
+        "LevelID": 3,
+        "PowerKW": 150.0,
+        "CurrentTypeID": 30,
+        "Quantity": 1
+      }
+    ],
+    "NumberOfPoints": 4,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-05-21T15:05:00Z",
+    "DataQualityLevel": 1,
+    "DateCreated": "2023-05-21T15:05:00Z",
+    "SubmissionStatusTypeID": 200
+  },
+  {
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2023-05-21T13:59:00Z",
+    "ID": 265816,
+    "UUID": "794DEE7D-337D-475D-BC0F-9191CCCAE558",
+    "DataProviderID": 1,
+    "OperatorID": 3578,
+    "UsageTypeID": 4,
+    "AddressInfo": {
+      "ID": 266200,
+      "Title": "Dillons Hotel",
+      "AddressLine1": "Upper Main Street",
+      "Town": "Letterkenny Municipal District",
+      "Postcode": "F92 DT62",
+      "CountryID": 3,
+      "Latitude": 54.95042729537343,
+      "Longitude": -7.736868638265605,
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 452161,
+        "ConnectionTypeID": 25,
+        "StatusTypeID": 50,
+        "LevelID": 2,
+        "PowerKW": 11.0,
+        "CurrentTypeID": 10,
+        "Quantity": 4
+      }
+    ],
+    "NumberOfPoints": 4,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-05-21T13:59:00Z",
+    "DataQualityLevel": 1,
+    "DateCreated": "2023-05-21T13:59:00Z",
+    "SubmissionStatusTypeID": 200
+  }
+]
