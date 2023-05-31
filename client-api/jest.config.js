@@ -28,10 +28,11 @@ export default {
   'transform': {
         '^.+\\.tsx?$': 'ts-jest'
     },
-  globals: {
-    'ts-jest': {
+   transform: {
+    '^.+\\.tsx?$': ['ts-jest', {
       tsconfig: 'tsconfig.test.json',
       useESM: true
-    }
+    }]
   },
+  'collectCoverage': true
 };

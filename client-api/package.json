@@ -14,7 +14,8 @@
     "format": "prettier --write \"**/*.{js,ts,json,md,test.js}\"",
     "format-check": "prettier -c \"**/*.{js,ts,json,md,test.js}\"",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "prisma": {
     "schema": "prisma/schema.prisma"
