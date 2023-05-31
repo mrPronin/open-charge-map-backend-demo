@@ -26,7 +26,7 @@ export class OCMServiceImplementation implements OCMService {
       );
     }
 
-    if (args.first < 0) {
+    if (args.first && args.first < 0) {
       throw new GraphQLError('[first] parameter must be positive integer', {
         extensions: {
           code: 'BAD_USER_INPUT',
@@ -34,7 +34,7 @@ export class OCMServiceImplementation implements OCMService {
       });
     }
 
-    if (args.last < 0) {
+    if (args.last && args.last < 0) {
       throw new GraphQLError('[last] parameter must be positive integer', {
         extensions: {
           code: 'BAD_USER_INPUT',

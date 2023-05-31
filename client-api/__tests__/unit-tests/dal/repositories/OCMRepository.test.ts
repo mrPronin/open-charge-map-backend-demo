@@ -8,11 +8,11 @@ import {
 } from '@jest/globals';
 import { PaginationArgs, FindManyArgs } from 'prisma-cursor-pagination';
 import { POI } from '@domain/models/POI.js';
-import { prismaMock } from '../../../helpers/singleton.utils';
+import { prismaMock } from '@test/helpers/singleton.utils.js';
 
-import { OCMRepositoryImplementation } from '../../../../src/dal/repositories/OCMRepository';
+import { OCMRepositoryImplementation } from '@dal/repositories/OCMRepository.js';
 
-const mockPOI = require('../../../mock/poi.json');
+import mockPOI from '@test/mock/poi.json';
 
 const poi: POI[] = mockPOI.map((item) => {
   return {
@@ -26,7 +26,6 @@ describe('OCMRepositoryImplementation', () => {
   let ocmRepository: OCMRepositoryImplementation;
   let args: PaginationArgs;
   let prismaArgs: FindManyArgs;
-  // let findManyMock = jest.fn<typeof prismaMock.pOI.findMany>();
   let findManyMock: jest.Spied<typeof prismaMock.pOI.findMany>;
 
   beforeEach(() => {

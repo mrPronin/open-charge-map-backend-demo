@@ -5,7 +5,8 @@
       "@presentation/*": ["./src/presentation/*"],
       "@dal/*": ["./src/dal/*"],
       "@domain/*": ["./src/domain/*"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@test/*": ["./__tests__/*"]
     },
     "rootDirs": ["src"],
     "outDir": "dist",

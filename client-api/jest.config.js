@@ -1,25 +1,3 @@
-import tsconfig from './tsconfig.json' assert { type: 'json' };
-
-function makeModuleNameMapper(srcPath) {
-    // Get paths from tsconfig
-    const { paths } = tsconfig.compilerOptions;
-
-    const aliases = {};
-
-    // Iterate over paths and convert them into moduleNameMapper format
-    Object.keys(paths).forEach((item) => {
-        const key = item.replace('/*', '/(.*)');
-        const path = paths[item][0].replace('/*', '/$1');
-        aliases[key] = srcPath + '/' + path;
-    });
-
-    // Replace .js with .ts in the resulting map
-    Object.keys(aliases).forEach(key => {
-        aliases[key] = aliases[key].replace('.js', '.ts');
-    });
-
-    return aliases;
-}
 
 const SRC_PATH = '<rootDir>';
 
@@ -30,6 +8,9 @@ export default {
   coverageProvider: "v8",
   moduleNameMapper: {
     '^@domain/(.*)\\.js$': '<rootDir>/src/domain/$1.ts',
+    '^@dal/(.*)\\.js$': '<rootDir>/src/dal/$1.ts',
+    '^@test/(.*)\\.js$': '<rootDir>/__tests__/$1.ts',
+    '^@test/(.*)\\.json$': '<rootDir>/__tests__/$1.json'
   },
   preset: 'ts-jest',
   roots: [
