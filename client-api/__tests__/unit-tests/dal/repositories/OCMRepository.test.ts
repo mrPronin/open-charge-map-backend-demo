@@ -1,6 +1,12 @@
-import { describe, beforeEach, expect, it, jest } from '@jest/globals';
-import { PrismaPromise } from 'prisma';
-import { PaginationArgs, parsePaginationArgs } from 'prisma-cursor-pagination';
+import {
+  describe,
+  beforeEach,
+  expect,
+  it,
+  jest,
+  afterEach,
+} from '@jest/globals';
+import { PaginationArgs, FindManyArgs } from 'prisma-cursor-pagination';
 import { POI } from '@domain/models/POI.js';
 import { prismaMock } from '../../../helpers/singleton.utils';
 
@@ -19,23 +25,48 @@ const poi: POI[] = mockPOI.map((item) => {
 describe('OCMRepositoryImplementation', () => {
   let ocmRepository: OCMRepositoryImplementation;
   let args: PaginationArgs;
+  let prismaArgs: FindManyArgs;
+  // let findManyMock = jest.fn<typeof prismaMock.pOI.findMany>();
+  let findManyMock: jest.Spied<typeof prismaMock.pOI.findMany>;
 
   beforeEach(() => {
     ocmRepository = new OCMRepositoryImplementation(prismaMock);
+    findManyMock = jest.spyOn(prismaMock.pOI, 'findMany');
   });
 
-  it('should call prisma with correct args', async () => {
-    jest
-      .spyOn(prismaMock.pOI, 'findMany')
-      .mockImplementation(() => Promise.resolve(poi) as any);
+  afterEach(() => {
+    findManyMock.mockClear();
+  });
 
+  it('responds with list of POI and called with correct args', async () => {
+    findManyMock.mockImplementation(() => Promise.resolve(poi) as any);
+
+    const first: number = 1;
     args = {
-      first: 1,
+      first,
+    };
+
+    prismaArgs = {
+      take: first + 1,
     };
 
     const result = await ocmRepository.pois(args);
 
     // Check the returned result
     expect(result).toEqual(poi);
+    // Check if the findMany function was called with correct args
+    expect(findManyMock).toHaveBeenCalledWith(prismaArgs);
+  });
+
+  it('should throw an error when prisma findMany fails', async () => {
+    findManyMock.mockImplementation(
+      () => Promise.reject(new Error('Database error')) as any
+    );
+
+    args = {
+      first: 1,
+    };
+
+    await expect(ocmRepository.pois(args)).rejects.toThrow('Database error');
   });
 });
