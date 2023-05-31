@@ -1,11 +1,4 @@
-import {
-  describe,
-  beforeEach,
-  expect,
-  it,
-  jest,
-  afterEach,
-} from '@jest/globals';
+import { describe, beforeEach, expect, it, jest } from '@jest/globals';
 import { PaginationArgs } from 'prisma-cursor-pagination';
 import { OCMServiceImplementation } from '@domain/services/OCMService.js';
 import { OCMRepository } from '@domain/interfaces/repositories/OCMRepository.js';

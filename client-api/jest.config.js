@@ -9,6 +9,7 @@ export default {
   moduleNameMapper: {
     '^@domain/(.*)\\.js$': '<rootDir>/src/domain/$1.ts',
     '^@dal/(.*)\\.js$': '<rootDir>/src/dal/$1.ts',
+    '^@presentation/(.*)\\.js$': '<rootDir>/src/presentation/$1.ts',
     '^@test/(.*)\\.js$': '<rootDir>/__tests__/$1.ts',
     '^@test/(.*)\\.json$': '<rootDir>/__tests__/$1.json'
   },
