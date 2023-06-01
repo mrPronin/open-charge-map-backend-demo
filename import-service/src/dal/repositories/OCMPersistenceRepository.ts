@@ -1,8 +1,8 @@
 import { injectable } from 'inversify';
 import mongoose from 'mongoose';
-// Interface
+// Repository interface
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
-// Models
+// Domain model interfaces
 import { POI, CoreReferenceData } from '@domain/models/ocm/index.js';
 // Mongoose models
 import {
