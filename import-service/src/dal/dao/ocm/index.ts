@@ -6,5 +6,3 @@ export * from './OperatorInfo.js';
 export * from './POI.js';
 export * from './StatusType.js';
 export * from './SupplyType.js';
-export * from './CoreReferenceData.js';
-

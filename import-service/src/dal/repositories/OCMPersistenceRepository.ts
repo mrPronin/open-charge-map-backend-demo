@@ -1,15 +1,18 @@
 import { injectable } from 'inversify';
 import mongoose from 'mongoose';
-import { POI } from '@domain/models/ocm/POI.js';
-import { CoreReferenceData } from '@domain/models/ocm/CoreReferenceData.js';
+// Interface
 import { OCMPersistenceRepository } from '@domain/interfaces/repositories/OCMPersistenceRepository.js';
-// import {  } from "@";
-import { POIModel } from '@dal/dao/ocm/POI.js';
-import { ConnectionTypeModel } from '@dal/dao/ocm/ConnectionType.js';
-import { CountryModel } from '@dal/dao/ocm/Country.js';
-import { OperatorInfoModel } from '@dal/dao/ocm/OperatorInfo.js';
-import { StatusTypeModel } from '@dal/dao/ocm/StatusType.js';
-import { SupplyTypeModel } from '@dal/dao/ocm/SupplyType.js';
+// Models
+import { POI, CoreReferenceData } from '@domain/models/ocm/index.js';
+// Mongoose models
+import {
+  POIModel,
+  ConnectionTypeModel,
+  CountryModel,
+  OperatorInfoModel,
+  StatusTypeModel,
+  SupplyTypeModel,
+} from '@dal/dao/ocm/index.js';
 
 @injectable()
 // eslint-disable-next-line prettier/prettier
